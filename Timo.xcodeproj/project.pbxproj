@@ -9,21 +9,33 @@
 /* Begin PBXBuildFile section */
 		DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62952AC19E7B003010DC /* AppDelegate.swift */; };
 		DEBD62982AC19E7B003010DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62972AC19E7B003010DC /* SceneDelegate.swift */; };
-		DEBD629A2AC19E7B003010DC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62992AC19E7B003010DC /* ViewController.swift */; };
 		DEBD629D2AC19E7B003010DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEBD629B2AC19E7B003010DC /* Main.storyboard */; };
 		DEBD629F2AC19E7C003010DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEBD629E2AC19E7C003010DC /* Assets.xcassets */; };
 		DEBD62A22AC19E7C003010DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEBD62A02AC19E7C003010DC /* LaunchScreen.storyboard */; };
+		DEBD62B42AC1A405003010DC /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DEBD62B32AC1A405003010DC /* SnapKit */; };
+		DEBD62B72AC1A42C003010DC /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = DEBD62B62AC1A42C003010DC /* Tabman */; };
+		DEBD62BA2AC1A4AC003010DC /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = DEBD62B92AC1A4AC003010DC /* Realm */; };
+		DEBD62BC2AC1A4AC003010DC /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DEBD62BB2AC1A4AC003010DC /* RealmSwift */; };
+		DEBD62BE2AC1A4DF003010DC /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62BD2AC1A4DE003010DC /* BaseViewController.swift */; };
+		DEBD62C02AC1A62E003010DC /* ProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62BF2AC1A62E003010DC /* ProjectListViewController.swift */; };
+		DEF16C522AC2D349006354F8 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF16C512AC2D349006354F8 /* Color.swift */; };
+		DEF16C542AC2DAD7006354F8 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF16C532AC2DAD7006354F8 /* BaseCollectionViewCell.swift */; };
+		DEF16C562AC2DB90006354F8 /* ProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF16C552AC2DB90006354F8 /* ProjectCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DEBD62922AC19E7B003010DC /* Timo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEBD62952AC19E7B003010DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEBD62972AC19E7B003010DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DEBD62992AC19E7B003010DC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DEBD629C2AC19E7B003010DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DEBD629E2AC19E7C003010DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEBD62A12AC19E7C003010DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DEBD62A32AC19E7C003010DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DEBD62BD2AC1A4DE003010DC /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		DEBD62BF2AC1A62E003010DC /* ProjectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewController.swift; sourceTree = "<group>"; };
+		DEF16C512AC2D349006354F8 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		DEF16C532AC2DAD7006354F8 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		DEF16C552AC2DB90006354F8 /* ProjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +43,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEBD62BC2AC1A4AC003010DC /* RealmSwift in Frameworks */,
+				DEBD62BA2AC1A4AC003010DC /* Realm in Frameworks */,
+				DEBD62B42AC1A405003010DC /* SnapKit in Frameworks */,
+				DEBD62B72AC1A42C003010DC /* Tabman in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,15 +72,91 @@
 		DEBD62942AC19E7B003010DC /* Timo */ = {
 			isa = PBXGroup;
 			children = (
+				DEBD62A92AC1A01F003010DC /* Utility */,
+				DEBD62AA2AC1A029003010DC /* Database */,
+				DEBD62AB2AC1A032003010DC /* Base */,
+				DEBD62AC2AC1A038003010DC /* View */,
+				DEBD62AD2AC1A03C003010DC /* Cell */,
+				DEBD62AE2AC1A042003010DC /* Scene */,
+				DEBD62AF2AC1A048003010DC /* Extension */,
 				DEBD62952AC19E7B003010DC /* AppDelegate.swift */,
 				DEBD62972AC19E7B003010DC /* SceneDelegate.swift */,
-				DEBD62992AC19E7B003010DC /* ViewController.swift */,
 				DEBD629B2AC19E7B003010DC /* Main.storyboard */,
 				DEBD629E2AC19E7C003010DC /* Assets.xcassets */,
 				DEBD62A02AC19E7C003010DC /* LaunchScreen.storyboard */,
 				DEBD62A32AC19E7C003010DC /* Info.plist */,
 			);
 			path = Timo;
+			sourceTree = "<group>";
+		};
+		DEBD62A92AC1A01F003010DC /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				DEF16C512AC2D349006354F8 /* Color.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		DEBD62AA2AC1A029003010DC /* Database */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		DEBD62AB2AC1A032003010DC /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				DEBD62BD2AC1A4DE003010DC /* BaseViewController.swift */,
+				DEF16C532AC2DAD7006354F8 /* BaseCollectionViewCell.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		DEBD62AC2AC1A038003010DC /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DEBD62AD2AC1A03C003010DC /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DEF16C552AC2DB90006354F8 /* ProjectCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		DEBD62AE2AC1A042003010DC /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				DEBD62B02AC1A08A003010DC /* ProjectList */,
+				DEBD62B12AC1A0AF003010DC /* ProjectDetail */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		DEBD62AF2AC1A048003010DC /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		DEBD62B02AC1A08A003010DC /* ProjectList */ = {
+			isa = PBXGroup;
+			children = (
+				DEBD62BF2AC1A62E003010DC /* ProjectListViewController.swift */,
+			);
+			path = ProjectList;
+			sourceTree = "<group>";
+		};
+		DEBD62B12AC1A0AF003010DC /* ProjectDetail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ProjectDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +175,12 @@
 			dependencies = (
 			);
 			name = Timo;
+			packageProductDependencies = (
+				DEBD62B32AC1A405003010DC /* SnapKit */,
+				DEBD62B62AC1A42C003010DC /* Tabman */,
+				DEBD62B92AC1A4AC003010DC /* Realm */,
+				DEBD62BB2AC1A4AC003010DC /* RealmSwift */,
+			);
 			productName = Timo;
 			productReference = DEBD62922AC19E7B003010DC /* Timo.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +209,11 @@
 				Base,
 			);
 			mainGroup = DEBD62892AC19E7B003010DC;
+			packageReferences = (
+				DEBD62B22AC1A405003010DC /* XCRemoteSwiftPackageReference "SnapKit" */,
+				DEBD62B52AC1A42C003010DC /* XCRemoteSwiftPackageReference "Tabman" */,
+				DEBD62B82AC1A4AC003010DC /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = DEBD62932AC19E7B003010DC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,9 +241,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEBD629A2AC19E7B003010DC /* ViewController.swift in Sources */,
+				DEF16C562AC2DB90006354F8 /* ProjectCollectionViewCell.swift in Sources */,
+				DEBD62C02AC1A62E003010DC /* ProjectListViewController.swift in Sources */,
 				DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */,
 				DEBD62982AC19E7B003010DC /* SceneDelegate.swift in Sources */,
+				DEF16C522AC2D349006354F8 /* Color.swift in Sources */,
+				DEBD62BE2AC1A4DF003010DC /* BaseViewController.swift in Sources */,
+				DEF16C542AC2DAD7006354F8 /* BaseCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +323,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -270,7 +377,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -302,9 +409,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sesac.Timo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -330,9 +440,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sesac.Timo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -358,6 +471,56 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DEBD62B22AC1A405003010DC /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		DEBD62B52AC1A42C003010DC /* XCRemoteSwiftPackageReference "Tabman" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uias/Tabman.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		DEBD62B82AC1A4AC003010DC /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DEBD62B32AC1A405003010DC /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DEBD62B22AC1A405003010DC /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		DEBD62B62AC1A42C003010DC /* Tabman */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DEBD62B52AC1A42C003010DC /* XCRemoteSwiftPackageReference "Tabman" */;
+			productName = Tabman;
+		};
+		DEBD62B92AC1A4AC003010DC /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DEBD62B82AC1A4AC003010DC /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		DEBD62BB2AC1A4AC003010DC /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DEBD62B82AC1A4AC003010DC /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DEBD628A2AC19E7B003010DC /* Project object */;
 }
