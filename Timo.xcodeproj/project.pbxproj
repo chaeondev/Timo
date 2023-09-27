@@ -9,15 +9,14 @@
 /* Begin PBXBuildFile section */
 		DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62952AC19E7B003010DC /* AppDelegate.swift */; };
 		DEBD62982AC19E7B003010DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62972AC19E7B003010DC /* SceneDelegate.swift */; };
-		DEBD629D2AC19E7B003010DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEBD629B2AC19E7B003010DC /* Main.storyboard */; };
 		DEBD629F2AC19E7C003010DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEBD629E2AC19E7C003010DC /* Assets.xcassets */; };
 		DEBD62A22AC19E7C003010DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEBD62A02AC19E7C003010DC /* LaunchScreen.storyboard */; };
 		DEBD62B42AC1A405003010DC /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DEBD62B32AC1A405003010DC /* SnapKit */; };
-		DEBD62B72AC1A42C003010DC /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = DEBD62B62AC1A42C003010DC /* Tabman */; };
 		DEBD62BA2AC1A4AC003010DC /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = DEBD62B92AC1A4AC003010DC /* Realm */; };
 		DEBD62BC2AC1A4AC003010DC /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DEBD62BB2AC1A4AC003010DC /* RealmSwift */; };
 		DEBD62BE2AC1A4DF003010DC /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62BD2AC1A4DE003010DC /* BaseViewController.swift */; };
 		DEBD62C02AC1A62E003010DC /* ProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62BF2AC1A62E003010DC /* ProjectListViewController.swift */; };
+		DED5E8A52AC44A8200DDACC7 /* UnderlineSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED5E8A42AC44A8200DDACC7 /* UnderlineSegmentedControl.swift */; };
 		DEF16C522AC2D349006354F8 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF16C512AC2D349006354F8 /* Color.swift */; };
 		DEF16C542AC2DAD7006354F8 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF16C532AC2DAD7006354F8 /* BaseCollectionViewCell.swift */; };
 		DEF16C562AC2DB90006354F8 /* ProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF16C552AC2DB90006354F8 /* ProjectCollectionViewCell.swift */; };
@@ -27,12 +26,12 @@
 		DEBD62922AC19E7B003010DC /* Timo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEBD62952AC19E7B003010DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEBD62972AC19E7B003010DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DEBD629C2AC19E7B003010DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DEBD629E2AC19E7C003010DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEBD62A12AC19E7C003010DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DEBD62A32AC19E7C003010DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DEBD62BD2AC1A4DE003010DC /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DEBD62BF2AC1A62E003010DC /* ProjectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewController.swift; sourceTree = "<group>"; };
+		DED5E8A42AC44A8200DDACC7 /* UnderlineSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineSegmentedControl.swift; sourceTree = "<group>"; };
 		DEF16C512AC2D349006354F8 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		DEF16C532AC2DAD7006354F8 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		DEF16C552AC2DB90006354F8 /* ProjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -46,7 +45,6 @@
 				DEBD62BC2AC1A4AC003010DC /* RealmSwift in Frameworks */,
 				DEBD62BA2AC1A4AC003010DC /* Realm in Frameworks */,
 				DEBD62B42AC1A405003010DC /* SnapKit in Frameworks */,
-				DEBD62B72AC1A42C003010DC /* Tabman in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,7 +79,6 @@
 				DEBD62AF2AC1A048003010DC /* Extension */,
 				DEBD62952AC19E7B003010DC /* AppDelegate.swift */,
 				DEBD62972AC19E7B003010DC /* SceneDelegate.swift */,
-				DEBD629B2AC19E7B003010DC /* Main.storyboard */,
 				DEBD629E2AC19E7C003010DC /* Assets.xcassets */,
 				DEBD62A02AC19E7C003010DC /* LaunchScreen.storyboard */,
 				DEBD62A32AC19E7C003010DC /* Info.plist */,
@@ -116,6 +113,7 @@
 		DEBD62AC2AC1A038003010DC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DED5E8A42AC44A8200DDACC7 /* UnderlineSegmentedControl.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -177,7 +175,6 @@
 			name = Timo;
 			packageProductDependencies = (
 				DEBD62B32AC1A405003010DC /* SnapKit */,
-				DEBD62B62AC1A42C003010DC /* Tabman */,
 				DEBD62B92AC1A4AC003010DC /* Realm */,
 				DEBD62BB2AC1A4AC003010DC /* RealmSwift */,
 			);
@@ -211,7 +208,6 @@
 			mainGroup = DEBD62892AC19E7B003010DC;
 			packageReferences = (
 				DEBD62B22AC1A405003010DC /* XCRemoteSwiftPackageReference "SnapKit" */,
-				DEBD62B52AC1A42C003010DC /* XCRemoteSwiftPackageReference "Tabman" */,
 				DEBD62B82AC1A4AC003010DC /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = DEBD62932AC19E7B003010DC /* Products */;
@@ -230,7 +226,6 @@
 			files = (
 				DEBD62A22AC19E7C003010DC /* LaunchScreen.storyboard in Resources */,
 				DEBD629F2AC19E7C003010DC /* Assets.xcassets in Resources */,
-				DEBD629D2AC19E7B003010DC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +241,7 @@
 				DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */,
 				DEBD62982AC19E7B003010DC /* SceneDelegate.swift in Sources */,
 				DEF16C522AC2D349006354F8 /* Color.swift in Sources */,
+				DED5E8A52AC44A8200DDACC7 /* UnderlineSegmentedControl.swift in Sources */,
 				DEBD62BE2AC1A4DF003010DC /* BaseViewController.swift in Sources */,
 				DEF16C542AC2DAD7006354F8 /* BaseCollectionViewCell.swift in Sources */,
 			);
@@ -254,14 +250,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		DEBD629B2AC19E7B003010DC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DEBD629C2AC19E7B003010DC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		DEBD62A02AC19E7C003010DC /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -399,9 +387,8 @@
 				INFOPLIST_FILE = Timo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -430,9 +417,8 @@
 				INFOPLIST_FILE = Timo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -481,14 +467,6 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		DEBD62B52AC1A42C003010DC /* XCRemoteSwiftPackageReference "Tabman" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/uias/Tabman.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
 		DEBD62B82AC1A4AC003010DC /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -504,11 +482,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DEBD62B22AC1A405003010DC /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		DEBD62B62AC1A42C003010DC /* Tabman */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DEBD62B52AC1A42C003010DC /* XCRemoteSwiftPackageReference "Tabman" */;
-			productName = Tabman;
 		};
 		DEBD62B92AC1A4AC003010DC /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
