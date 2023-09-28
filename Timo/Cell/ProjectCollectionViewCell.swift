@@ -11,43 +11,41 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
     
     let colorbar = {
         let view = UIView()
-        view.backgroundColor = .orange
+        view.backgroundColor = Design.BaseColor.subPoint
         return view
     }()
     
     let titleLabel = {
         let view = UILabel()
-//        view.backgroundColor = .lightGray
         view.text = "Design Project view UI setting"
         view.font = .boldSystemFont(ofSize: 14)
-        view.textColor = .black
+        view.textColor = Design.BaseColor.text
         view.numberOfLines = 0
         return view
     }()
     
     let boundaryline = {
         let view = UIView()
-        view.backgroundColor = .orange
+        view.backgroundColor = Design.BaseColor.subPoint
         return view
     }()
     
     let doneButton = {
         let view = UIButton()
         view.setTitle("Doing", for: .normal)
-        view.setTitleColor(.black, for: .normal)
+        view.setTitleColor(Design.BaseColor.text, for: .normal)
         view.titleLabel?.font = .systemFont(ofSize: 12, weight: .semibold)
         
         view.layer.cornerRadius = 10
         view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.black.cgColor
+        view.layer.borderColor = Design.BaseColor.border
         return view
     }()
     
     let ddayLabel = {
         let view = UILabel()
-//        view.backgroundColor = .lightGray
         view.text = "D-17"
-        view.textColor = .black
+        view.textColor = Design.BaseColor.text
         view.font = .systemFont(ofSize: 12, weight: .bold)
         return view
     }()
@@ -55,7 +53,7 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
     let progressbar = {
         let view = UIProgressView()
         view.trackTintColor = .lightGray
-        view.progressTintColor = .orange
+        view.progressTintColor = Design.BaseColor.subPoint
         view.progress = 0.3
         return view
     }()
@@ -99,6 +97,12 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
     }()
     
     override func configure() {
+        
+        self.backgroundColor = Design.BaseColor.subBackground
+        self.layer.cornerRadius = 12
+        self.layer.borderColor = Design.BaseColor.border
+        self.layer.borderWidth = 1
+        
         
         contentView.addSubview(colorbar)
         contentView.addSubview(titleLabel)
@@ -164,7 +168,7 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
         
         //TaskCount, Time 파트
         taskImageView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(8)
+            make.bottom.equalToSuperview().inset(10)
             make.leading.equalToSuperview().offset(16)
             make.size.equalTo(14)
         }

@@ -17,6 +17,7 @@ class ProjectListViewController: BaseViewController {
     
     private lazy var collectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+        view.backgroundColor = .clear
         view.register(ProjectCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         view.delegate = self
         view.dataSource = self
@@ -58,8 +59,6 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ProjectCollectionViewCell else { return UICollectionViewCell() }
-        cell.backgroundColor = .white
-        cell.layer.cornerRadius = 12
         return cell
     }
     
