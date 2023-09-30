@@ -31,14 +31,7 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
     }()
     
     let doneButton = {
-        let view = UIButton()
-        view.setTitle("Doing", for: .normal)
-        view.setTitleColor(Design.BaseColor.text, for: .normal)
-        view.titleLabel?.font = .systemFont(ofSize: 12, weight: .semibold)
-        
-        view.layer.cornerRadius = 10
-        view.layer.borderWidth = 1
-        view.layer.borderColor = Design.BaseColor.border
+        let view = StatusButton()
         return view
     }()
     
@@ -100,7 +93,7 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
         
         self.backgroundColor = Design.BaseColor.subBackground
         self.layer.cornerRadius = 12
-        self.layer.borderColor = Design.BaseColor.border
+        self.layer.borderColor = Design.BaseColor.border?.cgColor
         self.layer.borderWidth = 1
         
         
@@ -188,6 +181,14 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
             make.centerY.equalTo(taskImageView.snp.centerY)
             make.leading.equalTo(timeImageView.snp.trailing).offset(4)
         }
+    }
+    
+    func configureCell() {
+        doneButton.addTarget(self, action: #selector(doneButtonClicked), for: .touchUpInside)
+    }
+    
+    @objc func doneButtonClicked() {
+        doneButton.isSelected.toggle()
     }
     
 }

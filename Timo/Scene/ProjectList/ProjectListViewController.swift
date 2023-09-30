@@ -28,6 +28,7 @@ class ProjectListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setNavigationbar()
     }
     
     override func configure() {
@@ -48,6 +49,20 @@ class ProjectListViewController: BaseViewController {
             make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
+    
+    func setNavigationbar() {
+        title = "Projects"
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24, weight: .bold),
+            NSAttributedString.Key.foregroundColor : Design.BaseColor.border!
+        ]
+        navigationController?.navigationBar.tintColor = Design.BaseColor.border
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addBarButtonClicked))
+    }
+    
+    @objc func addBarButtonClicked() {
+        
+    }
 
 }
 
@@ -59,6 +74,7 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ProjectCollectionViewCell else { return UICollectionViewCell() }
+        cell.configureCell()
         return cell
     }
     

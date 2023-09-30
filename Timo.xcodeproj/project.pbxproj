@@ -10,6 +10,7 @@
 		DE1849FA2AC7EE06004EEC0B /* ProjectTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1849F92AC7EE06004EEC0B /* ProjectTable.swift */; };
 		DE1849FC2AC7EE16004EEC0B /* TaskTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1849FB2AC7EE16004EEC0B /* TaskTable.swift */; };
 		DE1849FE2AC7F6E7004EEC0B /* SubTaskTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1849FD2AC7F6E7004EEC0B /* SubTaskTable.swift */; };
+		DE184A002AC82916004EEC0B /* StatusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1849FF2AC82916004EEC0B /* StatusButton.swift */; };
 		DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62952AC19E7B003010DC /* AppDelegate.swift */; };
 		DEBD62982AC19E7B003010DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62972AC19E7B003010DC /* SceneDelegate.swift */; };
 		DEBD629F2AC19E7C003010DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEBD629E2AC19E7C003010DC /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 		DE1849F92AC7EE06004EEC0B /* ProjectTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTable.swift; sourceTree = "<group>"; };
 		DE1849FB2AC7EE16004EEC0B /* TaskTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTable.swift; sourceTree = "<group>"; };
 		DE1849FD2AC7F6E7004EEC0B /* SubTaskTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTaskTable.swift; sourceTree = "<group>"; };
+		DE1849FF2AC82916004EEC0B /* StatusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusButton.swift; sourceTree = "<group>"; };
 		DEBD62922AC19E7B003010DC /* Timo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEBD62952AC19E7B003010DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEBD62972AC19E7B003010DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				DED5E8A42AC44A8200DDACC7 /* UnderlineSegmentedControl.swift */,
+				DE1849FF2AC82916004EEC0B /* StatusButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEF16C562AC2DB90006354F8 /* ProjectCollectionViewCell.swift in Sources */,
+				DE184A002AC82916004EEC0B /* StatusButton.swift in Sources */,
 				DEBD62C02AC1A62E003010DC /* ProjectListViewController.swift in Sources */,
 				DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */,
 				DEBD62982AC19E7B003010DC /* SceneDelegate.swift in Sources */,
