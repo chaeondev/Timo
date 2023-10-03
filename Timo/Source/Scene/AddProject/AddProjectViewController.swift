@@ -26,11 +26,20 @@ class AddProjectViewController: BaseViewController {
     private lazy var colorLabel = UILabel.labelBuilder(text: "project_color".localized, font: .boldSystemFont(ofSize: 16))
     private lazy var colorWell = UIColorWell(frame: .zero)
     
+    private var isSaved: Bool = false
+    
+    let projectRepository = ProjectTableRepository()
+    
+    var viewModel = AddProjectViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bindData()
         setNavigationBar()
         setupSheet()
+        //projectRepository.checkRealmURL()
+        
     }
     
     override func configure() {
@@ -44,6 +53,8 @@ class AddProjectViewController: BaseViewController {
         [titleLabel, titleTextField, titleBorderline, dateLabel, dateStackView, dateBorderline, colorLabel, colorWell].forEach {
             view.addSubview($0)
         }
+        
+        titleTextField.addTarget(self, action: #selector(titleTextFieldChanged), for: .editingChanged)
         
     }
     
@@ -95,6 +106,16 @@ class AddProjectViewController: BaseViewController {
         
     }
     
+    func bindData() {
+        viewModel.title.bind { text in
+            self.titleTextField.text = text
+        }
+        viewModel.isValid.bind { bool in
+            self.navigationItem.rightBarButtonItem?.isEnabled = bool
+            self.navigationItem.rightBarButtonItem?.tintColor = bool ? .systemBlue : .systemGray
+        }
+    }
+    
     // sheetPresentationController 설정
     private func setupSheet() {
         if let sheet = sheetPresentationController {
@@ -108,16 +129,40 @@ class AddProjectViewController: BaseViewController {
     //NavigationBar 세팅
     private func setNavigationBar() {
         title = "navigation_create_title".localized
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "navigation_cancel_button".localized, style: .plain, target: self, action: #selector(cancelBarButtonClicked))
-        navigationItem.leftBarButtonItem?.tintColor = .systemRed
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "navigation_ok_button".localized, style: .plain, target: self, action: #selector(okBarButtonClicked))
+        var cancelButton = UIBarButtonItem(title: "navigation_cancel_button".localized, style: .plain, target: self, action: #selector(cancelBarButtonClicked))
+        cancelButton.tintColor = .systemRed
+        
+        let saveButton = UIBarButtonItem(title: "navigation_save_button".localized, style: .plain, target: self, action: #selector(saveBarButtonClicked))
+        saveButton.tintColor = isSaved ? .systemBlue : .systemGray
+        
+        navigationItem.leftBarButtonItem = cancelButton
+        navigationItem.rightBarButtonItem = saveButton
+    }
+    
+    @objc func titleTextFieldChanged() {
+        viewModel.title.value = titleTextField.text!
+        viewModel.checkValidation()
+        
     }
     
     @objc func cancelBarButtonClicked() {
-        
+        dismiss(animated: true)
     }
     
-    @objc func okBarButtonClicked() {
+    @objc func saveBarButtonClicked() {
+        
+        guard let title = titleTextField.text else { return }
+        if viewModel.isValid.value {
+            let color = colorWell.selectedColor?.toHexString() ?? Design.BaseColor.mainPoint!.toHexString()
+            
+            let projectItem = ProjectTable(title: title, savedDate: Date(), startDate: startDatePicker.date, endDate: endDatePicker.date, color: color, done: false)
+            
+            projectRepository.createItem(projectItem)
+            dismiss(animated: true)
+        } else {
+            // TODO: Alert 띄우기 -> 프로젝트 이름을 입력해주세요
+        }
         
     }
+
 }
