@@ -94,13 +94,9 @@ class AddProjectViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "새 프로젝트"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(cancelBarButtonClicked))
         
-    }
-    
-    @objc func cancelBarButtonClicked() {
-        
+        setNavigationBar()
+        setupSheet()
     }
     
     override func configure() {
@@ -163,6 +159,32 @@ class AddProjectViewController: BaseViewController {
             make.trailing.equalToSuperview().inset(30)
             make.size.equalTo(50)
         }
+        
+    }
+    
+    // sheetPresentationController 설정
+    private func setupSheet() {
+        if let sheet = sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.selectedDetentIdentifier = .medium
+            sheet.largestUndimmedDetentIdentifier = .medium
+            sheet.prefersGrabberVisible = true
+        }
+    }
+    
+    //NavigationBar 세팅
+    private func setNavigationBar() {
+        title = "새 프로젝트"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(cancelBarButtonClicked))
+        navigationItem.leftBarButtonItem?.tintColor = .systemRed
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "확인", style: .plain, target: self, action: #selector(okBarButtonClicked))
+    }
+    
+    @objc func cancelBarButtonClicked() {
+        
+    }
+    
+    @objc func okBarButtonClicked() {
         
     }
 }

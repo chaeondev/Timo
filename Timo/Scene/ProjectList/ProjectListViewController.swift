@@ -61,7 +61,8 @@ class ProjectListViewController: BaseViewController {
     }
     
     @objc func addBarButtonClicked() {
-        
+        let nav = UINavigationController(rootViewController: AddProjectViewController())
+        present(nav, animated: true)
     }
 
 }
