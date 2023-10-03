@@ -12,7 +12,7 @@ class ProjectTable: Object {
     
     @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var title: String
-    @Persisted var memo: String?
+    @Persisted var savedDate: Date
     @Persisted var startDate: Date?
     @Persisted var endDate: Date?
     @Persisted var color: String?
@@ -21,11 +21,11 @@ class ProjectTable: Object {
     //To Many Relationship
     @Persisted var tasks: List<TaskTable>
 
-    convenience init(_id: ObjectId, title: String, memo: String?, startDate: Date?, endDate: Date?, color: String?, done: Bool) {
+    convenience init(_id: ObjectId, title: String, savedDate: Date, startDate: Date?, endDate: Date?, color: String?, done: Bool) {
         self.init()
         
         self.title = title
-        self.memo = memo
+        self.savedDate = savedDate
         self.startDate = startDate
         self.endDate = endDate
         self.color = color
