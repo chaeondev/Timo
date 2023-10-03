@@ -12,7 +12,7 @@ class AddProjectViewController: BaseViewController {
     // 프로젝트 이름
     let titleLabel = {
         let view = UILabel()
-        view.text = "프로젝트 이름"
+        view.text = "project_title".localized
         view.font = .boldSystemFont(ofSize: 16)
         view.textColor = Design.BaseColor.text
         return view
@@ -20,7 +20,7 @@ class AddProjectViewController: BaseViewController {
     
     let titleTextField = {
         let view = UITextField()
-        view.placeholder = "프로젝트 이름을 입력해주세요"
+        view.placeholder = "project_title_placeholder".localized
         view.borderStyle = .none
         view.textColor = Design.BaseColor.text
         return view
@@ -35,7 +35,7 @@ class AddProjectViewController: BaseViewController {
     //프로젝트 기간
     let dateLabel = {
         let view = UILabel()
-        view.text = "프로젝트 기간"
+        view.text = "project_period".localized
         view.font = .boldSystemFont(ofSize: 16)
         view.textColor = Design.BaseColor.text
         return view
@@ -80,7 +80,7 @@ class AddProjectViewController: BaseViewController {
     
     let colorLabel = {
         let view = UILabel()
-        view.text = "프로잭트 색상 선택"
+        view.text = "project_color".localized
         view.font = .boldSystemFont(ofSize: 16)
         view.textColor = Design.BaseColor.text
         return view
@@ -174,10 +174,10 @@ class AddProjectViewController: BaseViewController {
     
     //NavigationBar 세팅
     private func setNavigationBar() {
-        title = "새 프로젝트"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(cancelBarButtonClicked))
+        title = "navigation_create_title".localized
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "navigation_cancel_button".localized, style: .plain, target: self, action: #selector(cancelBarButtonClicked))
         navigationItem.leftBarButtonItem?.tintColor = .systemRed
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "확인", style: .plain, target: self, action: #selector(okBarButtonClicked))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "navigation_ok_button".localized, style: .plain, target: self, action: #selector(okBarButtonClicked))
     }
     
     @objc func cancelBarButtonClicked() {

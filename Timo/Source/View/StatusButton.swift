@@ -23,7 +23,7 @@ final class StatusButton: UIButton {
 
         backgroundColor = Design.BaseColor.subBackground
         setTitleColor(Design.BaseColor.text, for: .normal)
-        setTitle("Doing", for: .normal)
+        setTitle("project_doing".localized, for: .normal)
         titleLabel?.font = .systemFont(ofSize: 12, weight: .semibold)
         
         layer.cornerRadius = 10
@@ -37,11 +37,11 @@ final class StatusButton: UIButton {
             if isSelected {
                 self.backgroundColor = Design.BaseColor.border
                 self.setTitleColor(Design.BaseColor.mainBackground, for: .selected)
-                self.setTitle("Done", for: .selected)
+                self.setTitle("project_done".localized, for: .selected)
             } else {
                 self.backgroundColor = Design.BaseColor.subBackground
                 self.setTitleColor(Design.BaseColor.text, for: .normal)
-                self.setTitle("Doing", for: .normal)
+                self.setTitle("project_doing".localized, for: .normal)
             }
         }
     }

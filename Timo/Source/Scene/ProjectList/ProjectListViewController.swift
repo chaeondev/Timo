@@ -10,7 +10,8 @@ import UIKit
 class ProjectListViewController: BaseViewController {
     
     private let segmentedControl = {
-        let view = UnderlineSegmentedControl(items: ["ALL", "Doing", "Done"])
+        let view = UnderlineSegmentedControl(items: [
+            "projectFilter_first".localized, "projectFilter_second".localized, "projectFilter_third".localized])
         view.selectedSegmentIndex = 0
         return view
     }()
@@ -51,7 +52,7 @@ class ProjectListViewController: BaseViewController {
     }
     
     func setNavigationbar() {
-        title = "Projects"
+        title = "navigation_list_title".localized
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24, weight: .bold),
             NSAttributedString.Key.foregroundColor : Design.BaseColor.border!

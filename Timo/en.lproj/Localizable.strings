@@ -1,0 +1,40 @@
+/* 
+  Localizable.strings
+  Timo
+
+  Created by Chaewon on 2023/10/03.
+  
+*/
+
+//1. ProjectListViewController
+
+//navigationbar
+"navigation_list_title" = "Projects";
+
+//segmentedControl
+"projectFilter_first" = "All";
+"projectFilter_second" = "Doing";
+"projectFilter_third" = "Done";
+
+//statusButton
+"project_doing" = "Doing";
+"project_done" = "Done";
+
+//2. AddProjectViewController
+
+// 프로젝트 추가
+
+//navigationbar
+"navigation_create_title" = "New Project";
+"navigation_cancel_button" = "Cancel";
+"navigation_ok_button" = "Save";
+
+//project title
+"project_title" = "Project Title";
+"project_title_placeholder" = "Enter a name for your project";
+
+//project period
+"project_period" = "Duration of the project";
+
+//project color
+"project_color" = "Select project color";

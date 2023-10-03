@@ -14,6 +14,8 @@
 		DE184A032AC8306E004EEC0B /* AddProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A022AC8306E004EEC0B /* AddProjectViewController.swift */; };
 		DE184A052ACBD662004EEC0B /* RepositoryType+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A042ACBD662004EEC0B /* RepositoryType+Protocol.swift */; };
 		DE184A072ACBD871004EEC0B /* ProjectTableRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A062ACBD871004EEC0B /* ProjectTableRepository.swift */; };
+		DE184A0C2ACBE54C004EEC0B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DE184A0E2ACBE54C004EEC0B /* Localizable.strings */; };
+		DE184A142ACBE8B4004EEC0B /* Localized+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A132ACBE8B4004EEC0B /* Localized+Extension.swift */; };
 		DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62952AC19E7B003010DC /* AppDelegate.swift */; };
 		DEBD62982AC19E7B003010DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62972AC19E7B003010DC /* SceneDelegate.swift */; };
 		DEBD629F2AC19E7C003010DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEBD629E2AC19E7C003010DC /* Assets.xcassets */; };
@@ -37,6 +39,11 @@
 		DE184A022AC8306E004EEC0B /* AddProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectViewController.swift; sourceTree = "<group>"; };
 		DE184A042ACBD662004EEC0B /* RepositoryType+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RepositoryType+Protocol.swift"; sourceTree = "<group>"; };
 		DE184A062ACBD871004EEC0B /* ProjectTableRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTableRepository.swift; sourceTree = "<group>"; };
+		DE184A082ACBE4F5004EEC0B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		DE184A092ACBE50A004EEC0B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		DE184A0D2ACBE54C004EEC0B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DE184A0F2ACBE54D004EEC0B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DE184A132ACBE8B4004EEC0B /* Localized+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Localized+Extension.swift"; sourceTree = "<group>"; };
 		DEBD62922AC19E7B003010DC /* Timo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEBD62952AC19E7B003010DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEBD62972AC19E7B003010DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +80,38 @@
 			path = AddProject;
 			sourceTree = "<group>";
 		};
+		DE184A102ACBE78E004EEC0B /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				DEBD62952AC19E7B003010DC /* AppDelegate.swift */,
+				DEBD62972AC19E7B003010DC /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		DE184A112ACBE7F4004EEC0B /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				DEBD629E2AC19E7C003010DC /* Assets.xcassets */,
+				DEBD62A02AC19E7C003010DC /* LaunchScreen.storyboard */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		DE184A122ACBE80A004EEC0B /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				DEBD62A92AC1A01F003010DC /* Utility */,
+				DEBD62AA2AC1A029003010DC /* Database */,
+				DEBD62AB2AC1A032003010DC /* Base */,
+				DEBD62AC2AC1A038003010DC /* View */,
+				DEBD62AD2AC1A03C003010DC /* Cell */,
+				DEBD62AE2AC1A042003010DC /* Scene */,
+				DEBD62AF2AC1A048003010DC /* Extension */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
 		DEBD62892AC19E7B003010DC = {
 			isa = PBXGroup;
 			children = (
@@ -92,18 +131,11 @@
 		DEBD62942AC19E7B003010DC /* Timo */ = {
 			isa = PBXGroup;
 			children = (
-				DEBD62A92AC1A01F003010DC /* Utility */,
-				DEBD62AA2AC1A029003010DC /* Database */,
-				DEBD62AB2AC1A032003010DC /* Base */,
-				DEBD62AC2AC1A038003010DC /* View */,
-				DEBD62AD2AC1A03C003010DC /* Cell */,
-				DEBD62AE2AC1A042003010DC /* Scene */,
-				DEBD62AF2AC1A048003010DC /* Extension */,
-				DEBD62952AC19E7B003010DC /* AppDelegate.swift */,
-				DEBD62972AC19E7B003010DC /* SceneDelegate.swift */,
-				DEBD629E2AC19E7C003010DC /* Assets.xcassets */,
-				DEBD62A02AC19E7C003010DC /* LaunchScreen.storyboard */,
+				DE184A102ACBE78E004EEC0B /* Application */,
+				DE184A112ACBE7F4004EEC0B /* Resource */,
+				DE184A122ACBE80A004EEC0B /* Source */,
 				DEBD62A32AC19E7C003010DC /* Info.plist */,
+				DE184A0E2ACBE54C004EEC0B /* Localizable.strings */,
 			);
 			path = Timo;
 			sourceTree = "<group>";
@@ -167,6 +199,7 @@
 		DEBD62AF2AC1A048003010DC /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				DE184A132ACBE8B4004EEC0B /* Localized+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -228,11 +261,12 @@
 			};
 			buildConfigurationList = DEBD628D2AC19E7B003010DC /* Build configuration list for PBXProject "Timo" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				ko,
+				en,
 			);
 			mainGroup = DEBD62892AC19E7B003010DC;
 			packageReferences = (
@@ -254,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEBD62A22AC19E7C003010DC /* LaunchScreen.storyboard in Resources */,
+				DE184A0C2ACBE54C004EEC0B /* Localizable.strings in Resources */,
 				DEBD629F2AC19E7C003010DC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,6 +303,7 @@
 				DE184A072ACBD871004EEC0B /* ProjectTableRepository.swift in Sources */,
 				DEF16C562AC2DB90006354F8 /* ProjectCollectionViewCell.swift in Sources */,
 				DE184A002AC82916004EEC0B /* StatusButton.swift in Sources */,
+				DE184A142ACBE8B4004EEC0B /* Localized+Extension.swift in Sources */,
 				DEBD62C02AC1A62E003010DC /* ProjectListViewController.swift in Sources */,
 				DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */,
 				DE184A032AC8306E004EEC0B /* AddProjectViewController.swift in Sources */,
@@ -286,10 +322,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		DE184A0E2ACBE54C004EEC0B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DE184A0D2ACBE54C004EEC0B /* ko */,
+				DE184A0F2ACBE54D004EEC0B /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		DEBD62A02AC19E7C003010DC /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DEBD62A12AC19E7C003010DC /* Base */,
+				DE184A082ACBE4F5004EEC0B /* ko */,
+				DE184A092ACBE50A004EEC0B /* en */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -301,6 +348,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -361,6 +409,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
