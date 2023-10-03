@@ -16,6 +16,12 @@
 		DE184A072ACBD871004EEC0B /* ProjectTableRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A062ACBD871004EEC0B /* ProjectTableRepository.swift */; };
 		DE184A0C2ACBE54C004EEC0B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DE184A0E2ACBE54C004EEC0B /* Localizable.strings */; };
 		DE184A142ACBE8B4004EEC0B /* Localized+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A132ACBE8B4004EEC0B /* Localized+Extension.swift */; };
+		DE184A1D2ACBF497004EEC0B /* ViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A1C2ACBF497004EEC0B /* ViewBuilder.swift */; };
+		DE184A1F2ACBF5D5004EEC0B /* LabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A1E2ACBF5D5004EEC0B /* LabelBuilder.swift */; };
+		DE184A212ACBF726004EEC0B /* ImageViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A202ACBF726004EEC0B /* ImageViewBuilder.swift */; };
+		DE184A232ACC0066004EEC0B /* TextFieldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A222ACC0066004EEC0B /* TextFieldBuilder.swift */; };
+		DE184A252ACC0151004EEC0B /* DatePickerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A242ACC0151004EEC0B /* DatePickerBuilder.swift */; };
+		DE184A272ACC0214004EEC0B /* StackViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A262ACC0214004EEC0B /* StackViewBuilder.swift */; };
 		DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62952AC19E7B003010DC /* AppDelegate.swift */; };
 		DEBD62982AC19E7B003010DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62972AC19E7B003010DC /* SceneDelegate.swift */; };
 		DEBD629F2AC19E7C003010DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEBD629E2AC19E7C003010DC /* Assets.xcassets */; };
@@ -44,6 +50,12 @@
 		DE184A0D2ACBE54C004EEC0B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DE184A0F2ACBE54D004EEC0B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DE184A132ACBE8B4004EEC0B /* Localized+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Localized+Extension.swift"; sourceTree = "<group>"; };
+		DE184A1C2ACBF497004EEC0B /* ViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBuilder.swift; sourceTree = "<group>"; };
+		DE184A1E2ACBF5D5004EEC0B /* LabelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBuilder.swift; sourceTree = "<group>"; };
+		DE184A202ACBF726004EEC0B /* ImageViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewBuilder.swift; sourceTree = "<group>"; };
+		DE184A222ACC0066004EEC0B /* TextFieldBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBuilder.swift; sourceTree = "<group>"; };
+		DE184A242ACC0151004EEC0B /* DatePickerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerBuilder.swift; sourceTree = "<group>"; };
+		DE184A262ACC0214004EEC0B /* StackViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewBuilder.swift; sourceTree = "<group>"; };
 		DEBD62922AC19E7B003010DC /* Timo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEBD62952AC19E7B003010DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEBD62972AC19E7B003010DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,12 +116,26 @@
 				DEBD62A92AC1A01F003010DC /* Utility */,
 				DEBD62AA2AC1A029003010DC /* Database */,
 				DEBD62AB2AC1A032003010DC /* Base */,
+				DE184A1B2ACBF41F004EEC0B /* Builder */,
 				DEBD62AC2AC1A038003010DC /* View */,
 				DEBD62AD2AC1A03C003010DC /* Cell */,
 				DEBD62AE2AC1A042003010DC /* Scene */,
 				DEBD62AF2AC1A048003010DC /* Extension */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		DE184A1B2ACBF41F004EEC0B /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				DE184A1C2ACBF497004EEC0B /* ViewBuilder.swift */,
+				DE184A1E2ACBF5D5004EEC0B /* LabelBuilder.swift */,
+				DE184A202ACBF726004EEC0B /* ImageViewBuilder.swift */,
+				DE184A222ACC0066004EEC0B /* TextFieldBuilder.swift */,
+				DE184A242ACC0151004EEC0B /* DatePickerBuilder.swift */,
+				DE184A262ACC0214004EEC0B /* StackViewBuilder.swift */,
+			);
+			path = Builder;
 			sourceTree = "<group>";
 		};
 		DEBD62892AC19E7B003010DC = {
@@ -304,17 +330,23 @@
 				DEF16C562AC2DB90006354F8 /* ProjectCollectionViewCell.swift in Sources */,
 				DE184A002AC82916004EEC0B /* StatusButton.swift in Sources */,
 				DE184A142ACBE8B4004EEC0B /* Localized+Extension.swift in Sources */,
+				DE184A1F2ACBF5D5004EEC0B /* LabelBuilder.swift in Sources */,
+				DE184A252ACC0151004EEC0B /* DatePickerBuilder.swift in Sources */,
 				DEBD62C02AC1A62E003010DC /* ProjectListViewController.swift in Sources */,
+				DE184A1D2ACBF497004EEC0B /* ViewBuilder.swift in Sources */,
 				DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */,
 				DE184A032AC8306E004EEC0B /* AddProjectViewController.swift in Sources */,
 				DE184A052ACBD662004EEC0B /* RepositoryType+Protocol.swift in Sources */,
+				DE184A272ACC0214004EEC0B /* StackViewBuilder.swift in Sources */,
 				DEBD62982AC19E7B003010DC /* SceneDelegate.swift in Sources */,
 				DE1849FE2AC7F6E7004EEC0B /* SubTaskTable.swift in Sources */,
 				DEF16C522AC2D349006354F8 /* Color.swift in Sources */,
+				DE184A232ACC0066004EEC0B /* TextFieldBuilder.swift in Sources */,
 				DED5E8A52AC44A8200DDACC7 /* UnderlineSegmentedControl.swift in Sources */,
 				DE1849FA2AC7EE06004EEC0B /* ProjectTable.swift in Sources */,
 				DEBD62BE2AC1A4DF003010DC /* BaseViewController.swift in Sources */,
 				DEF16C542AC2DAD7006354F8 /* BaseCollectionViewCell.swift in Sources */,
+				DE184A212ACBF726004EEC0B /* ImageViewBuilder.swift in Sources */,
 				DE1849FC2AC7EE16004EEC0B /* TaskTable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

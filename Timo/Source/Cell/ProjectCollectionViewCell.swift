@@ -9,85 +9,24 @@ import UIKit
 
 class ProjectCollectionViewCell: BaseCollectionViewCell {
     
-    let colorbar = {
-        let view = UIView()
-        view.backgroundColor = Design.BaseColor.subPoint
-        return view
-    }()
-    
-    let titleLabel = {
-        let view = UILabel()
-        view.text = "Design Project view UI setting"
-        view.font = .boldSystemFont(ofSize: 14)
-        view.textColor = Design.BaseColor.text
-        view.numberOfLines = 0
-        return view
-    }()
-    
-    let boundaryline = {
-        let view = UIView()
-        view.backgroundColor = Design.BaseColor.subPoint
-        return view
-    }()
-    
-    let doneButton = {
-        let view = StatusButton()
-        return view
-    }()
-    
-    let ddayLabel = {
-        let view = UILabel()
-        view.text = "D-17"
-        view.textColor = Design.BaseColor.text
-        view.font = .systemFont(ofSize: 12, weight: .bold)
-        return view
-    }()
-    
-    let progressbar = {
+    private lazy var colorbar = UIView.barViewBuilder(color: Design.BaseColor.subPoint!)
+    private lazy var titleLabel = UILabel.labelBuilder(text: "Design Project view UI setting", font: .boldSystemFont(ofSize: 14))
+    private lazy var boundaryline = UIView.barViewBuilder(color: Design.BaseColor.subPoint!)
+    private lazy var doneButton: UIButton = StatusButton()
+    private lazy var ddayLabel = UILabel.labelBuilder(text: "D-17", font: .systemFont(ofSize: 12, weight: .bold))
+    private lazy var progressbar = {
         let view = UIProgressView()
         view.trackTintColor = .lightGray
         view.progressTintColor = Design.BaseColor.subPoint
         view.progress = 0.3
         return view
     }()
+    private lazy var progressLabel = UILabel.labelBuilder(text: "33%", font: .systemFont(ofSize: 10, weight: .medium), textColor: .darkGray)
+    private lazy var taskImageView = UIImageView.imageViewBuilder(image: UIImage(systemName: "link")!)
+    private lazy var taskCountLabel = UILabel.labelBuilder(text: "23", font: .systemFont(ofSize: 10, weight: .medium), textColor: .darkGray)
+    private lazy var timeImageView = UIImageView.imageViewBuilder(image: UIImage(systemName: "clock")!)
+    private lazy var realTimeLabel = UILabel.labelBuilder(text: "9H", font: .systemFont(ofSize: 10, weight: .medium), textColor: .darkGray)
     
-    let progressLabel = {
-        let view = UILabel()
-        view.text = "33%"
-        view.font = .systemFont(ofSize: 10, weight: .medium)
-        view.textColor = .darkGray
-        return view
-    }()
-    
-    let taskImageView = {
-        let view = UIImageView()
-        view.image = UIImage(systemName: "link")
-        view.tintColor = .darkGray
-        return view
-    }()
-    
-    let taskCountLabel = {
-        let view = UILabel()
-        view.text = "23"
-        view.font = .systemFont(ofSize: 10, weight: .medium)
-        view.textColor = .darkGray
-        return view
-    }()
-    
-    let timeImageView = {
-        let view = UIImageView()
-        view.image = UIImage(systemName: "clock")
-        view.tintColor = .darkGray
-        return view
-    }()
-    
-    let realTimeLabel = {
-        let view = UILabel()
-        view.text = "9H"
-        view.font = .systemFont(ofSize: 10, weight: .medium)
-        view.textColor = .darkGray
-        return view
-    }()
     
     override func configure() {
         
@@ -96,18 +35,9 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
         self.layer.borderColor = Design.BaseColor.border?.cgColor
         self.layer.borderWidth = 1
         
-        
-        contentView.addSubview(colorbar)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(boundaryline)
-        contentView.addSubview(doneButton)
-        contentView.addSubview(ddayLabel)
-        contentView.addSubview(progressbar)
-        contentView.addSubview(progressLabel)
-        contentView.addSubview(taskImageView)
-        contentView.addSubview(taskCountLabel)
-        contentView.addSubview(timeImageView)
-        contentView.addSubview(realTimeLabel)
+        [colorbar, titleLabel, boundaryline, doneButton, ddayLabel, progressbar, progressLabel, taskImageView, taskCountLabel, timeImageView, realTimeLabel].forEach {
+            contentView.addSubview($0)
+        }
     }
     
     override func setConstraints() {

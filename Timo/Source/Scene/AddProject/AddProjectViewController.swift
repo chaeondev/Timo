@@ -10,87 +10,21 @@ import UIKit
 class AddProjectViewController: BaseViewController {
     
     // 프로젝트 이름
-    let titleLabel = {
-        let view = UILabel()
-        view.text = "project_title".localized
-        view.font = .boldSystemFont(ofSize: 16)
-        view.textColor = Design.BaseColor.text
-        return view
-    }()
-    
-    let titleTextField = {
-        let view = UITextField()
-        view.placeholder = "project_title_placeholder".localized
-        view.borderStyle = .none
-        view.textColor = Design.BaseColor.text
-        return view
-    }()
-    
-    let titleBorderline = {
-        let view = UIView()
-        view.backgroundColor = .lightGray
-        return view
-    }()
+    private lazy var titleLabel = UILabel.labelBuilder(text: "project_title".localized, font: .boldSystemFont(ofSize: 16))
+    private lazy var titleTextField = UITextField.textFieldBuilder(placeholder: "project_title_placeholder".localized)
+    private lazy var titleBorderline = UIView.barViewBuilder(color: .lightGray)
     
     //프로젝트 기간
-    let dateLabel = {
-        let view = UILabel()
-        view.text = "project_period".localized
-        view.font = .boldSystemFont(ofSize: 16)
-        view.textColor = Design.BaseColor.text
-        return view
-    }()
-    
-    let startDatePicker = {
-        let view = UIDatePicker()
-        view.datePickerMode = .date
-        return view
-    }()
-    
-    let periodLabel = {
-        let view = UILabel()
-        view.text = "~"
-        view.font = .boldSystemFont(ofSize: 16)
-        view.textColor = .lightGray
-        return view
-    }()
-    
-    let endDatePicker = {
-        let view = UIDatePicker()
-        view.datePickerMode = .date
-        return view
-    }()
-    
-    private lazy var dateStackView = {
-        let view = UIStackView(arrangedSubviews: [startDatePicker, periodLabel, endDatePicker])
-        view.axis = .horizontal
-        view.distribution = .equalSpacing
-        view.alignment = .center
-        view.spacing = 8
-        return view
-    }()
-    
-    let dateBorderline = {
-        let view = UIView()
-        view.backgroundColor = .lightGray
-        return view
-    }()
+    private lazy var dateLabel = UILabel.labelBuilder(text: "project_period".localized, font: .boldSystemFont(ofSize: 16))
+    private lazy var startDatePicker = UIDatePicker.datePickerBuilder()
+    private lazy var periodLabel = UILabel.labelBuilder(text: "~", font: .boldSystemFont(ofSize: 16), textColor: .lightGray)
+    private lazy var endDatePicker = UIDatePicker.datePickerBuilder()
+    private lazy var dateStackView = UIStackView.stackViewBuilder(axis: .horizontal, distribution: .equalSpacing, spacing: 8)
+    private lazy var dateBorderline = UIView.barViewBuilder(color: .lightGray)
     
     //프로젝트 색상
-    
-    let colorLabel = {
-        let view = UILabel()
-        view.text = "project_color".localized
-        view.font = .boldSystemFont(ofSize: 16)
-        view.textColor = Design.BaseColor.text
-        return view
-    }()
-    
-    let colorWell = {
-        let view = UIColorWell(frame: .zero)
-        return view
-    }()
-
+    private lazy var colorLabel = UILabel.labelBuilder(text: "project_color".localized, font: .boldSystemFont(ofSize: 16))
+    private lazy var colorWell = UIColorWell(frame: .zero)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,15 +36,14 @@ class AddProjectViewController: BaseViewController {
     override func configure() {
         super.configure()
         
-        view.addSubview(titleLabel)
-        view.addSubview(titleTextField)
-        view.addSubview(titleBorderline)
-        view.addSubview(dateLabel)
-        view.addSubview(dateStackView)
-        view.addSubview(dateBorderline)
-        view.addSubview(colorLabel)
-        view.addSubview(colorWell)
+
+        [startDatePicker, periodLabel, endDatePicker].forEach {
+            dateStackView.addArrangedSubview($0)
+        }
         
+        [titleLabel, titleTextField, titleBorderline, dateLabel, dateStackView, dateBorderline, colorLabel, colorWell].forEach {
+            view.addSubview($0)
+        }
         
     }
     
