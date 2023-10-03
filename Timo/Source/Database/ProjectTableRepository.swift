@@ -11,13 +11,9 @@ import RealmSwift
 class ProjectTableRepository: RepositoryType {
     
     typealias T = ProjectTable
-    
-    private let realm: Realm
-    
-    //failable init
-    init() throws {
-        self.realm = try Realm()
-    }
+
+    // TODO: failable init 공부하기
+    private let realm = try! Realm()
     
     
     func checkRealmURL() {

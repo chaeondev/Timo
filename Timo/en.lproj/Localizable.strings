@@ -27,7 +27,7 @@
 //navigationbar
 "navigation_create_title" = "New Project";
 "navigation_cancel_button" = "Cancel";
-"navigation_ok_button" = "Save";
+"navigation_save_button" = "Save";
 
 //project title
 "project_title" = "Project Title";

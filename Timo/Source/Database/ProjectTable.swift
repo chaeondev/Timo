@@ -21,7 +21,7 @@ class ProjectTable: Object {
     //To Many Relationship
     @Persisted var tasks: List<TaskTable>
 
-    convenience init(_id: ObjectId, title: String, savedDate: Date, startDate: Date?, endDate: Date?, color: String?, done: Bool) {
+    convenience init(title: String, savedDate: Date, startDate: Date?, endDate: Date?, color: String?, done: Bool) {
         self.init()
         
         self.title = title
