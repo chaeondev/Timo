@@ -96,7 +96,8 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        <#code#>
+        let vc = ProjectDetailViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     // MARK: iOS17 확인

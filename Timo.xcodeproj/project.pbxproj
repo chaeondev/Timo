@@ -25,6 +25,11 @@
 		DE184A292ACC0E8B004EEC0B /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A282ACC0E8B004EEC0B /* UIColor+Extension.swift */; };
 		DE184A2C2ACC3625004EEC0B /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A2B2ACC3625004EEC0B /* Observable.swift */; };
 		DE184A302ACC3858004EEC0B /* AddProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A2F2ACC3858004EEC0B /* AddProjectViewModel.swift */; };
+		DE184A642ACD6165004EEC0B /* ProjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A632ACD6165004EEC0B /* ProjectDetailViewController.swift */; };
+		DE184A662ACD64C9004EEC0B /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A652ACD64C9004EEC0B /* TaskTableViewCell.swift */; };
+		DE184A6A2ACD6644004EEC0B /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A692ACD6644004EEC0B /* BaseTableViewCell.swift */; };
+		DE184A6C2ACD7287004EEC0B /* ButtonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A6B2ACD7287004EEC0B /* ButtonBuilder.swift */; };
+		DE184A702ACD8399004EEC0B /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A6F2ACD8399004EEC0B /* TimerButton.swift */; };
 		DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62952AC19E7B003010DC /* AppDelegate.swift */; };
 		DEBD62982AC19E7B003010DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62972AC19E7B003010DC /* SceneDelegate.swift */; };
 		DEBD629F2AC19E7C003010DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEBD629E2AC19E7C003010DC /* Assets.xcassets */; };
@@ -62,6 +67,11 @@
 		DE184A282ACC0E8B004EEC0B /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		DE184A2B2ACC3625004EEC0B /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		DE184A2F2ACC3858004EEC0B /* AddProjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectViewModel.swift; sourceTree = "<group>"; };
+		DE184A632ACD6165004EEC0B /* ProjectDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewController.swift; sourceTree = "<group>"; };
+		DE184A652ACD64C9004EEC0B /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		DE184A692ACD6644004EEC0B /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		DE184A6B2ACD7287004EEC0B /* ButtonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonBuilder.swift; sourceTree = "<group>"; };
+		DE184A6F2ACD8399004EEC0B /* TimerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
 		DEBD62922AC19E7B003010DC /* Timo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEBD62952AC19E7B003010DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEBD62972AC19E7B003010DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +152,7 @@
 				DE184A222ACC0066004EEC0B /* TextFieldBuilder.swift */,
 				DE184A242ACC0151004EEC0B /* DatePickerBuilder.swift */,
 				DE184A262ACC0214004EEC0B /* StackViewBuilder.swift */,
+				DE184A6B2ACD7287004EEC0B /* ButtonBuilder.swift */,
 			);
 			path = Builder;
 			sourceTree = "<group>";
@@ -207,6 +218,7 @@
 			children = (
 				DEBD62BD2AC1A4DE003010DC /* BaseViewController.swift */,
 				DEF16C532AC2DAD7006354F8 /* BaseCollectionViewCell.swift */,
+				DE184A692ACD6644004EEC0B /* BaseTableViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -216,6 +228,7 @@
 			children = (
 				DED5E8A42AC44A8200DDACC7 /* UnderlineSegmentedControl.swift */,
 				DE1849FF2AC82916004EEC0B /* StatusButton.swift */,
+				DE184A6F2ACD8399004EEC0B /* TimerButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -224,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				DEF16C552AC2DB90006354F8 /* ProjectCollectionViewCell.swift */,
+				DE184A652ACD64C9004EEC0B /* TaskTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -258,6 +272,7 @@
 		DEBD62B12AC1A0AF003010DC /* ProjectDetail */ = {
 			isa = PBXGroup;
 			children = (
+				DE184A632ACD6165004EEC0B /* ProjectDetailViewController.swift */,
 			);
 			path = ProjectDetail;
 			sourceTree = "<group>";
@@ -346,6 +361,9 @@
 				DE184A072ACBD871004EEC0B /* ProjectTableRepository.swift in Sources */,
 				DEF16C562AC2DB90006354F8 /* ProjectCollectionViewCell.swift in Sources */,
 				DE184A002AC82916004EEC0B /* StatusButton.swift in Sources */,
+				DE184A702ACD8399004EEC0B /* TimerButton.swift in Sources */,
+				DE184A642ACD6165004EEC0B /* ProjectDetailViewController.swift in Sources */,
+				DE184A6A2ACD6644004EEC0B /* BaseTableViewCell.swift in Sources */,
 				DE184A142ACBE8B4004EEC0B /* Localized+Extension.swift in Sources */,
 				DE184A1F2ACBF5D5004EEC0B /* LabelBuilder.swift in Sources */,
 				DE184A252ACC0151004EEC0B /* DatePickerBuilder.swift in Sources */,
@@ -353,6 +371,8 @@
 				DE184A1D2ACBF497004EEC0B /* ViewBuilder.swift in Sources */,
 				DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */,
 				DE184A302ACC3858004EEC0B /* AddProjectViewModel.swift in Sources */,
+				DE184A6C2ACD7287004EEC0B /* ButtonBuilder.swift in Sources */,
+				DE184A662ACD64C9004EEC0B /* TaskTableViewCell.swift in Sources */,
 				DE184A032AC8306E004EEC0B /* AddProjectViewController.swift in Sources */,
 				DE184A052ACBD662004EEC0B /* RepositoryType+Protocol.swift in Sources */,
 				DE184A272ACC0214004EEC0B /* StackViewBuilder.swift in Sources */,
