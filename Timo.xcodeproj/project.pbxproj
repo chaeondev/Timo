@@ -22,6 +22,9 @@
 		DE184A232ACC0066004EEC0B /* TextFieldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A222ACC0066004EEC0B /* TextFieldBuilder.swift */; };
 		DE184A252ACC0151004EEC0B /* DatePickerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A242ACC0151004EEC0B /* DatePickerBuilder.swift */; };
 		DE184A272ACC0214004EEC0B /* StackViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A262ACC0214004EEC0B /* StackViewBuilder.swift */; };
+		DE184A292ACC0E8B004EEC0B /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A282ACC0E8B004EEC0B /* UIColor+Extension.swift */; };
+		DE184A2C2ACC3625004EEC0B /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A2B2ACC3625004EEC0B /* Observable.swift */; };
+		DE184A302ACC3858004EEC0B /* AddProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A2F2ACC3858004EEC0B /* AddProjectViewModel.swift */; };
 		DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62952AC19E7B003010DC /* AppDelegate.swift */; };
 		DEBD62982AC19E7B003010DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62972AC19E7B003010DC /* SceneDelegate.swift */; };
 		DEBD629F2AC19E7C003010DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEBD629E2AC19E7C003010DC /* Assets.xcassets */; };
@@ -56,6 +59,9 @@
 		DE184A222ACC0066004EEC0B /* TextFieldBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBuilder.swift; sourceTree = "<group>"; };
 		DE184A242ACC0151004EEC0B /* DatePickerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerBuilder.swift; sourceTree = "<group>"; };
 		DE184A262ACC0214004EEC0B /* StackViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewBuilder.swift; sourceTree = "<group>"; };
+		DE184A282ACC0E8B004EEC0B /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		DE184A2B2ACC3625004EEC0B /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		DE184A2F2ACC3858004EEC0B /* AddProjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectViewModel.swift; sourceTree = "<group>"; };
 		DEBD62922AC19E7B003010DC /* Timo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEBD62952AC19E7B003010DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEBD62972AC19E7B003010DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				DE184A022AC8306E004EEC0B /* AddProjectViewController.swift */,
+				DE184A2F2ACC3858004EEC0B /* AddProjectViewModel.swift */,
 			);
 			path = AddProject;
 			sourceTree = "<group>";
@@ -119,6 +126,7 @@
 				DE184A1B2ACBF41F004EEC0B /* Builder */,
 				DEBD62AC2AC1A038003010DC /* View */,
 				DEBD62AD2AC1A03C003010DC /* Cell */,
+				DE184A2A2ACC35FD004EEC0B /* Observable */,
 				DEBD62AE2AC1A042003010DC /* Scene */,
 				DEBD62AF2AC1A048003010DC /* Extension */,
 			);
@@ -136,6 +144,14 @@
 				DE184A262ACC0214004EEC0B /* StackViewBuilder.swift */,
 			);
 			path = Builder;
+			sourceTree = "<group>";
+		};
+		DE184A2A2ACC35FD004EEC0B /* Observable */ = {
+			isa = PBXGroup;
+			children = (
+				DE184A2B2ACC3625004EEC0B /* Observable.swift */,
+			);
+			path = Observable;
 			sourceTree = "<group>";
 		};
 		DEBD62892AC19E7B003010DC = {
@@ -226,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				DE184A132ACBE8B4004EEC0B /* Localized+Extension.swift */,
+				DE184A282ACC0E8B004EEC0B /* UIColor+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -335,6 +352,7 @@
 				DEBD62C02AC1A62E003010DC /* ProjectListViewController.swift in Sources */,
 				DE184A1D2ACBF497004EEC0B /* ViewBuilder.swift in Sources */,
 				DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */,
+				DE184A302ACC3858004EEC0B /* AddProjectViewModel.swift in Sources */,
 				DE184A032AC8306E004EEC0B /* AddProjectViewController.swift in Sources */,
 				DE184A052ACBD662004EEC0B /* RepositoryType+Protocol.swift in Sources */,
 				DE184A272ACC0214004EEC0B /* StackViewBuilder.swift in Sources */,
@@ -342,7 +360,9 @@
 				DE1849FE2AC7F6E7004EEC0B /* SubTaskTable.swift in Sources */,
 				DEF16C522AC2D349006354F8 /* Color.swift in Sources */,
 				DE184A232ACC0066004EEC0B /* TextFieldBuilder.swift in Sources */,
+				DE184A2C2ACC3625004EEC0B /* Observable.swift in Sources */,
 				DED5E8A52AC44A8200DDACC7 /* UnderlineSegmentedControl.swift in Sources */,
+				DE184A292ACC0E8B004EEC0B /* UIColor+Extension.swift in Sources */,
 				DE1849FA2AC7EE06004EEC0B /* ProjectTable.swift in Sources */,
 				DEBD62BE2AC1A4DF003010DC /* BaseViewController.swift in Sources */,
 				DEF16C542AC2DAD7006354F8 /* BaseCollectionViewCell.swift in Sources */,

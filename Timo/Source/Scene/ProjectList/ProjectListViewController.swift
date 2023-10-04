@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ProjectListViewController: BaseViewController {
     
@@ -22,14 +23,20 @@ class ProjectListViewController: BaseViewController {
         view.register(ProjectCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         view.delegate = self
         view.dataSource = self
-        view.collectionViewLayout = collectionViewLayout()
         view.keyboardDismissMode = .onDrag
         return view
     }()
+    
+    var projectList: Results<ProjectTable>?
+    
+    private let projectRepository = ProjectTableRepository()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setNavigationbar()
+        
+        projectList = projectRepository.fetch()
     }
     
     override func configure() {
@@ -71,13 +78,48 @@ class ProjectListViewController: BaseViewController {
 extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        guard let projectList = projectList else { return 0 }
+        return projectList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ProjectCollectionViewCell else { return UICollectionViewCell() }
-        cell.configureCell()
+        
+        if let projectList {
+            let data = projectList[indexPath.row]
+            cell.data = data
+            cell.configureCell()
+
+        }
+        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        <#code#>
+    }
+    
+    // MARK: iOS17 확인
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        configureContextMenu(index: indexPath.item)
+    }
+    
+    func configureContextMenu(index: Int) -> UIContextMenuConfiguration {
+        let context = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { (action) -> UIMenu? in
+            
+            let edit = UIAction(title: "edit_contextmenu".localized, image: UIImage(systemName: "square.and.pencil"), identifier: nil, discoverabilityTitle: nil, state: .off) { (_) in
+                print("edit button clicked")
+                //add tasks...
+                // TODO: 편집 viewcontroller -> addviewcontroller
+            }
+            let delete = UIAction(title: "delete_contextmenu".localized, image: UIImage(systemName: "trash"), identifier: nil, discoverabilityTitle: nil,attributes: .destructive, state: .off) { (_) in
+                print("delete button clicked")
+                //add tasks...
+                // TODO: 삭제 alert -> realm 지우기
+            }
+            return UIMenu(title: "Options", image: nil, identifier: nil, options: UIMenu.Options.displayInline, children: [edit,delete])
+        }
+        return context
     }
     
     private func collectionViewLayout() -> UICollectionViewFlowLayout {

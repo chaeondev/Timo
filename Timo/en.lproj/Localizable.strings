@@ -20,6 +20,10 @@
 "project_doing" = "Doing";
 "project_done" = "Done";
 
+//contextmenu in cell
+"edit_contextmenu" = "Edit";
+"delete_contextmenu" = "Delete";
+
 //2. AddProjectViewController
 
 // 프로젝트 추가

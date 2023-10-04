@@ -20,6 +20,10 @@
 "project_doing" = "진행중";
 "project_done" = "완료";
 
+//contextmenu in cell
+"edit_contextmenu" = "편집하기";
+"delete_contextmenu" = "삭제하기";
+
 //2. AddProjectViewController
 
 // 프로젝트 추가

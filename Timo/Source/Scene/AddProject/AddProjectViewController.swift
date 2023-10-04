@@ -38,7 +38,7 @@ class AddProjectViewController: BaseViewController {
         bindData()
         setNavigationBar()
         setupSheet()
-        //projectRepository.checkRealmURL()
+        projectRepository.checkRealmURL()
         
     }
     
