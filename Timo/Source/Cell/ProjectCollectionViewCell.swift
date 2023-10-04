@@ -27,6 +27,9 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
     private lazy var timeImageView = UIImageView.imageViewBuilder(image: UIImage(systemName: "clock")!)
     private lazy var realTimeLabel = UILabel.labelBuilder(text: "9H", font: .systemFont(ofSize: 10, weight: .medium), textColor: .darkGray)
     
+    var data: ProjectTable?
+    
+    private let repository = ProjectTableRepository()
     
     override func configure() {
         
@@ -38,6 +41,8 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
         [colorbar, titleLabel, boundaryline, doneButton, ddayLabel, progressbar, progressLabel, taskImageView, taskCountLabel, timeImageView, realTimeLabel].forEach {
             contentView.addSubview($0)
         }
+        
+        doneButton.addTarget(self, action: #selector(doneButtonClicked), for: .touchUpInside)
     }
     
     override func setConstraints() {
@@ -80,7 +85,7 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
         progressbar.snp.makeConstraints { make in
             make.top.equalTo(doneButton.snp.bottom).offset(8)
             make.leading.equalToSuperview().offset(16)
-            make.trailing.equalTo(ddayLabel.snp.leading).inset(4)
+            make.width.equalToSuperview().multipliedBy(0.67)
             make.height.equalTo(5)
         }
         
@@ -114,11 +119,49 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
     }
     
     func configureCell() {
-        doneButton.addTarget(self, action: #selector(doneButtonClicked), for: .touchUpInside)
+        guard let data else { return }
+        titleLabel.text = data.title
+        if let endDate = data.endDate {
+            let dday = calculateDateInterval(from: endDate)
+            ddayLabel.text = dday <= 0 ? "D\(dday)" : "D+\(dday)"
+        }
+        doneButton.isSelected = data.done
+        
+        // TODO: Task 데이터 추가되고 업데이트 하기
+
+        
+        
     }
     
     @objc func doneButtonClicked() {
         doneButton.isSelected.toggle()
+        guard let data else { return }
+        repository.updateItemStatus(data)
+        
     }
     
+    func calculateDateInterval(from endDate: Date) -> Int {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        //str으로 변환(날짜 제외 시간 삭제)
+        let endDateStr = dateFormatter.string(from: endDate)
+        let todayStr = dateFormatter.string(from: Date())
+        
+        //다시 Date변환(계산위해서)
+        let end = dateFormatter.date(from: endDateStr)
+        let today = dateFormatter.date(from: todayStr)
+        
+        //interval 계산
+        let calendar = Calendar.current
+        
+        if let end, let today {
+            let dateGap = calendar.dateComponents([.day], from: end, to: today).day!
+            
+            return dateGap
+        } else {
+            return 0 // TODO: d-day 계산 실패 -> alert 필요?
+        }
+    }
 }
