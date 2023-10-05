@@ -24,10 +24,12 @@ class TaskTableViewCell: BaseTableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 8, left: 20, bottom: 8, right: 20))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 8, left: 24, bottom: 8, right: 24))
     }
     
     override func configure() {
+        
+        backgroundColor = Design.BaseColor.mainBackground
         
         contentView.layer.cornerRadius = 12
         contentView.layer.borderColor = Design.BaseColor.border?.cgColor
