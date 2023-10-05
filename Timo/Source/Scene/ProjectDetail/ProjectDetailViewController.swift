@@ -21,12 +21,14 @@ class ProjectDetailViewController: BaseViewController {
     private lazy var totalTaskCountLabel = UILabel.labelBuilder(text: "24/87 task", font: .boldSystemFont(ofSize: 13), textColor: Design.BaseColor.border!, numberOfLines: 1, textAlignment: .center)
     
     private lazy var tableView = {
-        let view = UITableView()
+        let view = UITableView(frame: .zero, style: .grouped)
         view.backgroundColor = .clear
         view.register(TaskTableViewCell.self, forCellReuseIdentifier: "tableCell")
+        view.register(ProjectDetailFooterView.self, forHeaderFooterViewReuseIdentifier: "footerView")
         view.delegate = self
         view.dataSource = self
         view.rowHeight = 105
+        view.sectionFooterHeight = 80
         view.keyboardDismissMode = .onDrag
         return view
     }()
@@ -122,6 +124,11 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell") as? TaskTableViewCell else { return UITableViewCell()}
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "footerView") as? ProjectDetailFooterView else { return UIView() }
+        return view
     }
     
     
