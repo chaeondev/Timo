@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol AddProjectDelegate {
+    func updateCollectionView()
+}
+
 class AddProjectViewController: BaseViewController {
     
     // 프로젝트 이름
@@ -27,6 +31,7 @@ class AddProjectViewController: BaseViewController {
     private lazy var colorWell = UIColorWell(frame: .zero)
     
     private var isSaved: Bool = false
+    var delegate: AddProjectDelegate?
     
     let projectRepository = ProjectTableRepository()
     
@@ -138,7 +143,7 @@ class AddProjectViewController: BaseViewController {
         navigationItem.leftBarButtonItem = cancelButton
         navigationItem.rightBarButtonItem = saveButton
     }
-    
+
     @objc func titleTextFieldChanged() {
         viewModel.title.value = titleTextField.text!
         viewModel.checkValidation()
@@ -158,6 +163,10 @@ class AddProjectViewController: BaseViewController {
             let projectItem = ProjectTable(title: title, savedDate: Date(), startDate: startDatePicker.date, endDate: endDatePicker.date, color: color, done: false)
             
             projectRepository.createItem(projectItem)
+            
+            //call delegate -> collectionview reload 위해서
+            delegate?.updateCollectionView()
+            
             dismiss(animated: true)
         } else {
             // TODO: Alert 띄우기 -> 프로젝트 이름을 입력해주세요

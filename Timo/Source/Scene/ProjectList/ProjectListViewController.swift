@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class ProjectListViewController: BaseViewController {
+class ProjectListViewController: BaseViewController, AddProjectDelegate {
     
     private let segmentedControl = {
         let view = UnderlineSegmentedControl(items: [
@@ -61,7 +61,7 @@ class ProjectListViewController: BaseViewController {
     func setNavigationbar() {
         title = "navigation_list_title".localized
         navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24, weight: .bold),
+            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 22, weight: .bold),
             NSAttributedString.Key.foregroundColor : Design.BaseColor.border!
         ]
         navigationController?.navigationBar.tintColor = Design.BaseColor.border
@@ -69,8 +69,15 @@ class ProjectListViewController: BaseViewController {
     }
     
     @objc func addBarButtonClicked() {
-        let nav = UINavigationController(rootViewController: AddProjectViewController())
+        let vc = AddProjectViewController()
+        vc.delegate = self
+        let nav = UINavigationController(rootViewController: vc)
         present(nav, animated: true)
+    }
+    
+    //AddView의 delegate 메서드
+    func updateCollectionView() {
+        collectionView.reloadData()
     }
 
 }

@@ -123,7 +123,17 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
         titleLabel.text = data.title
         if let endDate = data.endDate {
             let dday = calculateDateInterval(from: endDate)
-            ddayLabel.text = dday <= 0 ? "D\(dday)" : "D+\(dday)"
+            ddayLabel.text = {
+                if dday < 0 {
+                    return "D\(dday)"
+                } else if dday == 0 {
+                    return "D-Day"
+                } else if dday > 0 {
+                    return "D+\(dday)"
+                } else {
+                    return ""
+                }
+            }()
         }
         doneButton.isSelected = data.done
         

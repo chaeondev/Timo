@@ -31,6 +31,7 @@
 		DE184A6C2ACD7287004EEC0B /* ButtonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A6B2ACD7287004EEC0B /* ButtonBuilder.swift */; };
 		DE184A702ACD8399004EEC0B /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A6F2ACD8399004EEC0B /* TimerButton.swift */; };
 		DE184A742ACE7EC1004EEC0B /* ProjectDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A732ACE7EC1004EEC0B /* ProjectDashboardView.swift */; };
+		DE184A762ACEA379004EEC0B /* ProjectDetailFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A752ACEA379004EEC0B /* ProjectDetailFooterView.swift */; };
 		DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62952AC19E7B003010DC /* AppDelegate.swift */; };
 		DEBD62982AC19E7B003010DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62972AC19E7B003010DC /* SceneDelegate.swift */; };
 		DEBD629F2AC19E7C003010DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEBD629E2AC19E7C003010DC /* Assets.xcassets */; };
@@ -74,6 +75,7 @@
 		DE184A6B2ACD7287004EEC0B /* ButtonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonBuilder.swift; sourceTree = "<group>"; };
 		DE184A6F2ACD8399004EEC0B /* TimerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
 		DE184A732ACE7EC1004EEC0B /* ProjectDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDashboardView.swift; sourceTree = "<group>"; };
+		DE184A752ACEA379004EEC0B /* ProjectDetailFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailFooterView.swift; sourceTree = "<group>"; };
 		DEBD62922AC19E7B003010DC /* Timo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEBD62952AC19E7B003010DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEBD62972AC19E7B003010DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				DE1849FF2AC82916004EEC0B /* StatusButton.swift */,
 				DE184A6F2ACD8399004EEC0B /* TimerButton.swift */,
 				DE184A732ACE7EC1004EEC0B /* ProjectDashboardView.swift */,
+				DE184A752ACEA379004EEC0B /* ProjectDetailFooterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				DEBD62C02AC1A62E003010DC /* ProjectListViewController.swift in Sources */,
 				DE184A1D2ACBF497004EEC0B /* ViewBuilder.swift in Sources */,
 				DE184A742ACE7EC1004EEC0B /* ProjectDashboardView.swift in Sources */,
+				DE184A762ACEA379004EEC0B /* ProjectDetailFooterView.swift in Sources */,
 				DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */,
 				DE184A302ACC3858004EEC0B /* AddProjectViewModel.swift in Sources */,
 				DE184A6C2ACD7287004EEC0B /* ButtonBuilder.swift in Sources */,
