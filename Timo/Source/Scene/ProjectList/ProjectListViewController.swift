@@ -32,6 +32,12 @@ class ProjectListViewController: BaseViewController, AddProjectDelegate {
     
     private let projectRepository = ProjectTableRepository()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidLoad()
+        
+        collectionView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -129,6 +135,9 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = ProjectDetailViewController()
+        guard let projectList else { return }
+        vc.data = projectList[indexPath.row]
+        
         navigationController?.pushViewController(vc, animated: true)
     }
     

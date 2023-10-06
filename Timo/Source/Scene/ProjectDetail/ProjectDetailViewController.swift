@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ProjectDetailViewController: BaseViewController {
     
@@ -33,9 +34,14 @@ class ProjectDetailViewController: BaseViewController {
         return view
     }()
     
+    var data: ProjectTable?
+    
+    private let projectRepository = ProjectTableRepository()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Design Project View UI"
+        setProjectData()
+        doneButton.addTarget(self, action: #selector(doneButtonClicked), for: .touchUpInside)
     }
     
     override func configure() {
@@ -105,6 +111,26 @@ class ProjectDetailViewController: BaseViewController {
             make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
+    
+    @objc func doneButtonClicked() {
+        doneButton.isSelected.toggle()
+        guard let data else { return }
+        projectRepository.updateItemStatus(data)
+    }
+    
+    func setProjectData() {
+        guard let data else { return }
+        title = data.title
+        
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yy.MM.dd"
+        
+        guard let startdate = data.startDate else { return }
+        guard let enddate = data.endDate else { return }
+        dateLabel.text = "\(dateformatter.string(from: startdate)) - \(dateformatter.string(from: enddate))"
+        
+        doneButton.isSelected = data.done
+    }
 }
 
 extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -128,8 +154,14 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "footerView") as? ProjectDetailFooterView else { return UIView() }
+        view.addTaskButton.addTarget(self, action: #selector(addTaskButtonClicked), for: .touchUpInside)
         return view
     }
     
+    @objc func addTaskButtonClicked() {
+        let vc = AddTaskViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true)
+    }
     
 }
