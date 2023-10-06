@@ -136,7 +136,9 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
             }()
         }
         doneButton.isSelected = data.done
-        
+        colorbar.backgroundColor = UIColor(hex: data.color!)
+        boundaryline.backgroundColor = UIColor(hex: data.color!)
+        progressbar.progressTintColor = UIColor(hex: data.color!)
         // TODO: Task 데이터 추가되고 업데이트 하기
 
         

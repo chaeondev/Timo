@@ -32,6 +32,9 @@
 		DE184A702ACD8399004EEC0B /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A6F2ACD8399004EEC0B /* TimerButton.swift */; };
 		DE184A742ACE7EC1004EEC0B /* ProjectDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A732ACE7EC1004EEC0B /* ProjectDashboardView.swift */; };
 		DE184A762ACEA379004EEC0B /* ProjectDetailFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A752ACEA379004EEC0B /* ProjectDetailFooterView.swift */; };
+		DE184A792ACEBF52004EEC0B /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A782ACEBF52004EEC0B /* AddTaskViewController.swift */; };
+		DE184A7C2ACED648004EEC0B /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DE184A7B2ACED648004EEC0B /* IQKeyboardManagerSwift */; };
+		DE184A7E2ACFF336004EEC0B /* UnderlineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A7D2ACFF336004EEC0B /* UnderlineTextField.swift */; };
 		DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62952AC19E7B003010DC /* AppDelegate.swift */; };
 		DEBD62982AC19E7B003010DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62972AC19E7B003010DC /* SceneDelegate.swift */; };
 		DEBD629F2AC19E7C003010DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEBD629E2AC19E7C003010DC /* Assets.xcassets */; };
@@ -76,6 +79,8 @@
 		DE184A6F2ACD8399004EEC0B /* TimerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
 		DE184A732ACE7EC1004EEC0B /* ProjectDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDashboardView.swift; sourceTree = "<group>"; };
 		DE184A752ACEA379004EEC0B /* ProjectDetailFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailFooterView.swift; sourceTree = "<group>"; };
+		DE184A782ACEBF52004EEC0B /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
+		DE184A7D2ACFF336004EEC0B /* UnderlineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineTextField.swift; sourceTree = "<group>"; };
 		DEBD62922AC19E7B003010DC /* Timo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEBD62952AC19E7B003010DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEBD62972AC19E7B003010DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +101,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEBD62BC2AC1A4AC003010DC /* RealmSwift in Frameworks */,
+				DE184A7C2ACED648004EEC0B /* IQKeyboardManagerSwift in Frameworks */,
 				DEBD62BA2AC1A4AC003010DC /* Realm in Frameworks */,
 				DEBD62B42AC1A405003010DC /* SnapKit in Frameworks */,
 			);
@@ -169,6 +175,14 @@
 			path = Observable;
 			sourceTree = "<group>";
 		};
+		DE184A772ACEBF2F004EEC0B /* AddTask */ = {
+			isa = PBXGroup;
+			children = (
+				DE184A782ACEBF52004EEC0B /* AddTaskViewController.swift */,
+			);
+			path = AddTask;
+			sourceTree = "<group>";
+		};
 		DEBD62892AC19E7B003010DC = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +249,7 @@
 				DE184A6F2ACD8399004EEC0B /* TimerButton.swift */,
 				DE184A732ACE7EC1004EEC0B /* ProjectDashboardView.swift */,
 				DE184A752ACEA379004EEC0B /* ProjectDetailFooterView.swift */,
+				DE184A7D2ACFF336004EEC0B /* UnderlineTextField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -254,6 +269,7 @@
 				DEBD62B02AC1A08A003010DC /* ProjectList */,
 				DE184A012AC83033004EEC0B /* AddProject */,
 				DEBD62B12AC1A0AF003010DC /* ProjectDetail */,
+				DE184A772ACEBF2F004EEC0B /* AddTask */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -303,6 +319,7 @@
 				DEBD62B32AC1A405003010DC /* SnapKit */,
 				DEBD62B92AC1A4AC003010DC /* Realm */,
 				DEBD62BB2AC1A4AC003010DC /* RealmSwift */,
+				DE184A7B2ACED648004EEC0B /* IQKeyboardManagerSwift */,
 			);
 			productName = Timo;
 			productReference = DEBD62922AC19E7B003010DC /* Timo.app */;
@@ -336,6 +353,7 @@
 			packageReferences = (
 				DEBD62B22AC1A405003010DC /* XCRemoteSwiftPackageReference "SnapKit" */,
 				DEBD62B82AC1A4AC003010DC /* XCRemoteSwiftPackageReference "realm-swift" */,
+				DE184A7A2ACED648004EEC0B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = DEBD62932AC19E7B003010DC /* Products */;
 			projectDirPath = "";
@@ -368,6 +386,7 @@
 				DEF16C562AC2DB90006354F8 /* ProjectCollectionViewCell.swift in Sources */,
 				DE184A002AC82916004EEC0B /* StatusButton.swift in Sources */,
 				DE184A702ACD8399004EEC0B /* TimerButton.swift in Sources */,
+				DE184A7E2ACFF336004EEC0B /* UnderlineTextField.swift in Sources */,
 				DE184A642ACD6165004EEC0B /* ProjectDetailViewController.swift in Sources */,
 				DE184A6A2ACD6644004EEC0B /* BaseTableViewCell.swift in Sources */,
 				DE184A142ACBE8B4004EEC0B /* Localized+Extension.swift in Sources */,
@@ -392,6 +411,7 @@
 				DED5E8A52AC44A8200DDACC7 /* UnderlineSegmentedControl.swift in Sources */,
 				DE184A292ACC0E8B004EEC0B /* UIColor+Extension.swift in Sources */,
 				DE1849FA2AC7EE06004EEC0B /* ProjectTable.swift in Sources */,
+				DE184A792ACEBF52004EEC0B /* AddTaskViewController.swift in Sources */,
 				DEBD62BE2AC1A4DF003010DC /* BaseViewController.swift in Sources */,
 				DEF16C542AC2DAD7006354F8 /* BaseCollectionViewCell.swift in Sources */,
 				DE184A212ACBF726004EEC0B /* ImageViewBuilder.swift in Sources */,
@@ -624,6 +644,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DE184A7A2ACED648004EEC0B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		DEBD62B22AC1A405003010DC /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -643,6 +671,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		DE184A7B2ACED648004EEC0B /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DE184A7A2ACED648004EEC0B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
 		DEBD62B32AC1A405003010DC /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DEBD62B22AC1A405003010DC /* XCRemoteSwiftPackageReference "SnapKit" */;

@@ -10,10 +10,11 @@ import RealmSwift
 
 class ProjectListViewController: BaseViewController, AddProjectDelegate {
     
-    private let segmentedControl = {
+    private lazy var segmentedControl = {
         let view = UnderlineSegmentedControl(items: [
             "projectFilter_first".localized, "projectFilter_second".localized, "projectFilter_third".localized])
         view.selectedSegmentIndex = 0
+        view.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
         return view
     }()
     
@@ -37,6 +38,7 @@ class ProjectListViewController: BaseViewController, AddProjectDelegate {
         setNavigationbar()
         
         projectList = projectRepository.fetch()
+        
     }
     
     override func configure() {
@@ -58,6 +60,26 @@ class ProjectListViewController: BaseViewController, AddProjectDelegate {
         }
     }
     
+    @objc private func segmentedControlValueChanged() {
+        projectList = {
+            switch segmentedControl.selectedSegmentIndex {
+            case 0:
+                return projectRepository.fetch()
+            case 1:
+                return projectRepository.fetch().where {
+                    $0.done == false
+                }
+            case 2:
+                return projectRepository.fetch().where {
+                    $0.done == true
+                }
+            default:
+                return projectRepository.fetch()
+            }
+        }()
+        collectionView.reloadData()
+    }
+    
     func setNavigationbar() {
         title = "navigation_list_title".localized
         navigationController?.navigationBar.titleTextAttributes = [
@@ -69,6 +91,9 @@ class ProjectListViewController: BaseViewController, AddProjectDelegate {
     }
     
     @objc func addBarButtonClicked() {
+        
+        // TODO: collectionview select 되는거 막기 -> select되면 다음화면으로 넘어감
+        
         let vc = AddProjectViewController()
         vc.delegate = self
         let nav = UINavigationController(rootViewController: vc)

@@ -41,7 +41,9 @@ final class UnderlineSegmentedControl: UISegmentedControl {
         setBackgroundImage(UIImage(), for: .normal, barMetrics: .default)
         setBackgroundImage(UIImage(), for: .selected, barMetrics: .default)
         setBackgroundImage(UIImage(), for: .highlighted, barMetrics: .default)
-        
+//        layer.borderColor = UIColor.systemGray4.cgColor
+//        layer.borderWidth = 1
+
         setDividerImage(UIImage(), forLeftSegmentState: .selected, rightSegmentState: .normal, barMetrics: .default)
 
         setTitleTextAttributes([
