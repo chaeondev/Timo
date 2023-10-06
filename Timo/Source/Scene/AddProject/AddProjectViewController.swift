@@ -134,7 +134,7 @@ class AddProjectViewController: BaseViewController {
     //NavigationBar 세팅
     private func setNavigationBar() {
         title = "navigation_create_title".localized
-        var cancelButton = UIBarButtonItem(title: "navigation_cancel_button".localized, style: .plain, target: self, action: #selector(cancelBarButtonClicked))
+        let cancelButton = UIBarButtonItem(title: "navigation_cancel_button".localized, style: .plain, target: self, action: #selector(cancelBarButtonClicked))
         cancelButton.tintColor = .systemRed
         
         let saveButton = UIBarButtonItem(title: "navigation_save_button".localized, style: .plain, target: self, action: #selector(saveBarButtonClicked))

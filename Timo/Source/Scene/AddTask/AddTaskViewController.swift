@@ -6,6 +6,11 @@
 //
 
 import UIKit
+import RealmSwift
+
+protocol AddTaskDelegate {
+    func updateTableView()
+}
 
 class AddTaskViewController: BaseViewController {
     
@@ -34,8 +39,24 @@ class AddTaskViewController: BaseViewController {
     }()
     private lazy var timeLabel = UILabel.labelBuilder(text: "시간", font: .systemFont(ofSize: 16))
     
+    private var isSaved: Bool = false
+    var delegate: AddTaskDelegate?
+    
+    var project: ProjectTable?
+    let taskRepository = TaskTableRepository()
+    
+    var viewModel = AddTaskViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bindData()
+        
+        setNavigationBar()
+        setupDatePicker()
+        setupTimeTextField()
+        setupSheet()
+        
     }
     
     override func configure() {
@@ -44,9 +65,8 @@ class AddTaskViewController: BaseViewController {
         [titleLabel, titleTextField, titleBorderline, deadlineImageView, deadlineTextField, expectedTimeImageView, expectedTimeTextField, timeLabel].forEach {
             view.addSubview($0)
         }
-        setNavigationBar()
-        setupDatePicker()
-        setupTimeTextField()
+        
+        titleTextField.addTarget(self, action: #selector(titleTextFieldChanged), for: .editingChanged)
         
     }
     
@@ -99,14 +119,32 @@ class AddTaskViewController: BaseViewController {
         }
     }
     
+    //viewModel data 연결
+    func bindData() {
+        viewModel.title.bind { text in
+            self.titleTextField.text = text
+        }
+        viewModel.isValid.bind { bool in
+            self.navigationItem.rightBarButtonItem?.isEnabled = bool
+            self.navigationItem.rightBarButtonItem?.tintColor = bool ? .systemBlue : .systemGray
+        }
+    }
+    
+    //viewModel checkValidation -> textField 바뀔때마다
+    @objc func titleTextFieldChanged() {
+        viewModel.title.value = titleTextField.text!
+        viewModel.checkValidation()
+        
+    }
+    
     //Navigationbar 설정
     private func setNavigationBar() {
         title = "Task 생성"
-        var cancelButton = UIBarButtonItem(title: "navigation_cancel_button".localized, style: .plain, target: self, action: #selector(cancelBarButtonClicked))
+        let cancelButton = UIBarButtonItem(title: "navigation_cancel_button".localized, style: .plain, target: self, action: #selector(cancelBarButtonClicked))
         cancelButton.tintColor = .systemRed
         
         let saveButton = UIBarButtonItem(title: "navigation_save_button".localized, style: .plain, target: self, action: #selector(saveBarButtonClicked))
-        //saveButton.tintColor = isSaved ? .systemBlue : .systemGray
+        saveButton.tintColor = isSaved ? .systemBlue : .systemGray
         
         navigationItem.leftBarButtonItem = cancelButton
         navigationItem.rightBarButtonItem = saveButton
@@ -117,7 +155,23 @@ class AddTaskViewController: BaseViewController {
     }
     
     @objc func saveBarButtonClicked() {
-
+        
+        guard let title = titleTextField.text else { return }
+        if viewModel.isValid.value {
+            
+            let taskItem = TaskTable(title: title, savedDate: Date(), date: deadlineDatePicker.date, expectedTime: Int(expectedTimeTextField.text ?? "0"), realTime: 0, completed: false)
+            
+            guard let project else { return }
+            taskRepository.createItem(taskItem, project: project)
+            
+            //call delegate -> collectionview reload 위해서
+            delegate?.updateTableView()
+            
+            dismiss(animated: true)
+        } else {
+            // TODO: Alert 띄우기 -> 프로젝트 이름을 입력해주세요
+        }
+        
         }
     
     // sheetPresentationController 설정

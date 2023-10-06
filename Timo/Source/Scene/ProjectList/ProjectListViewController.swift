@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class ProjectListViewController: BaseViewController, AddProjectDelegate {
+class ProjectListViewController: BaseViewController {
     
     private lazy var segmentedControl = {
         let view = UnderlineSegmentedControl(items: [
@@ -105,11 +105,6 @@ class ProjectListViewController: BaseViewController, AddProjectDelegate {
         let nav = UINavigationController(rootViewController: vc)
         present(nav, animated: true)
     }
-    
-    //AddView의 delegate 메서드
-    func updateCollectionView() {
-        collectionView.reloadData()
-    }
 
 }
 
@@ -136,7 +131,7 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = ProjectDetailViewController()
         guard let projectList else { return }
-        vc.data = projectList[indexPath.row]
+        vc.projectData = projectList[indexPath.row]
         
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -178,4 +173,12 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     
+}
+
+extension ProjectListViewController: AddProjectDelegate {
+    
+    //AddView의 delegate 메서드
+    func updateCollectionView() {
+        collectionView.reloadData()
+    }
 }

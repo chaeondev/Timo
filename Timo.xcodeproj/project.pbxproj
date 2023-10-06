@@ -35,6 +35,8 @@
 		DE184A792ACEBF52004EEC0B /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A782ACEBF52004EEC0B /* AddTaskViewController.swift */; };
 		DE184A7C2ACED648004EEC0B /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DE184A7B2ACED648004EEC0B /* IQKeyboardManagerSwift */; };
 		DE184A7E2ACFF336004EEC0B /* UnderlineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A7D2ACFF336004EEC0B /* UnderlineTextField.swift */; };
+		DE184A802AD02FCF004EEC0B /* TaskTableRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A7F2AD02FCF004EEC0B /* TaskTableRepository.swift */; };
+		DE184A852AD0357B004EEC0B /* AddTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A842AD0357B004EEC0B /* AddTaskViewModel.swift */; };
 		DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62952AC19E7B003010DC /* AppDelegate.swift */; };
 		DEBD62982AC19E7B003010DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62972AC19E7B003010DC /* SceneDelegate.swift */; };
 		DEBD629F2AC19E7C003010DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEBD629E2AC19E7C003010DC /* Assets.xcassets */; };
@@ -81,6 +83,8 @@
 		DE184A752ACEA379004EEC0B /* ProjectDetailFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailFooterView.swift; sourceTree = "<group>"; };
 		DE184A782ACEBF52004EEC0B /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		DE184A7D2ACFF336004EEC0B /* UnderlineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineTextField.swift; sourceTree = "<group>"; };
+		DE184A7F2AD02FCF004EEC0B /* TaskTableRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableRepository.swift; sourceTree = "<group>"; };
+		DE184A842AD0357B004EEC0B /* AddTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewModel.swift; sourceTree = "<group>"; };
 		DEBD62922AC19E7B003010DC /* Timo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEBD62952AC19E7B003010DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEBD62972AC19E7B003010DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -179,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				DE184A782ACEBF52004EEC0B /* AddTaskViewController.swift */,
+				DE184A842AD0357B004EEC0B /* AddTaskViewModel.swift */,
 			);
 			path = AddTask;
 			sourceTree = "<group>";
@@ -227,6 +232,7 @@
 				DE1849FD2AC7F6E7004EEC0B /* SubTaskTable.swift */,
 				DE184A042ACBD662004EEC0B /* RepositoryType+Protocol.swift */,
 				DE184A062ACBD871004EEC0B /* ProjectTableRepository.swift */,
+				DE184A7F2AD02FCF004EEC0B /* TaskTableRepository.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -383,6 +389,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE184A072ACBD871004EEC0B /* ProjectTableRepository.swift in Sources */,
+				DE184A852AD0357B004EEC0B /* AddTaskViewModel.swift in Sources */,
 				DEF16C562AC2DB90006354F8 /* ProjectCollectionViewCell.swift in Sources */,
 				DE184A002AC82916004EEC0B /* StatusButton.swift in Sources */,
 				DE184A702ACD8399004EEC0B /* TimerButton.swift in Sources */,
@@ -393,6 +400,7 @@
 				DE184A1F2ACBF5D5004EEC0B /* LabelBuilder.swift in Sources */,
 				DE184A252ACC0151004EEC0B /* DatePickerBuilder.swift in Sources */,
 				DEBD62C02AC1A62E003010DC /* ProjectListViewController.swift in Sources */,
+				DE184A802AD02FCF004EEC0B /* TaskTableRepository.swift in Sources */,
 				DE184A1D2ACBF497004EEC0B /* ViewBuilder.swift in Sources */,
 				DE184A742ACE7EC1004EEC0B /* ProjectDashboardView.swift in Sources */,
 				DE184A762ACEA379004EEC0B /* ProjectDetailFooterView.swift in Sources */,

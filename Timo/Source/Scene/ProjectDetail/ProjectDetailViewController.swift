@@ -34,7 +34,8 @@ class ProjectDetailViewController: BaseViewController {
         return view
     }()
     
-    var data: ProjectTable?
+    var projectData: ProjectTable?
+    var taskList: Results<TaskTable>?
     
     private let projectRepository = ProjectTableRepository()
     
@@ -42,6 +43,7 @@ class ProjectDetailViewController: BaseViewController {
         super.viewDidLoad()
         setProjectData()
         doneButton.addTarget(self, action: #selector(doneButtonClicked), for: .touchUpInside)
+        taskList = projectData?.tasks.sorted(byKeyPath: "savedDate")
     }
     
     override func configure() {
@@ -114,22 +116,22 @@ class ProjectDetailViewController: BaseViewController {
     
     @objc func doneButtonClicked() {
         doneButton.isSelected.toggle()
-        guard let data else { return }
-        projectRepository.updateItemStatus(data)
+        guard let projectData else { return }
+        projectRepository.updateItemStatus(projectData)
     }
     
     func setProjectData() {
-        guard let data else { return }
-        title = data.title
+        guard let projectData else { return }
+        title = projectData.title
         
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yy.MM.dd"
         
-        guard let startdate = data.startDate else { return }
-        guard let enddate = data.endDate else { return }
+        guard let startdate = projectData.startDate else { return }
+        guard let enddate = projectData.endDate else { return }
         dateLabel.text = "\(dateformatter.string(from: startdate)) - \(dateformatter.string(from: enddate))"
         
-        doneButton.isSelected = data.done
+        doneButton.isSelected = projectData.done
     }
 }
 
@@ -144,7 +146,8 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        guard let taskList = taskList else { return 0 }
+        return taskList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -160,8 +163,16 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
     
     @objc func addTaskButtonClicked() {
         let vc = AddTaskViewController()
+        vc.project = projectData
+        vc.delegate = self
         let nav = UINavigationController(rootViewController: vc)
         present(nav, animated: true)
     }
     
+}
+
+extension ProjectDetailViewController: AddTaskDelegate {
+    func updateTableView() {
+        tableView.reloadData()
+    }
 }
