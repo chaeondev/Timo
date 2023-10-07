@@ -28,7 +28,7 @@ class ProjectDetailViewController: BaseViewController {
         view.register(ProjectDetailFooterView.self, forHeaderFooterViewReuseIdentifier: "footerView")
         view.delegate = self
         view.dataSource = self
-        view.rowHeight = 90
+        view.rowHeight = 91
         view.sectionFooterHeight = 80
         view.keyboardDismissMode = .onDrag
         return view
@@ -44,6 +44,8 @@ class ProjectDetailViewController: BaseViewController {
         setProjectData()
         doneButton.addTarget(self, action: #selector(doneButtonClicked), for: .touchUpInside)
         taskList = projectData?.tasks.sorted(byKeyPath: "savedDate")
+        
+        setupMenu()
     }
     
     override func configure() {
@@ -133,6 +135,27 @@ class ProjectDetailViewController: BaseViewController {
         
         doneButton.isSelected = projectData.done
     }
+    
+    //navigationbarbutton menu 추가
+    func setupMenu() {
+        let projectEdit = UIAction(title: "프로젝트 편집", image: UIImage(systemName: "square.and.pencil")) { [weak self] action in
+            // TODO: 코드 작성
+        }
+        let projectDelete = UIAction(title: "프로젝트 삭제", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] action in
+            // TODO: 코드 작성
+        }
+        let taskAdd = UIAction(title: "Task 추가", image: UIImage(systemName: "link.badge.plus")) { [weak self] action in
+            // TODO: 코드 작성
+        }
+        
+        let projectMenu = UIMenu(options: .displayInline, children: [projectEdit, projectDelete])
+        let taskMenu = UIMenu(options: .displayInline, children: [taskAdd])
+        let mainMenu = UIMenu(children: [projectMenu, taskMenu])
+        
+        let barButton = UIBarButtonItem(title: nil, image: UIImage(systemName: "ellipsis"), primaryAction: nil, menu: mainMenu)
+        
+        navigationItem.rightBarButtonItem = barButton
+    }
 }
 
 extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -172,6 +195,36 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
         vc.delegate = self
         let nav = UINavigationController(rootViewController: vc)
         present(nav, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        configureContextMenu(index: indexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let done = UIContextualAction(style: .normal, title: "완료") { (action, view, completionHandler) in
+            
+        }
+        done.image = UIImage(systemName: "checkmark.circle")
+        let swipeAction = UISwipeActionsConfiguration(actions: [done])
+        swipeAction.performsFirstActionWithFullSwipe = false
+        return swipeAction
+    }
+    
+    func configureContextMenu(index: Int) -> UIContextMenuConfiguration{
+        let context = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { (action) -> UIMenu? in
+            
+            let edit = UIAction(title: "편집하기", image: UIImage(systemName: "square.and.pencil"), state: .off) { (_) in
+                print("edit button clicked")
+                //add tasks...
+            }
+            let delete = UIAction(title: "삭제하기", image: UIImage(systemName: "trash"), attributes: .destructive, state: .off) { (_) in
+                print("delete button clicked")
+                //add tasks...
+            }
+            return UIMenu(title: "Options", image: nil, identifier: nil, options: .displayInline, children: [edit,delete])
+        }
+        return context
     }
     
 }
