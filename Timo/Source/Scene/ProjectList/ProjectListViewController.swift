@@ -119,7 +119,7 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ProjectCollectionViewCell else { return UICollectionViewCell() }
         
         if let projectList {
-            let data = projectList[indexPath.row]
+            let data = projectList[indexPath.item]
             cell.data = data
             cell.configureCell()
 

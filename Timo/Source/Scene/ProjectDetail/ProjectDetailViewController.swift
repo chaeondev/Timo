@@ -28,7 +28,7 @@ class ProjectDetailViewController: BaseViewController {
         view.register(ProjectDetailFooterView.self, forHeaderFooterViewReuseIdentifier: "footerView")
         view.delegate = self
         view.dataSource = self
-        view.rowHeight = 105
+        view.rowHeight = 90
         view.sectionFooterHeight = 80
         view.keyboardDismissMode = .onDrag
         return view
@@ -137,10 +137,6 @@ class ProjectDetailViewController: BaseViewController {
 
 extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         "Tasks"
     }
@@ -152,6 +148,15 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell") as? TaskTableViewCell else { return UITableViewCell()}
+        
+        if let taskList, let projectData {
+            let data = taskList[indexPath.row]
+            cell.taskdata = data
+            cell.projectTitle = projectData.title
+            cell.projectOfTaskLabel.isHidden = true
+            cell.configureCell()
+        }
+        
         return cell
     }
     
