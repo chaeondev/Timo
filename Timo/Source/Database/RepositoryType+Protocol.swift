@@ -18,5 +18,6 @@ protocol RepositoryType {
     func fetch() -> Results<T>
     func fetchByID(_ id: ObjectId) -> T?
     func upsertItem(_ item: T)
+    func updateItem(completion: () -> Void)
     func deleteItem(_ item: T)
 }

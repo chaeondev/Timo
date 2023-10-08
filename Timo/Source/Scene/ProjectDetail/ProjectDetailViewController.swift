@@ -28,7 +28,7 @@ class ProjectDetailViewController: BaseViewController {
         view.register(ProjectDetailFooterView.self, forHeaderFooterViewReuseIdentifier: "footerView")
         view.delegate = self
         view.dataSource = self
-        view.rowHeight = 91
+        view.rowHeight = 90
         view.sectionFooterHeight = 80
         view.keyboardDismissMode = .onDrag
         return view
@@ -119,7 +119,10 @@ class ProjectDetailViewController: BaseViewController {
     @objc func doneButtonClicked() {
         doneButton.isSelected.toggle()
         guard let projectData else { return }
-        projectRepository.updateItemStatus(projectData)
+        //projectRepository.updateItemStatus(projectData)
+        projectRepository.updateItem {
+            projectData.done.toggle()
+        }
     }
     
     func setProjectData() {
@@ -201,15 +204,15 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
         configureContextMenu(index: indexPath.row)
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let done = UIContextualAction(style: .normal, title: "완료") { (action, view, completionHandler) in
-            
-        }
-        done.image = UIImage(systemName: "checkmark.circle")
-        let swipeAction = UISwipeActionsConfiguration(actions: [done])
-        swipeAction.performsFirstActionWithFullSwipe = false
-        return swipeAction
-    }
+//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        let done = UIContextualAction(style: .normal, title: "완료") { (action, view, completionHandler) in
+//
+//        }
+//        done.image = UIImage(systemName: "checkmark.circle")
+//        let swipeAction = UISwipeActionsConfiguration(actions: [done])
+//        swipeAction.performsFirstActionWithFullSwipe = false
+//        return swipeAction
+//    }
     
     func configureContextMenu(index: Int) -> UIContextMenuConfiguration{
         let context = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { (action) -> UIMenu? in

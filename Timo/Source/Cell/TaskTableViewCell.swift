@@ -27,6 +27,8 @@ class TaskTableViewCell: BaseTableViewCell {
     var taskdata: TaskTable?
     var projectTitle: String = ""
     
+    private let taskRepository = TaskTableRepository()
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -146,6 +148,11 @@ class TaskTableViewCell: BaseTableViewCell {
             titleLabel.attributedText = titleLabel.text?.strikethrough()
         } else {
             titleLabel.attributedText = titleLabel.text?.removeStrikethrough()
+        }
+        
+        guard let taskdata else { return }
+        taskRepository.updateItem {
+            taskdata.completed.toggle()
         }
         
     }

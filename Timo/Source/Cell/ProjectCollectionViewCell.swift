@@ -150,7 +150,9 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
     @objc func doneButtonClicked() {
         doneButton.isSelected.toggle()
         guard let data else { return }
-        repository.updateItemStatus(data)
+        repository.updateItem {
+            data.done.toggle()
+        }
         
     }
     

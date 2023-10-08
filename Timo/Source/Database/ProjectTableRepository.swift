@@ -42,7 +42,6 @@ class ProjectTableRepository: RepositoryType {
     }
     
     func upsertItem(_ item: ProjectTable) {
-        // TODO: Update 어떻게 할지 고민 -> protocol 수정 필요?
         do {
             try realm.write {
                 realm.add(item, update: .modified)
@@ -52,16 +51,15 @@ class ProjectTableRepository: RepositoryType {
         }
     }
     
-    func updateItemStatus(_ item: ProjectTable) {
+    func updateItem(completion: () -> Void) {
         do {
             try realm.write {
-                item.done.toggle()
+                completion()
             }
         } catch {
             print(error)
         }
     }
-    
     
     
     func deleteItem(_ item: ProjectTable) {

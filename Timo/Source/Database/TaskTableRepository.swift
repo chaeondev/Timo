@@ -59,6 +59,16 @@ class TaskTableRepository: RepositoryType {
         }
     }
     
+    func updateItem(completion: () -> Void) {
+        do {
+            try realm.write {
+                completion()
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
     func deleteItem(_ item: TaskTable) {
         do {
             try realm.write {
