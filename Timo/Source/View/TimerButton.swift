@@ -28,3 +28,17 @@ final class TimerButton: UIButton {
     }
     
 }
+
+extension TimerButton {
+    static func timerButtonBuilder(imageSystemName: String, pointSize: CGFloat = 35, title: String? = nil, font: UIFont? = nil) -> UIButton {
+        let view = TimerButton()
+        view.titleLabel?.font = font
+        view.setTitle(title, for: .normal)
+        view.tintColor = Design.BaseColor.border
+        
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: pointSize, weight: .bold)
+        let image = UIImage(systemName: imageSystemName, withConfiguration: imageConfig)
+        view.setImage(image, for: .normal)
+        return view
+    }
+}
