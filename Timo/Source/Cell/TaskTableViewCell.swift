@@ -9,13 +9,14 @@ import UIKit
 
 class TaskTableViewCell: BaseTableViewCell {
     
+    private lazy var doneButton = CheckButton()
     private lazy var titleLabel = UILabel.labelBuilder(text: "Dashboard Design", font: .systemFont(ofSize: 15, weight: .bold), textColor: .darkGray, numberOfLines: 1)
     lazy var projectOfTaskLabel = UILabel.labelBuilder(text: "⚬ Design Project view UI", font: .systemFont(ofSize: 11), textColor: .systemBlue, numberOfLines: 1)
     private lazy var titleStackView = UIStackView.stackViewBuilder(axis: .vertical, distribution: .equalSpacing, spacing: 4, alignment: .fill)
     
     private lazy var dateLabel = UILabel.labelBuilder(text: "8/23", font: .systemFont(ofSize: 12), textColor: .darkGray)
     private lazy var subTaskCountImageView = UIImageView.imageViewBuilder(tintColor: .darkGray, image: UIImage(systemName: "point.topleft.down.curvedto.point.bottomright.up")!)
-    private lazy var subTaskCountLabel = UILabel.labelBuilder(text: "8", font: .systemFont(ofSize: 12, weight: .medium), textColor: .darkGray)
+    private lazy var subTaskCountLabel = UILabel.labelBuilder(text: "3/8", font: .systemFont(ofSize: 12, weight: .medium), textColor: .darkGray)
     private lazy var expectedTimeLabel = UILabel.labelBuilder(text: "Expected :", font: .systemFont(ofSize: 12), textColor: .systemGray)
     private lazy var expectedTimeValueLabel = UILabel.labelBuilder(text: "5H", font: .systemFont(ofSize: 12), textColor: .systemBlue)
     private lazy var taskRealTimeLabel = UILabel.labelBuilder(text: "2:34:12", font: .boldSystemFont(ofSize: 13), textAlignment: .center)
@@ -48,17 +49,24 @@ class TaskTableViewCell: BaseTableViewCell {
             timerStackView.addArrangedSubview($0)
         }
         
-        [titleStackView, dateLabel, subTaskCountImageView, subTaskCountLabel, expectedTimeLabel, expectedTimeValueLabel, timerStackView].forEach {
+        [doneButton, titleStackView, dateLabel, subTaskCountImageView, subTaskCountLabel, expectedTimeLabel, expectedTimeValueLabel, timerStackView].forEach {
             contentView.addSubview($0)
         }
+        
+        doneButton.addTarget(self, action: #selector(doneButtonClicked), for: .touchUpInside)
     }
     
     override func setConstraints() {
+        //doneButton.backgroundColor = .blue
+        doneButton.snp.makeConstraints { make in
+            make.top.leading.equalToSuperview().offset(16)
+            make.size.equalTo(20)
+        }
         //titleStackView.backgroundColor = .cyan
         titleStackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(12)
-            make.leading.equalToSuperview().inset(16)
-            make.width.equalToSuperview().multipliedBy(0.7)
+            make.centerY.equalTo(doneButton)
+            make.leading.equalTo(doneButton.snp.trailing).offset(6)
+            make.width.equalToSuperview().multipliedBy(0.65)
             make.height.equalToSuperview().multipliedBy(0.4)
         }
         
@@ -128,6 +136,16 @@ class TaskTableViewCell: BaseTableViewCell {
         } else {
             expectedTimeLabel.isHidden = true
             expectedTimeValueLabel.isHidden = true
+        }
+        
+    }
+    
+    @objc func doneButtonClicked() {
+        doneButton.isSelected.toggle()
+        if doneButton.isSelected {
+            titleLabel.attributedText = titleLabel.text?.strikethrough()
+        } else {
+            titleLabel.attributedText = titleLabel.text?.removeStrikethrough()
         }
         
     }
