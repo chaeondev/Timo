@@ -123,28 +123,16 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
         titleLabel.text = data.title
         if let endDate = data.endDate {
             let dday = calculateDateInterval(from: endDate)
-            ddayLabel.text = {
-                if dday < 0 {
-                    return "D\(dday)"
-                } else if dday == 0 {
-                    return "D-Day"
-                } else if dday > 0 {
-                    return "D+\(dday)"
-                } else {
-                    return ""
-                }
-            }()
+            ddayLabel.text = setDDayString(interval: dday)
         }
         doneButton.isSelected = data.done
         colorbar.backgroundColor = UIColor(hex: data.color!)
         boundaryline.backgroundColor = UIColor(hex: data.color!)
         progressbar.progressTintColor = UIColor(hex: data.color!)
-        
-        // TODO: Task 데이터 추가되고 업데이트 하기
+        progressbar.progress = calculateProgress()
+        progressLabel.text = setProgressLabel()
         taskCountLabel.text = "\(data.tasks.count)"
 
-        
-        
     }
     
     @objc func doneButtonClicked() {
@@ -153,7 +141,24 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
         repository.updateItem {
             data.done.toggle()
         }
+    }
+    
+    func calculateProgress() -> Float {
+        guard let data else { return 0 }
+        let allTasksCount = data.tasks.count
+        let completedTasksCount = data.tasks.filter("completed == true").count
         
+        if allTasksCount == 0 {
+            return 0
+        } else {
+            return Float(completedTasksCount) / Float(allTasksCount)
+        }
+    }
+    
+    func setProgressLabel() -> String {
+        let progress = calculateProgress()
+        let percent = Int(progress * 100)
+        return "\(percent)%"
     }
     
     func calculateDateInterval(from endDate: Date) -> Int {
@@ -178,6 +183,18 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
             return dateGap
         } else {
             return 0 // TODO: d-day 계산 실패 -> alert 필요?
+        }
+    }
+    
+    func setDDayString(interval: Int) -> String {
+        if interval < 0 {
+            return "D\(interval)"
+        } else if interval == 0 {
+            return "D-Day"
+        } else if interval > 0 {
+            return "D+\(interval)"
+        } else {
+            return ""
         }
     }
 }

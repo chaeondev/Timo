@@ -124,7 +124,12 @@ class TaskTableViewCell: BaseTableViewCell {
         guard let taskdata else { return }
         titleLabel.text = taskdata.title
         projectOfTaskLabel.text = " ⚬ \(projectTitle)"
-        
+        doneButton.isSelected = taskdata.completed
+        if doneButton.isSelected {
+            titleLabel.attributedText = titleLabel.text?.strikethrough()
+        } else {
+            titleLabel.attributedText = titleLabel.text?.removeStrikethrough()
+        }
         if let date = taskdata.date {
             let dateformatter = DateFormatter()
             dateformatter.dateFormat = "MM/dd"
