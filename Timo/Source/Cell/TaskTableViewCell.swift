@@ -20,7 +20,7 @@ class TaskTableViewCell: BaseTableViewCell {
     private lazy var expectedTimeLabel = UILabel.labelBuilder(text: "Expected :", font: .systemFont(ofSize: 12), textColor: .systemGray)
     private lazy var expectedTimeValueLabel = UILabel.labelBuilder(text: "5H", font: .systemFont(ofSize: 12), textColor: .systemBlue)
     private lazy var taskRealTimeLabel = UILabel.labelBuilder(text: "2:34:12", font: .boldSystemFont(ofSize: 13), textAlignment: .center)
-    private lazy var taskTimerButton = TimerButton()
+    lazy var taskTimerButton = TimerButton()
     private lazy var timerStackView = UIStackView.stackViewBuilder(axis: .vertical, distribution: .equalSpacing, spacing: 4)
         //UIButton.buttonBuilder(image: UIImage(systemName: "play.circle.fill")!)
 
@@ -56,6 +56,7 @@ class TaskTableViewCell: BaseTableViewCell {
         }
         
         doneButton.addTarget(self, action: #selector(doneButtonClicked), for: .touchUpInside)
+
     }
     
     override func setConstraints() {
@@ -161,4 +162,5 @@ class TaskTableViewCell: BaseTableViewCell {
         }
         
     }
+    
 }

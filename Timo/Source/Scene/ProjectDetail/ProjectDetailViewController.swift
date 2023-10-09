@@ -152,7 +152,7 @@ class ProjectDetailViewController: BaseViewController {
             })
         }
         let taskAdd = UIAction(title: "Task 추가", image: UIImage(systemName: "link.badge.plus")) { [weak self] action in
-            // TODO: 코드 작성
+            self?.transitionAddTaskView()
         }
         
         let projectMenu = UIMenu(options: .displayInline, children: [projectEdit, projectDelete])
@@ -185,9 +185,17 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
             cell.projectTitle = projectData.title
             cell.projectOfTaskLabel.isHidden = true
             cell.configureCell()
+            cell.taskTimerButton.addTarget(self, action: #selector(timerButtonClicked), for: .touchUpInside)
         }
         
         return cell
+    }
+    
+    @objc func timerButtonClicked(_ data: TaskTable) {
+        
+        let vc = TimerViewController()
+        vc.taskData = data
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -197,11 +205,7 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     @objc func addTaskButtonClicked() {
-        let vc = AddTaskViewController()
-        vc.project = projectData
-        vc.delegate = self
-        let nav = UINavigationController(rootViewController: vc)
-        present(nav, animated: true)
+        transitionAddTaskView()
     }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
@@ -232,10 +236,9 @@ extension ProjectDetailViewController: AddTaskDelegate {
     }
 }
 
-// 편집하기, 삭제하기 관련 메서드
 extension ProjectDetailViewController {
     
-    //편집하기 화면 전환
+    //프로젝트 편집하기 화면 전환
     func transitionProjectMenuView(menuType: ProjectMenuType, projectData: ProjectTable?) {
         
         let vc = AddProjectViewController()
@@ -244,6 +247,14 @@ extension ProjectDetailViewController {
         let nav = UINavigationController(rootViewController: vc)
         present(nav, animated: true)
         
+    }
+    
+    func transitionAddTaskView() {
+        let vc = AddTaskViewController()
+        vc.project = projectData
+        vc.delegate = self
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true)
     }
     
     
