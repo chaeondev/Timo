@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-protocol AddTaskDelegate {
+protocol AddTaskDelegate: AnyObject {
     func updateTableView()
 }
 
@@ -39,6 +39,11 @@ class AddTaskViewController: BaseViewController {
     }()
     private lazy var timeLabel = UILabel.labelBuilder(text: "시간", font: .systemFont(ofSize: 16))
     
+    
+    //MenuType
+    var menuType: TaskMenuType = .add
+    var taskData: TaskTable?
+    
     private var isSaved: Bool = false
     var delegate: AddTaskDelegate?
     
@@ -56,6 +61,8 @@ class AddTaskViewController: BaseViewController {
         setupDatePicker()
         setupTimeTextField()
         setupSheet()
+        
+        setEditView()
         
     }
     
@@ -137,53 +144,6 @@ class AddTaskViewController: BaseViewController {
         
     }
     
-    //Navigationbar 설정
-    private func setNavigationBar() {
-        title = "Task 생성"
-        let cancelButton = UIBarButtonItem(title: "navigation_cancel_button".localized, style: .plain, target: self, action: #selector(cancelBarButtonClicked))
-        cancelButton.tintColor = .systemRed
-        
-        let saveButton = UIBarButtonItem(title: "navigation_save_button".localized, style: .plain, target: self, action: #selector(saveBarButtonClicked))
-        saveButton.tintColor = isSaved ? .systemBlue : .systemGray
-        
-        navigationItem.leftBarButtonItem = cancelButton
-        navigationItem.rightBarButtonItem = saveButton
-    }
-    
-    @objc func cancelBarButtonClicked() {
-        dismiss(animated: true)
-    }
-    
-    @objc func saveBarButtonClicked() {
-        
-        guard let title = titleTextField.text else { return }
-        if viewModel.isValid.value {
-            
-            let taskItem = TaskTable(title: title, savedDate: Date(), date: deadlineDatePicker.date, expectedTime: Int(expectedTimeTextField.text ?? "0"), realTime: 0, completed: false)
-            
-            guard let project else { return }
-            taskRepository.createItem(taskItem, project: project)
-            
-            //call delegate -> collectionview reload 위해서
-            delegate?.updateTableView()
-            
-            dismiss(animated: true)
-        } else {
-            // TODO: Alert 띄우기 -> 프로젝트 이름을 입력해주세요
-        }
-        
-        }
-    
-    // sheetPresentationController 설정
-    private func setupSheet() {
-        if let sheet = sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
-            sheet.selectedDetentIdentifier = .medium
-            sheet.largestUndimmedDetentIdentifier = .medium
-            sheet.prefersGrabberVisible = true
-        }
-    }
-    
     //timeTextField -> 숫자만 입력하게
     func setupTimeTextField() {
         expectedTimeTextField.keyboardType = .numberPad
@@ -213,11 +173,97 @@ class AddTaskViewController: BaseViewController {
     }
 }
 
-// TODO: 시간 단위 제한 더 구현하기
-//extension AddTaskViewController: UITextFieldDelegate {
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        let allowCharacters = CharacterSet.decimalDigits
-//        let characters = CharacterSet(charactersIn: string)
-//        return allowCharacters.isSuperset(of: characters)
-//    }
-//}
+extension AddTaskViewController {
+    //Navigationbar 설정
+    private func setNavigationBar() {
+        setTitle()
+        
+        let cancelButton = UIBarButtonItem(title: "navigation_cancel_button".localized, style: .plain, target: self, action: #selector(cancelBarButtonClicked))
+        cancelButton.tintColor = .systemRed
+        
+        let saveButton = UIBarButtonItem(title: "navigation_save_button".localized, style: .plain, target: self, action: #selector(saveBarButtonClicked))
+        saveButton.tintColor = isSaved ? .systemBlue : .systemGray
+        
+        navigationItem.leftBarButtonItem = cancelButton
+        navigationItem.rightBarButtonItem = saveButton
+    }
+    
+    private func setTitle() {
+        switch menuType {
+        case .add:
+            title = "Task 생성"
+        case .edit:
+            title = "Task 편집"
+        }
+    }
+    
+    @objc func cancelBarButtonClicked() {
+        dismiss(animated: true)
+    }
+    
+    @objc func saveBarButtonClicked() {
+        
+        guard let title = titleTextField.text else { return }
+        
+        if viewModel.isValid.value {
+            
+            let taskItem = TaskTable(title: title, savedDate: Date(), date: deadlineDatePicker.date, expectedTime: Int(expectedTimeTextField.text ?? "0"), realTime: 0, completed: false)
+            
+            switch menuType {
+            case .add:
+                guard let project else { return }
+                taskRepository.createItem(taskItem, project: project)
+            case .edit:
+                guard let taskData else { return }
+                taskRepository.updateItem {
+                    taskData.title = title
+                    taskData.date = deadlineDatePicker.date
+                    taskData.expectedTime = Int(expectedTimeTextField.text ?? "0")
+                }
+            }
+            
+            
+            //call delegate -> collectionview reload 위해서
+            delegate?.updateTableView()
+            
+            dismiss(animated: true)
+        } else {
+            // TODO: Alert 띄우기 -> 프로젝트 이름을 입력해주세요
+        }
+        
+        }
+    
+    // sheetPresentationController 설정
+    private func setupSheet() {
+        if let sheet = sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.selectedDetentIdentifier = .medium
+            sheet.largestUndimmedDetentIdentifier = .medium
+            sheet.prefersGrabberVisible = true
+        }
+    }
+    
+}
+
+extension AddTaskViewController {
+    
+    private func setEditView() {
+        guard let taskData else { return }
+        if menuType == .edit {
+            titleTextField.text = taskData.title
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yy-MM-dd"
+            deadlineDatePicker.date = taskData.date ?? Date()
+            deadlineTextField.text = dateFormatter.string(from: deadlineDatePicker.date)
+            
+            if let time = taskData.expectedTime {
+                expectedTimeTextField.text = "\(time)"
+            }
+            
+            viewModel.title.value = titleTextField.text!
+            viewModel.checkValidation()
+        }
+    }
+    
+}

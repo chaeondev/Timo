@@ -10,3 +10,7 @@ import Foundation
 enum ProjectMenuType {
     case add, edit
 }
+
+enum TaskMenuType {
+    case add, edit
+}

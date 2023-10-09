@@ -216,8 +216,8 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
         let context = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { (action) -> UIMenu? in
             
             let edit = UIAction(title: "편집하기", image: UIImage(systemName: "square.and.pencil"), state: .off) { (_) in
-                print("edit button clicked")
-                //add tasks...
+                guard let taskList = self.taskList else { return }
+                self.transitionTaskMenuView(menuType: .edit, taskData: taskList[index])
             }
             let delete = UIAction(title: "삭제하기", image: UIImage(systemName: "trash"), attributes: .destructive, state: .off) { (_) in
                 print("delete button clicked")
@@ -249,9 +249,20 @@ extension ProjectDetailViewController {
         
     }
     
+    //Task 추가 화면 전환
     func transitionAddTaskView() {
         let vc = AddTaskViewController()
         vc.project = projectData
+        vc.delegate = self
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true)
+    }
+    
+    //Task 편집하기 화면 전환
+    func transitionTaskMenuView(menuType: TaskMenuType, taskData: TaskTable?) {
+        let vc = AddTaskViewController()
+        vc.menuType = menuType
+        vc.taskData = taskData
         vc.delegate = self
         let nav = UINavigationController(rootViewController: vc)
         present(nav, animated: true)
