@@ -100,10 +100,7 @@ class ProjectListViewController: BaseViewController {
         
         // TODO: collectionview select 되는거 막기 -> select되면 다음화면으로 넘어감
         
-        let vc = AddProjectViewController()
-        vc.delegate = self
-        let nav = UINavigationController(rootViewController: vc)
-        present(nav, animated: true)
+        transitionView(menuType: .add, projectData: nil)
     }
 
 }
@@ -131,7 +128,7 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = ProjectDetailViewController()
         guard let projectList else { return }
-        vc.projectData = projectList[indexPath.row]
+        vc.projectData = projectList[indexPath.item]
         
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -145,9 +142,10 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
         let context = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { (action) -> UIMenu? in
             
             let edit = UIAction(title: "edit_contextmenu".localized, image: UIImage(systemName: "square.and.pencil"), identifier: nil, discoverabilityTitle: nil, state: .off) { (_) in
-                print("edit button clicked")
-                //add tasks...
-                // TODO: 편집 viewcontroller -> addviewcontroller
+                
+                guard let projectList = self.projectList else { return }
+                self.transitionView(menuType: .edit, projectData: projectList[index])
+                
             }
             let delete = UIAction(title: "delete_contextmenu".localized, image: UIImage(systemName: "trash"), identifier: nil, discoverabilityTitle: nil,attributes: .destructive, state: .off) { (_) in
                 print("delete button clicked")
@@ -180,5 +178,20 @@ extension ProjectListViewController: AddProjectDelegate {
     //AddView의 delegate 메서드
     func updateCollectionView() {
         collectionView.reloadData()
+    }
+}
+
+extension ProjectListViewController {
+    
+    //AddProject 화면 전환
+    func transitionView(menuType: ProjectMenuType, projectData: ProjectTable?) {
+        
+        let vc = AddProjectViewController()
+        vc.menuType = menuType
+        vc.projectData = projectData
+        vc.delegate = self
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true)
+        
     }
 }

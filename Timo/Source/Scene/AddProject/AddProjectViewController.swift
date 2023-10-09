@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol AddProjectDelegate {
+protocol AddProjectDelegate: AnyObject {
     func updateCollectionView()
 }
 
@@ -30,7 +30,14 @@ class AddProjectViewController: BaseViewController {
     private lazy var colorLabel = UILabel.labelBuilder(text: "project_color".localized, font: .boldSystemFont(ofSize: 16))
     private lazy var colorWell = UIColorWell(frame: .zero)
     
+    // Menu Type
+    var menuType: ProjectMenuType = .add // default 값
+    var projectData: ProjectTable? // Edit 화면일 때 해당 프로젝트 Data
+    
+    // save 버튼 Enable 여부
     private var isSaved: Bool = false
+    
+    // delegate - collectionView reload
     var delegate: AddProjectDelegate?
     
     let projectRepository = ProjectTableRepository()
@@ -44,6 +51,7 @@ class AddProjectViewController: BaseViewController {
         setNavigationBar()
         setupSheet()
         projectRepository.checkRealmURL()
+        setEditView()
         
     }
     
@@ -120,6 +128,18 @@ class AddProjectViewController: BaseViewController {
             self.navigationItem.rightBarButtonItem?.tintColor = bool ? .systemBlue : .systemGray
         }
     }
+
+    @objc func titleTextFieldChanged() {
+        viewModel.title.value = titleTextField.text!
+        viewModel.checkValidation()
+        
+    }
+    
+
+
+}
+
+extension AddProjectViewController {
     
     // sheetPresentationController 설정
     private func setupSheet() {
@@ -133,7 +153,8 @@ class AddProjectViewController: BaseViewController {
     
     //NavigationBar 세팅
     private func setNavigationBar() {
-        title = "navigation_create_title".localized
+        setTitle()
+        
         let cancelButton = UIBarButtonItem(title: "navigation_cancel_button".localized, style: .plain, target: self, action: #selector(cancelBarButtonClicked))
         cancelButton.tintColor = .systemRed
         
@@ -143,11 +164,14 @@ class AddProjectViewController: BaseViewController {
         navigationItem.leftBarButtonItem = cancelButton
         navigationItem.rightBarButtonItem = saveButton
     }
-
-    @objc func titleTextFieldChanged() {
-        viewModel.title.value = titleTextField.text!
-        viewModel.checkValidation()
-        
+    
+    private func setTitle() {
+        switch menuType {
+        case .add:
+            title = "navigation_create_title".localized
+        case .edit:
+            title = "navigation_edit_title".localized
+        }
     }
     
     @objc func cancelBarButtonClicked() {
@@ -159,11 +183,23 @@ class AddProjectViewController: BaseViewController {
         guard let title = titleTextField.text else { return }
         if viewModel.isValid.value {
             let color = colorWell.selectedColor?.toHexString() ?? Design.BaseColor.mainPoint!.toHexString()
-            
+
             let projectItem = ProjectTable(title: title, savedDate: Date(), startDate: startDatePicker.date, endDate: endDatePicker.date, color: color, done: false)
             
-            projectRepository.createItem(projectItem)
-            
+            switch menuType {
+                
+            case .add:
+                projectRepository.createItem(projectItem)
+            case .edit:
+                guard let projectData else { return }
+                projectRepository.updateItem {
+                    projectData.title = title
+                    projectData.startDate = startDatePicker.date
+                    projectData.endDate = endDatePicker.date
+                    projectData.color = color
+                }
+            }
+
             //call delegate -> collectionview reload 위해서
             delegate?.updateCollectionView()
             
@@ -173,5 +209,22 @@ class AddProjectViewController: BaseViewController {
         }
         
     }
+    
+}
 
+// MARK: - Edit Menu 화면
+extension AddProjectViewController {
+    
+    private func setEditView() {
+        guard let projectData else { return }
+        if menuType == .edit {
+            titleTextField.text = projectData.title
+            startDatePicker.date = projectData.startDate ?? Date()
+            endDatePicker.date = projectData.endDate ?? Date()
+            colorWell.selectedColor = UIColor(hex: projectData.color!)
+            
+            viewModel.title.value = titleTextField.text!
+            viewModel.checkValidation()
+        }
+    }
 }

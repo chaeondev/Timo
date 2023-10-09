@@ -30,6 +30,7 @@
 
 //navigationbar
 "navigation_create_title" = "새 프로젝트";
+"navigation_edit_title" = "프로젝트 편집";
 "navigation_cancel_button" = "취소";
 "navigation_save_button" = "확인";
 

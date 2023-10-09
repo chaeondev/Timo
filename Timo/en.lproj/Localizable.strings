@@ -30,6 +30,7 @@
 
 //navigationbar
 "navigation_create_title" = "New Project";
+"navigation_edit_title" = "Edit Project";
 "navigation_cancel_button" = "Cancel";
 "navigation_save_button" = "Save";
 

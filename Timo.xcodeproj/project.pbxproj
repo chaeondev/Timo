@@ -37,6 +37,10 @@
 		DE184A7E2ACFF336004EEC0B /* UnderlineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A7D2ACFF336004EEC0B /* UnderlineTextField.swift */; };
 		DE184A802AD02FCF004EEC0B /* TaskTableRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A7F2AD02FCF004EEC0B /* TaskTableRepository.swift */; };
 		DE184A852AD0357B004EEC0B /* AddTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A842AD0357B004EEC0B /* AddTaskViewModel.swift */; };
+		DE184A882AD1F720004EEC0B /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A872AD1F720004EEC0B /* TimerViewController.swift */; };
+		DE184A8A2AD2B479004EEC0B /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A892AD2B479004EEC0B /* CheckButton.swift */; };
+		DE184A8C2AD2BEB3004EEC0B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A8B2AD2BEB3004EEC0B /* String+Extension.swift */; };
+		DE184A902AD3CD19004EEC0B /* ProjectMenuType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A8F2AD3CD19004EEC0B /* ProjectMenuType.swift */; };
 		DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62952AC19E7B003010DC /* AppDelegate.swift */; };
 		DEBD62982AC19E7B003010DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62972AC19E7B003010DC /* SceneDelegate.swift */; };
 		DEBD629F2AC19E7C003010DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEBD629E2AC19E7C003010DC /* Assets.xcassets */; };
@@ -85,6 +89,10 @@
 		DE184A7D2ACFF336004EEC0B /* UnderlineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineTextField.swift; sourceTree = "<group>"; };
 		DE184A7F2AD02FCF004EEC0B /* TaskTableRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableRepository.swift; sourceTree = "<group>"; };
 		DE184A842AD0357B004EEC0B /* AddTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewModel.swift; sourceTree = "<group>"; };
+		DE184A872AD1F720004EEC0B /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		DE184A892AD2B479004EEC0B /* CheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
+		DE184A8B2AD2BEB3004EEC0B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		DE184A8F2AD3CD19004EEC0B /* ProjectMenuType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectMenuType.swift; sourceTree = "<group>"; };
 		DEBD62922AC19E7B003010DC /* Timo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEBD62952AC19E7B003010DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEBD62972AC19E7B003010DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +160,7 @@
 				DEBD62AD2AC1A03C003010DC /* Cell */,
 				DE184A2A2ACC35FD004EEC0B /* Observable */,
 				DEBD62AE2AC1A042003010DC /* Scene */,
+				DE184A8E2AD3CCF8004EEC0B /* Enum */,
 				DEBD62AF2AC1A048003010DC /* Extension */,
 			);
 			path = Source;
@@ -186,6 +195,22 @@
 				DE184A842AD0357B004EEC0B /* AddTaskViewModel.swift */,
 			);
 			path = AddTask;
+			sourceTree = "<group>";
+		};
+		DE184A862AD1F6C7004EEC0B /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				DE184A872AD1F720004EEC0B /* TimerViewController.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		DE184A8E2AD3CCF8004EEC0B /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				DE184A8F2AD3CD19004EEC0B /* ProjectMenuType.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		DEBD62892AC19E7B003010DC = {
@@ -256,6 +281,7 @@
 				DE184A732ACE7EC1004EEC0B /* ProjectDashboardView.swift */,
 				DE184A752ACEA379004EEC0B /* ProjectDetailFooterView.swift */,
 				DE184A7D2ACFF336004EEC0B /* UnderlineTextField.swift */,
+				DE184A892AD2B479004EEC0B /* CheckButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -276,6 +302,7 @@
 				DE184A012AC83033004EEC0B /* AddProject */,
 				DEBD62B12AC1A0AF003010DC /* ProjectDetail */,
 				DE184A772ACEBF2F004EEC0B /* AddTask */,
+				DE184A862AD1F6C7004EEC0B /* Timer */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -285,6 +312,7 @@
 			children = (
 				DE184A132ACBE8B4004EEC0B /* Localized+Extension.swift */,
 				DE184A282ACC0E8B004EEC0B /* UIColor+Extension.swift */,
+				DE184A8B2AD2BEB3004EEC0B /* String+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -390,6 +418,7 @@
 			files = (
 				DE184A072ACBD871004EEC0B /* ProjectTableRepository.swift in Sources */,
 				DE184A852AD0357B004EEC0B /* AddTaskViewModel.swift in Sources */,
+				DE184A8A2AD2B479004EEC0B /* CheckButton.swift in Sources */,
 				DEF16C562AC2DB90006354F8 /* ProjectCollectionViewCell.swift in Sources */,
 				DE184A002AC82916004EEC0B /* StatusButton.swift in Sources */,
 				DE184A702ACD8399004EEC0B /* TimerButton.swift in Sources */,
@@ -399,12 +428,14 @@
 				DE184A142ACBE8B4004EEC0B /* Localized+Extension.swift in Sources */,
 				DE184A1F2ACBF5D5004EEC0B /* LabelBuilder.swift in Sources */,
 				DE184A252ACC0151004EEC0B /* DatePickerBuilder.swift in Sources */,
+				DE184A882AD1F720004EEC0B /* TimerViewController.swift in Sources */,
 				DEBD62C02AC1A62E003010DC /* ProjectListViewController.swift in Sources */,
 				DE184A802AD02FCF004EEC0B /* TaskTableRepository.swift in Sources */,
 				DE184A1D2ACBF497004EEC0B /* ViewBuilder.swift in Sources */,
 				DE184A742ACE7EC1004EEC0B /* ProjectDashboardView.swift in Sources */,
 				DE184A762ACEA379004EEC0B /* ProjectDetailFooterView.swift in Sources */,
 				DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */,
+				DE184A8C2AD2BEB3004EEC0B /* String+Extension.swift in Sources */,
 				DE184A302ACC3858004EEC0B /* AddProjectViewModel.swift in Sources */,
 				DE184A6C2ACD7287004EEC0B /* ButtonBuilder.swift in Sources */,
 				DE184A662ACD64C9004EEC0B /* TaskTableViewCell.swift in Sources */,
@@ -423,6 +454,7 @@
 				DEBD62BE2AC1A4DF003010DC /* BaseViewController.swift in Sources */,
 				DEF16C542AC2DAD7006354F8 /* BaseCollectionViewCell.swift in Sources */,
 				DE184A212ACBF726004EEC0B /* ImageViewBuilder.swift in Sources */,
+				DE184A902AD3CD19004EEC0B /* ProjectMenuType.swift in Sources */,
 				DE1849FC2AC7EE16004EEC0B /* TaskTable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

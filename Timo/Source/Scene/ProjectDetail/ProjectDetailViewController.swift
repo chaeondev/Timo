@@ -119,7 +119,6 @@ class ProjectDetailViewController: BaseViewController {
     @objc func doneButtonClicked() {
         doneButton.isSelected.toggle()
         guard let projectData else { return }
-        //projectRepository.updateItemStatus(projectData)
         projectRepository.updateItem {
             projectData.done.toggle()
         }
@@ -142,7 +141,8 @@ class ProjectDetailViewController: BaseViewController {
     //navigationbarbutton menu 추가
     func setupMenu() {
         let projectEdit = UIAction(title: "프로젝트 편집", image: UIImage(systemName: "square.and.pencil")) { [weak self] action in
-            // TODO: 코드 작성
+            guard let data = self?.projectData else { return }
+            self?.transitionProjectMenuView(menuType: .edit, projectData: data)
         }
         let projectDelete = UIAction(title: "프로젝트 삭제", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] action in
             // TODO: 코드 작성
@@ -204,16 +204,6 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
         configureContextMenu(index: indexPath.row)
     }
     
-//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        let done = UIContextualAction(style: .normal, title: "완료") { (action, view, completionHandler) in
-//
-//        }
-//        done.image = UIImage(systemName: "checkmark.circle")
-//        let swipeAction = UISwipeActionsConfiguration(actions: [done])
-//        swipeAction.performsFirstActionWithFullSwipe = false
-//        return swipeAction
-//    }
-    
     func configureContextMenu(index: Int) -> UIContextMenuConfiguration{
         let context = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { (action) -> UIMenu? in
             
@@ -235,5 +225,17 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
 extension ProjectDetailViewController: AddTaskDelegate {
     func updateTableView() {
         tableView.reloadData()
+    }
+}
+
+extension ProjectDetailViewController {
+    func transitionProjectMenuView(menuType: ProjectMenuType, projectData: ProjectTable?) {
+        
+        let vc = AddProjectViewController()
+        vc.menuType = menuType
+        vc.projectData = projectData
+        let nav = UINavigationController(rootViewController: vc)
+        present(nav, animated: true)
+        
     }
 }
