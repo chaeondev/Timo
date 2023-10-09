@@ -145,7 +145,11 @@ class ProjectDetailViewController: BaseViewController {
             self?.transitionProjectMenuView(menuType: .edit, projectData: data)
         }
         let projectDelete = UIAction(title: "프로젝트 삭제", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] action in
-            // TODO: 코드 작성
+            guard let data = self?.projectData else { return }
+            self?.showAlertMessage(title: "프로젝트 삭제", message: "해당 프로젝트 삭제 시, 하위 Task들과 기록한 시간이 삭제됩니다. 삭제하시겠습니까?", handler: {
+                self?.projectRepository.deleteItem(data)
+                self?.navigationController?.popViewController(animated: true)
+            })
         }
         let taskAdd = UIAction(title: "Task 추가", image: UIImage(systemName: "link.badge.plus")) { [weak self] action in
             // TODO: 코드 작성
@@ -228,7 +232,10 @@ extension ProjectDetailViewController: AddTaskDelegate {
     }
 }
 
+// 편집하기, 삭제하기 관련 메서드
 extension ProjectDetailViewController {
+    
+    //편집하기 화면 전환
     func transitionProjectMenuView(menuType: ProjectMenuType, projectData: ProjectTable?) {
         
         let vc = AddProjectViewController()
@@ -238,4 +245,6 @@ extension ProjectDetailViewController {
         present(nav, animated: true)
         
     }
+    
+    
 }

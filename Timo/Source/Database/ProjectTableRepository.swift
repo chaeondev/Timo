@@ -65,6 +65,8 @@ class ProjectTableRepository: RepositoryType {
     func deleteItem(_ item: ProjectTable) {
         do {
             try realm.write {
+                // TODO: subTasks 추가시 이 부분까지 고려하기
+                realm.delete(item.tasks)
                 realm.delete(item)
             }
         } catch {

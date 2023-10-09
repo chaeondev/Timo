@@ -141,6 +141,7 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
     func configureContextMenu(index: Int) -> UIContextMenuConfiguration {
         let context = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { (action) -> UIMenu? in
             
+            
             let edit = UIAction(title: "edit_contextmenu".localized, image: UIImage(systemName: "square.and.pencil"), identifier: nil, discoverabilityTitle: nil, state: .off) { (_) in
                 
                 guard let projectList = self.projectList else { return }
@@ -148,9 +149,14 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
                 
             }
             let delete = UIAction(title: "delete_contextmenu".localized, image: UIImage(systemName: "trash"), identifier: nil, discoverabilityTitle: nil,attributes: .destructive, state: .off) { (_) in
-                print("delete button clicked")
-                //add tasks...
-                // TODO: 삭제 alert -> realm 지우기
+                
+                guard let projectList = self.projectList else { return }
+                
+                self.showAlertMessage(title: "프로젝트 삭제", message: "해당 프로젝트 삭제 시, 하위 Task들과 기록한 시간이 삭제됩니다. 삭제하시겠습니까?") {
+                    self.projectRepository.deleteItem(projectList[index])
+                    self.collectionView.reloadData()
+                }
+                
             }
             return UIMenu(title: "Options", image: nil, identifier: nil, options: UIMenu.Options.displayInline, children: [edit,delete])
         }
@@ -181,9 +187,10 @@ extension ProjectListViewController: AddProjectDelegate {
     }
 }
 
+// MARK: - 추가, 편집, 삭제 관련 메서드
 extension ProjectListViewController {
     
-    //AddProject 화면 전환
+    //AddProject 화면 전환 (추가, 편집)
     func transitionView(menuType: ProjectMenuType, projectData: ProjectTable?) {
         
         let vc = AddProjectViewController()
@@ -194,4 +201,5 @@ extension ProjectListViewController {
         present(nav, animated: true)
         
     }
+    
 }

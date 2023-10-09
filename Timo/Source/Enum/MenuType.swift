@@ -1,5 +1,5 @@
 //
-//  ProjectMenuType.swift
+//  MenuType.swift
 //  Timo
 //
 //  Created by Chaewon on 2023/10/09.
