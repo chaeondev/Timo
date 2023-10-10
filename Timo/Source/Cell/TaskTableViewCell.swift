@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TimerDelegate: AnyObject {
+    func passTaskData(data: TaskTable)
+}
+
 class TaskTableViewCell: BaseTableViewCell {
     
     private lazy var doneButton = CheckButton()
@@ -26,6 +30,8 @@ class TaskTableViewCell: BaseTableViewCell {
 
     var taskdata: TaskTable?
     var projectTitle: String = ""
+    
+    var delegate: TimerDelegate?
     
     private let taskRepository = TaskTableRepository()
     
@@ -56,6 +62,7 @@ class TaskTableViewCell: BaseTableViewCell {
         }
         
         doneButton.addTarget(self, action: #selector(doneButtonClicked), for: .touchUpInside)
+        taskTimerButton.addTarget(self, action: #selector(timerButtonClicked), for: .touchUpInside)
 
     }
     
@@ -161,6 +168,11 @@ class TaskTableViewCell: BaseTableViewCell {
             taskdata.completed.toggle()
         }
         
+    }
+    
+    @objc func timerButtonClicked() {
+        guard let data = taskdata else { return }
+        delegate?.passTaskData(data: data)
     }
     
 }

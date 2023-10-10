@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+
 class TimerViewController: BaseViewController {
     
     private lazy var timeLabel = UILabel.labelBuilder(text: "00:00:00", font: .boldSystemFont(ofSize: 44), textColor: Design.BaseColor.border!, numberOfLines: 1, textAlignment: .center)
@@ -25,23 +27,22 @@ class TimerViewController: BaseViewController {
     let userDefaults = UserDefaults.standard
     
     var taskData: TaskTable?
+    let taskRepository = TaskTableRepository()
     
     // TODO: 나중에 밖으로 빼기
-    enum TimeData {
-        static let startTimeKey = "startTime"
-        static let stopTimeKey = "stopTime"
-        static let countingKey = "countingKey"
-    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
         stopButton.addTarget(self, action: #selector(stopButtonClicked), for: .touchUpInside)
         
-        //UserDefaults 저장값 
-        startTime = userDefaults.object(forKey: TimeData.startTimeKey) as? Date
-        stopTime = userDefaults.object(forKey: TimeData.stopTimeKey) as? Date
-        timerCounting = userDefaults.bool(forKey: TimeData.countingKey)
+        //UserDefaults 저장값
+        guard let taskData else { return }
+        startTime = taskData.timerStart
+        stopTime = taskData.timerStop
+        timerCounting = taskData.timerCounting
         
         if timerCounting {
             createTimer()
@@ -116,8 +117,29 @@ class TimerViewController: BaseViewController {
 extension TimerViewController {
     func calRestartTime(start: Date, stop: Date) -> Date {
         
-        let diff = start.timeIntervalSince(stop) // negative value
-        return Date().addingTimeInterval(diff)
+        let diff = stop.timeIntervalSince(start) // 누적시간
+        
+        if let taskData
+        {
+            taskRepository.updateItem
+            {
+                taskData.realTime = Int(diff)
+            }
+            if let realTime = taskData.realTime
+            {
+                let timeInterval = TimeInterval(-realTime)
+                return Date().addingTimeInterval(timeInterval)
+            }
+            else
+            {
+                return Date()
+            }
+        }
+        else
+        {
+            return Date()
+        }
+
     }
     
     func setTimeLabel(_ val: Int) {
@@ -154,19 +176,6 @@ extension TimerViewController {
         }
     }
     
-    /*
-    func updateTimerOld() {
-        guard let timer else { return }
-        elapsedTime += timer.timeInterval
-
-        let hours = Int(elapsedTime) / 3600
-        let minutes = Int(elapsedTime) / 60 % 60
-        let seconds = Int(elapsedTime) % 60
-
-        timeLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
-    }
-    */
-    
     func cancelTimer() { //stopTimer
         timer?.invalidate()
         timer = nil
@@ -190,18 +199,27 @@ extension TimerViewController {
 extension TimerViewController {
     
     func setStartTime(date: Date?) {
+        guard let taskData else { return }
         startTime = date
-        userDefaults.set(startTime, forKey: TimeData.startTimeKey)
+        taskRepository.updateItem {
+            taskData.timerStart = startTime
+        }
     }
     
     func setStopTime(date: Date?) {
+        guard let taskData else { return }
         stopTime = date
-        userDefaults.set(stopTime, forKey: TimeData.stopTimeKey)
+        taskRepository.updateItem {
+            taskData.timerStop = stopTime
+        }
     }
     
     func setTimerCounting(_ val: Bool) {
+        guard let taskData else { return }
         timerCounting = val
-        userDefaults.set(timerCounting, forKey: TimeData.countingKey)
+        taskRepository.updateItem {
+            taskData.timerCounting = timerCounting
+        }
     }
 }
 

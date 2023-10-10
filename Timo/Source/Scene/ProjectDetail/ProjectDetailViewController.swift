@@ -185,17 +185,10 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
             cell.projectTitle = projectData.title
             cell.projectOfTaskLabel.isHidden = true
             cell.configureCell()
-            cell.taskTimerButton.addTarget(self, action: #selector(timerButtonClicked), for: .touchUpInside)
+            cell.delegate = self
         }
         
         return cell
-    }
-    
-    @objc func timerButtonClicked(_ data: TaskTable) {
-        
-        let vc = TimerViewController()
-        vc.taskData = data
-        navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -230,10 +223,17 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
     
 }
 
-extension ProjectDetailViewController: AddTaskDelegate {
+extension ProjectDetailViewController: AddTaskDelegate, TimerDelegate {
     func updateTableView() {
         tableView.reloadData()
     }
+    
+    func passTaskData(data: TaskTable) {
+        let vc = TimerViewController()
+        vc.taskData = data
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
 extension ProjectDetailViewController {

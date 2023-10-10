@@ -207,7 +207,7 @@ extension AddTaskViewController {
         
         if viewModel.isValid.value {
             
-            let taskItem = TaskTable(title: title, savedDate: Date(), date: deadlineDatePicker.date, expectedTime: Int(expectedTimeTextField.text ?? "0"), realTime: 0, completed: false)
+            let taskItem = TaskTable(title: title, savedDate: Date(), date: deadlineDatePicker.date, expectedTime: Int(expectedTimeTextField.text ?? "0"), realTime: 0, timerStart: nil, timerStop: nil)
             
             switch menuType {
             case .add:
