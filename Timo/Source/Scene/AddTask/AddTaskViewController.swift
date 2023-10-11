@@ -237,9 +237,6 @@ extension AddTaskViewController {
     private func setupSheet() {
         if let sheet = sheetPresentationController {
             sheet.detents = [.medium(), .large()]
-            sheet.selectedDetentIdentifier = .medium
-            sheet.largestUndimmedDetentIdentifier = .medium
-            sheet.prefersGrabberVisible = true
         }
     }
     

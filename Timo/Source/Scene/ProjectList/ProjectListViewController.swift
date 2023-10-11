@@ -187,7 +187,6 @@ extension ProjectListViewController: AddProjectDelegate {
     }
 }
 
-// MARK: - 추가, 편집, 삭제 관련 메서드
 extension ProjectListViewController {
     
     //AddProject 화면 전환 (추가, 편집)
@@ -197,7 +196,10 @@ extension ProjectListViewController {
         vc.menuType = menuType
         vc.projectData = projectData
         vc.delegate = self
+        
         let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .pageSheet
+
         present(nav, animated: true)
         
     }

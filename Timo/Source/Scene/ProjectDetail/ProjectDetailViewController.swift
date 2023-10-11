@@ -248,7 +248,10 @@ extension ProjectDetailViewController {
         let vc = AddProjectViewController()
         vc.menuType = menuType
         vc.projectData = projectData
+        
         let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .pageSheet
+        
         present(nav, animated: true)
         
     }
@@ -258,7 +261,10 @@ extension ProjectDetailViewController {
         let vc = AddTaskViewController()
         vc.project = projectData
         vc.delegate = self
+        
         let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .pageSheet
+
         present(nav, animated: true)
     }
     
@@ -268,7 +274,10 @@ extension ProjectDetailViewController {
         vc.menuType = menuType
         vc.taskData = taskData
         vc.delegate = self
+        
         let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .pageSheet
+
         present(nav, animated: true)
     }
     
