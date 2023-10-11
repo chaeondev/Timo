@@ -38,6 +38,7 @@ class ProjectDetailViewController: BaseViewController {
     var taskList: Results<TaskTable>?
     
     private let projectRepository = ProjectTableRepository()
+    private let taskRepository = TaskTableRepository()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -213,8 +214,11 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
                 self.transitionTaskMenuView(menuType: .edit, taskData: taskList[index])
             }
             let delete = UIAction(title: "삭제하기", image: UIImage(systemName: "trash"), attributes: .destructive, state: .off) { (_) in
-                print("delete button clicked")
-                //add tasks...
+                guard let taskList = self.taskList else { return }
+                self.showAlertMessage(title: "Task 삭제", message: "해당 Task에 기록된 시간도 함께 삭제됩니다. 삭제하시겠습니까?") {
+                    self.taskRepository.deleteItem(taskList[index])
+                    self.tableView.reloadData()
+                }
             }
             return UIMenu(title: "Options", image: nil, identifier: nil, options: .displayInline, children: [edit,delete])
         }
