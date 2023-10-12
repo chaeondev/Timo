@@ -15,4 +15,11 @@ extension UITextField {
         view.borderStyle = .none
         return view
     }
+    static func underlineTextFieldBuilder(placeholder: String, textColor: UIColor = Design.BaseColor.text!, textAlignment: NSTextAlignment = .center) -> UnderlineTextField {
+        let view = UnderlineTextField()
+        view.setPlaceholder(placeholder: placeholder)
+        view.textColor = textColor
+        view.textAlignment = textAlignment
+        return view
+    }
 }

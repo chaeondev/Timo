@@ -144,7 +144,9 @@ class TaskTableViewCell: BaseTableViewCell {
         }
         
         if let expectedTime = taskdata.expectedTime {
-            expectedTimeValueLabel.text = "\(expectedTime)H"
+            let timeformatter = DateFormatter()
+            timeformatter.dateFormat = "H'H'mm'M'"
+            expectedTimeValueLabel.text = timeformatter.string(from: expectedTime)
         } else {
             expectedTimeLabel.isHidden = true
             expectedTimeValueLabel.isHidden = true

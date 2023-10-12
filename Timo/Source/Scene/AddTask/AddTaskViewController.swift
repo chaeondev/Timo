@@ -21,23 +21,13 @@ class AddTaskViewController: BaseViewController {
     
     // 마감 날짜
     private lazy var deadlineImageView = UIImageView.imageViewBuilder(image: UIImage(systemName: "calendar")!)
-    private lazy var deadlineTextField = {
-        let view = UnderlineTextField()
-        view.setPlaceholder(placeholder: "일정")
-        view.textAlignment = .center
-        return view
-    }()
+    private lazy var deadlineTextField = UITextField.underlineTextFieldBuilder(placeholder: "일정")
     private lazy var deadlineDatePicker = UIDatePicker.datePickerBuilder(datePickerStyle: .inline)
     
     // 예상 시간
     private lazy var expectedTimeImageView = UIImageView.imageViewBuilder(image: UIImage(systemName: "clock")!)
-    private lazy var expectedTimeTextField = {
-        let view = UnderlineTextField()
-        view.setPlaceholder(placeholder: "예상시간")
-        view.textAlignment = .center
-        return view
-    }()
-    private lazy var timeLabel = UILabel.labelBuilder(text: "시간", font: .systemFont(ofSize: 16))
+    private lazy var expectedTimeTextField = UITextField.underlineTextFieldBuilder(placeholder: "예상시간")
+    private lazy var expectedTimePicker = UIDatePicker.datePickerBuilder(datePickerMode: .countDownTimer, datePickerStyle: .wheels)
     
     
     //MenuType
@@ -69,7 +59,7 @@ class AddTaskViewController: BaseViewController {
     override func configure() {
         super.configure()
         
-        [titleLabel, titleTextField, titleBorderline, deadlineImageView, deadlineTextField, expectedTimeImageView, expectedTimeTextField, timeLabel].forEach {
+        [titleLabel, titleTextField, titleBorderline, deadlineImageView, deadlineTextField, expectedTimeImageView, expectedTimeTextField].forEach {
             view.addSubview($0)
         }
         
@@ -119,11 +109,6 @@ class AddTaskViewController: BaseViewController {
             make.leading.equalTo(expectedTimeImageView.snp.trailing).offset(12)
             make.width.equalTo(100)
         }
-        
-        timeLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(expectedTimeImageView)
-            make.leading.equalTo(expectedTimeTextField.snp.trailing).offset(8)
-        }
     }
     
     //viewModel data 연결
@@ -152,21 +137,24 @@ class AddTaskViewController: BaseViewController {
     //textField안에 datepicker 설정
     func setupDatePicker() {
         
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target : nil, action: #selector(toolBarDoneButtonClicked))
-        toolbar.setItems([doneButton], animated: true)
-            
-        deadlineTextField.inputAccessoryView = toolbar
         deadlineTextField.inputView = deadlineDatePicker
-        deadlineDatePicker.addTarget(self, action: #selector(datePickerValueChanged(sender: )), for: .valueChanged)
+        deadlineDatePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
+        
+        expectedTimeTextField.inputView = expectedTimePicker
+        expectedTimePicker.addTarget(self, action: #selector(timePickerValueChanged), for: .valueChanged)
     }
     
-    @objc func datePickerValueChanged(sender: UIDatePicker) {
+    @objc func datePickerValueChanged(_ sender: UIDatePicker) {
           let dateFormatter = DateFormatter()
           dateFormatter.dateFormat = "yy-MM-dd"
           deadlineTextField.text = dateFormatter.string(from: sender.date)
      }
+    
+    @objc func timePickerValueChanged(_ sender: UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "H시간 mm분"
+        expectedTimeTextField.text = dateFormatter.string(from: sender.date)
+    }
     
     @objc func toolBarDoneButtonClicked(){
         self.view.endEditing(true)
@@ -207,7 +195,8 @@ extension AddTaskViewController {
         
         if viewModel.isValid.value {
             
-            let taskItem = TaskTable(title: title, savedDate: Date(), date: deadlineDatePicker.date, expectedTime: Int(expectedTimeTextField.text ?? "0"), realTime: 0, timerStart: nil, timerStop: nil)
+            let expectedTime = expectedTimePicker.isSelected ? expectedTimePicker.date : nil
+            let taskItem = TaskTable(title: title, savedDate: Date(), date: deadlineDatePicker.date, expectedTime: expectedTime, realTime: 0, timerStart: nil, timerStop: nil)
             
             switch menuType {
             case .add:
@@ -218,10 +207,9 @@ extension AddTaskViewController {
                 taskRepository.updateItem {
                     taskData.title = title
                     taskData.date = deadlineDatePicker.date
-                    taskData.expectedTime = Int(expectedTimeTextField.text ?? "0")
+                    taskData.expectedTime = expectedTimePicker.date //nil의 경우 삽입 필요
                 }
             }
-            
             
             //call delegate -> collectionview reload 위해서
             delegate?.updateTableView()
@@ -254,9 +242,10 @@ extension AddTaskViewController {
             deadlineDatePicker.date = taskData.date ?? Date()
             deadlineTextField.text = dateFormatter.string(from: deadlineDatePicker.date)
             
-            if let time = taskData.expectedTime {
-                expectedTimeTextField.text = "\(time)"
-            }
+            let timeFormatter = DateFormatter()
+            timeFormatter.dateFormat = "H시간mm분"
+            expectedTimePicker.date = taskData.expectedTime ?? Date()
+            expectedTimeTextField.text = timeFormatter.string(from: expectedTimePicker.date)
             
             viewModel.title.value = titleTextField.text!
             viewModel.checkValidation()
