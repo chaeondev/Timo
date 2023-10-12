@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TimerDelegate: AnyObject {
+    func updateTableView()
+}
+
 
 
 class TimerViewController: BaseViewController {
@@ -29,11 +33,16 @@ class TimerViewController: BaseViewController {
     var taskData: TaskTable?
     let taskRepository = TaskTableRepository()
     
-    // TODO: 나중에 밖으로 빼기
+    var delegate: TimerDelegate?
     
+    // TODO: 나중에 밖으로 빼기
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
         stopButton.addTarget(self, action: #selector(stopButtonClicked), for: .touchUpInside)
@@ -46,14 +55,14 @@ class TimerViewController: BaseViewController {
         
         if timerCounting {
             createTimer()
-        }
-        else {
+        } else {
             cancelTimer()
             if let start = startTime, let stop = stopTime {
                 let time = calRestartTime(start: start, stop: stop)
                 let diff = Date().timeIntervalSince(time)
                 setTimeLabel(Int(diff))
             }
+            startTimer()
         }
         
     }
@@ -86,7 +95,7 @@ class TimerViewController: BaseViewController {
         }
     }
     
-    @objc func startButtonClicked() {
+    func startTimer() {
         if !timerCounting
         {
             if let stop = stopTime
@@ -102,15 +111,34 @@ class TimerViewController: BaseViewController {
             
             createTimer()
         }
+    }
+    
+    @objc func startButtonClicked() {
+        startTimer()
     
     }
     
     @objc func stopButtonClicked() {
         
         if timerCounting {
+            //stop 시간 Realm에 업데이트
             setStopTime(date: Date())
+            
+            //stop시 누적시간 계산해서 Realm에 업데이트
+            if let taskData, let start = taskData.timerStart, let stop = taskData.timerStop
+            {
+                let diff = stop.timeIntervalSince(start) // 누적시간
+                taskRepository.updateItem
+                {
+                    taskData.realTime = Int(diff)
+                }
+            }
+
+            //Timer invalidate
             cancelTimer()
         }
+        delegate?.updateTableView()
+        dismiss(animated: true)
     }
 }
 
@@ -182,17 +210,7 @@ extension TimerViewController {
         
         setTimerCounting(false)
     }
-    
-    //youtube
-    func startStopAction() {
-        if timerCounting {
-            setStopTime(date: Date())
-            cancelTimer()
-        } else {
-            createTimer()
-        }
-    }
-    //
+
 }
 
 // MARK: UserDefaults

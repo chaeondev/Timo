@@ -227,15 +227,21 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
     
 }
 
-extension ProjectDetailViewController: AddTaskDelegate, TimerDelegate {
+extension ProjectDetailViewController {
+    
+}
+
+extension ProjectDetailViewController: AddTaskDelegate, TaskTableCellDelegate, TimerDelegate {
     func updateTableView() {
         tableView.reloadData()
     }
     
     func passTaskData(data: TaskTable) {
         let vc = TimerViewController()
+        vc.delegate = self
         vc.taskData = data
-        navigationController?.pushViewController(vc, animated: true)
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
 }

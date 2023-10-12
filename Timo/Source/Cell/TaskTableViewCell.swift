@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol TimerDelegate: AnyObject {
+protocol TaskTableCellDelegate: AnyObject {
     func passTaskData(data: TaskTable)
 }
 
@@ -31,7 +31,7 @@ class TaskTableViewCell: BaseTableViewCell {
     var taskdata: TaskTable?
     var projectTitle: String = ""
     
-    var delegate: TimerDelegate?
+    var delegate: TaskTableCellDelegate?
     
     private let taskRepository = TaskTableRepository()
     
@@ -108,7 +108,7 @@ class TaskTableViewCell: BaseTableViewCell {
 
         taskRealTimeLabel.snp.makeConstraints { make in
 
-            make.width.equalTo(contentView).multipliedBy(0.15)
+            make.width.equalTo(contentView).multipliedBy(0.18)
         }
 
         taskTimerButton.snp.makeConstraints { make in
@@ -119,7 +119,7 @@ class TaskTableViewCell: BaseTableViewCell {
         timerStackView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().inset(22)
-            make.width.equalToSuperview().multipliedBy(0.15)
+            make.width.equalToSuperview().multipliedBy(0.18)
             make.height.equalToSuperview().multipliedBy(0.7)
         }
         
@@ -153,6 +153,21 @@ class TaskTableViewCell: BaseTableViewCell {
             expectedTimeValueLabel.isHidden = true
         }
         
+        setRealTime(taskdata: taskdata)
+        
+        
+    }
+    
+    func setRealTime(taskdata: TaskTable) {
+        if let val = taskdata.realTime {
+            let hours = val / 3600
+            let minutes = val / 60 % 60
+            let seconds = val % 60
+            taskRealTimeLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        } else {
+            taskRealTimeLabel.text = "00:00:00"
+        }
+
     }
     
     @objc func doneButtonClicked() {
