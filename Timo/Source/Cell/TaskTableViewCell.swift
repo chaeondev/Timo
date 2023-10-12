@@ -13,8 +13,8 @@ protocol TaskTableCellDelegate: AnyObject {
 
 class TaskTableViewCell: BaseTableViewCell {
     
-    private lazy var doneButton = CheckButton()
-    private lazy var titleLabel = UILabel.labelBuilder(text: "Dashboard Design", font: .systemFont(ofSize: 15, weight: .bold), textColor: .darkGray, numberOfLines: 1)
+    lazy var doneButton = CheckButton()
+    lazy var titleLabel = UILabel.labelBuilder(text: "Dashboard Design", font: .systemFont(ofSize: 15, weight: .bold), textColor: .darkGray, numberOfLines: 1)
     lazy var projectOfTaskLabel = UILabel.labelBuilder(text: "⚬ Design Project view UI", font: .systemFont(ofSize: 11), textColor: .systemBlue, numberOfLines: 1)
     private lazy var titleStackView = UIStackView.stackViewBuilder(axis: .vertical, distribution: .equalSpacing, spacing: 4, alignment: .fill)
     
@@ -44,6 +44,7 @@ class TaskTableViewCell: BaseTableViewCell {
     override func configure() {
         
         backgroundColor = Design.BaseColor.mainBackground
+        selectionStyle = .none
         
         contentView.layer.cornerRadius = 12
         contentView.layer.borderColor = Design.BaseColor.border?.cgColor
@@ -85,20 +86,20 @@ class TaskTableViewCell: BaseTableViewCell {
             make.leading.equalToSuperview().offset(20)
         }
         
-        subTaskCountImageView.snp.makeConstraints { make in
-            make.size.equalTo(14)
-            make.centerY.equalTo(dateLabel)
-            make.leading.equalTo(dateLabel.snp.trailing).offset(12)
-        }
-        
-        subTaskCountLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(dateLabel)
-            make.leading.equalTo(subTaskCountImageView.snp.trailing).offset(4)
-        }
+//        subTaskCountImageView.snp.makeConstraints { make in
+//            make.size.equalTo(14)
+//            make.centerY.equalTo(dateLabel)
+//            make.leading.equalTo(dateLabel.snp.trailing).offset(12)
+//        }
+//
+//        subTaskCountLabel.snp.makeConstraints { make in
+//            make.centerY.equalTo(dateLabel)
+//            make.leading.equalTo(subTaskCountImageView.snp.trailing).offset(4)
+//        }
         
         expectedTimeLabel.snp.makeConstraints { make in
             make.centerY.equalTo(dateLabel)
-            make.leading.equalTo(subTaskCountLabel.snp.trailing).offset(12)
+            make.leading.equalTo(dateLabel.snp.trailing).offset(12)
         }
         
         expectedTimeValueLabel.snp.makeConstraints { make in
@@ -133,11 +134,7 @@ class TaskTableViewCell: BaseTableViewCell {
         titleLabel.text = taskdata.title
         projectOfTaskLabel.text = " ⚬ \(projectTitle)"
         doneButton.isSelected = taskdata.completed
-        if doneButton.isSelected {
-            titleLabel.attributedText = titleLabel.text?.strikethrough()
-        } else {
-            titleLabel.attributedText = titleLabel.text?.removeStrikethrough()
-        }
+        titleLabel.attributedText = doneButton.isSelected ? titleLabel.text?.strikethrough() : titleLabel.text?.removeStrikethrough()
         if let date = taskdata.date {
             let dateformatter = DateFormatter()
             dateformatter.dateFormat = "MM/dd"

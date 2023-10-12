@@ -178,6 +178,7 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell") as? TaskTableViewCell else { return UITableViewCell()}
         
         if let taskList, let projectData {
@@ -190,6 +191,26 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let selectedCell = tableView.cellForRow(at: indexPath) as? TaskTableViewCell else { return }
+        guard let taskList else { return }
+        
+        let data = taskList[indexPath.row]
+        
+        selectedCell.doneButton.isSelected.toggle()
+        if selectedCell.doneButton.isSelected {
+            selectedCell.titleLabel.attributedText = selectedCell.titleLabel.text?.strikethrough()
+        } else {
+            selectedCell.titleLabel.attributedText = selectedCell.titleLabel.text?.removeStrikethrough()
+        }
+     
+        taskRepository.updateItem {
+            data.completed.toggle()
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

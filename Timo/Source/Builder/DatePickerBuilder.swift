@@ -8,10 +8,11 @@
 import UIKit
 
 extension UIDatePicker {
-    static func datePickerBuilder(datePickerStyle: UIDatePickerStyle = .automatic) -> UIDatePicker {
+    static func datePickerBuilder(datePickerMode: UIDatePicker.Mode = .date, datePickerStyle: UIDatePickerStyle = .automatic) -> UIDatePicker {
         let view = UIDatePicker()
-        view.datePickerMode = .date
+        view.datePickerMode = datePickerMode
         view.preferredDatePickerStyle = datePickerStyle
+        view.minuteInterval = 5
         return view
     }
 }
