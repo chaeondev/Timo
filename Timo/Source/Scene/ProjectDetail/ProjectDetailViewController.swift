@@ -35,13 +35,19 @@ class ProjectDetailViewController: BaseViewController {
     }()
     
     var projectData: ProjectTable?
-    var taskList: Results<TaskTable>?
+    var taskList: Results<TaskTable>? {
+        didSet {
+            setTotalTaskActivity()
+            setTotalWorkingHour()
+        }
+    }
     
     private let projectRepository = ProjectTableRepository()
     private let taskRepository = TaskTableRepository()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setProjectData()
         doneButton.addTarget(self, action: #selector(doneButtonClicked), for: .touchUpInside)
         taskList = projectData?.tasks.sorted(byKeyPath: "savedDate")
@@ -249,12 +255,40 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
 }
 
 extension ProjectDetailViewController {
-    
+    func setTotalTaskActivity() {
+        let doneTaskCount = taskList?.where { $0.completed == true }.count
+        let totalTaskCount = taskList?.count
+        if totalTaskCount == 0 {
+            totalTaskCountLabel.text = "0 task"
+        } else {
+            totalTaskCountLabel.text = "\(doneTaskCount ?? 0)/\(totalTaskCount ?? 0) task"
+        }
+        
+    }
+    func setTotalWorkingHour() {
+        var totalHour = 0
+        taskList?.forEach {
+            totalHour += ($0.realTime ?? 0)
+        }
+        
+        let hours = totalHour / 3600
+        let minutes = totalHour / 60 % 60
+        let seconds = totalHour % 60
+        
+        totalHourValueLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
 }
 
 extension ProjectDetailViewController: AddTaskDelegate, TaskTableCellDelegate, TimerDelegate {
     func updateTableView() {
         tableView.reloadData()
+    }
+    
+    func updateTimerTableView() {
+        tableView.reloadData()
+        taskList = projectData?.tasks.sorted(byKeyPath: "savedDate")
+        setTotalWorkingHour()
+        
     }
     
     func passTaskData(data: TaskTable) {
