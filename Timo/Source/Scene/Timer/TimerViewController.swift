@@ -6,12 +6,11 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol TimerDelegate: AnyObject {
-    func updateTableView()
+    func updateTimerTableView()
 }
-
-
 
 class TimerViewController: BaseViewController {
     
@@ -30,6 +29,7 @@ class TimerViewController: BaseViewController {
     
     let userDefaults = UserDefaults.standard
     
+    var projectID: ObjectId?
     var taskData: TaskTable?
     let taskRepository = TaskTableRepository()
     
@@ -43,6 +43,8 @@ class TimerViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        self.navigationController?.navigationBar.isHidden = true
         
         startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
         stopButton.addTarget(self, action: #selector(stopButtonClicked), for: .touchUpInside)
@@ -137,8 +139,8 @@ class TimerViewController: BaseViewController {
             //Timer invalidate
             cancelTimer()
         }
-        delegate?.updateTableView()
-        dismiss(animated: true)
+        delegate?.updateTimerTableView()
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -189,7 +191,7 @@ extension TimerViewController {
             RunLoop.current.add(newTimer, forMode: .common) // TODO: 유무에 따른 차이점..? UI와 상호작용하는 동안에도 타이머가 실행됨
             self.timer = newTimer
             
-            setTimerCounting(true) // Timer on 상태 저장
+            setRealmTimerCounting(true) // Timer on 상태 저장
         }
     }
     
@@ -208,12 +210,12 @@ extension TimerViewController {
         timer?.invalidate()
         timer = nil
         
-        setTimerCounting(false)
+        setRealmTimerCounting(false)
     }
 
 }
 
-// MARK: UserDefaults
+// MARK: UserDefaults, Realm
 extension TimerViewController {
     
     func setStartTime(date: Date?) {
@@ -231,13 +233,26 @@ extension TimerViewController {
             taskData.timerStop = stopTime
         }
     }
-    
-    func setTimerCounting(_ val: Bool) {
-        guard let taskData else { return }
+    func setRealmTimerCounting(_ val: Bool) {
         timerCounting = val
         taskRepository.updateItem {
-            taskData.timerCounting = timerCounting
+            taskData?.timerCounting = timerCounting
         }
+    }
+    
+//    func setUserDefaultsTimerCounting(_ val: Bool) {
+//        timerCounting = val
+//        userDefaults.set(timerCounting, forKey: UserKey.TimeData.countingKey)
+//    }
+    
+    func setProjectID(id: ObjectId?) {
+        userDefaults.set(id, forKey: UserKey.TimeData.projectKey)
+    }
+    
+    func setTaskID(task: TaskTable?) {
+        guard let task else { return }
+        let taskID = task._id
+        userDefaults.set(taskID, forKey: UserKey.TimeData.taskKey)
     }
 }
 

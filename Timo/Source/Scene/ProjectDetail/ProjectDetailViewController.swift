@@ -45,6 +45,16 @@ class ProjectDetailViewController: BaseViewController {
     private let projectRepository = ProjectTableRepository()
     private let taskRepository = TaskTableRepository()
     
+    let userDefaults = UserDefaults.standard
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.navigationController?.navigationBar.isHidden = false
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -292,11 +302,13 @@ extension ProjectDetailViewController: AddTaskDelegate, TaskTableCellDelegate, T
     }
     
     func passTaskData(data: TaskTable) {
+        
+        userDefaults.set(data._id.stringValue, forKey: UserKey.TimeData.taskKey)
+        
         let vc = TimerViewController()
         vc.delegate = self
         vc.taskData = data
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

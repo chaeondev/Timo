@@ -31,12 +31,40 @@ class ProjectListViewController: BaseViewController {
     var projectList: Results<ProjectTable>?
     
     private let projectRepository = ProjectTableRepository()
+    private let taskRepository = TaskTableRepository()
+    
+    let userDefaults = UserDefaults.standard
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
         
         collectionView.reloadData()
+        let timerCounting = taskRepository.fetch().where {
+            $0.timerCounting == true
+        }.count >= 1
+
+        let projectDetailVC = ProjectDetailViewController()
+        let timerVC = TimerViewController()
+        
+        if timerCounting {
+            let projectID = userDefaults.string(forKey: UserKey.TimeData.projectKey)
+            let taskID = userDefaults.string(forKey: UserKey.TimeData.taskKey)
+
+            if let projectID, let taskID {
+                let projectData = projectRepository.fetchByID(try! ObjectId(string: projectID))
+
+                projectDetailVC.projectData = projectData
+                projectDetailVC.taskList = projectData?.tasks.sorted(byKeyPath: "savedDate")
+                navigationController?.pushViewController(projectDetailVC, animated: true)
+                let taskData = taskRepository.fetchByID(try! ObjectId(string: taskID))
+                timerVC.taskData = taskData
+                navigationController?.pushViewController(timerVC, animated: true)
+            }
+        }
+        
+        
     }
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,8 +156,11 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = ProjectDetailViewController()
         guard let projectList else { return }
-        vc.projectData = projectList[indexPath.item]
+        let projectData = projectList[indexPath.item]
         
+        userDefaults.set(projectData._id.stringValue, forKey: UserKey.TimeData.projectKey)
+        
+        vc.projectData = projectData
         navigationController?.pushViewController(vc, animated: true)
     }
     
