@@ -50,7 +50,7 @@ class AddProjectViewController: BaseViewController {
         bindData()
         setNavigationBar()
         setupSheet()
-        //projectRepository.checkRealmURL()
+        projectRepository.checkRealmURL()
         setEditView()
         
     }
@@ -68,6 +68,7 @@ class AddProjectViewController: BaseViewController {
         }
         
         titleTextField.addTarget(self, action: #selector(titleTextFieldChanged), for: .editingChanged)
+        startDatePicker.addTarget(self, action: #selector(startDatePickerValueChanged), for: .valueChanged)
         
     }
     
@@ -135,6 +136,9 @@ class AddProjectViewController: BaseViewController {
         
     }
     
+    @objc func startDatePickerValueChanged() {
+        endDatePicker.minimumDate = startDatePicker.date
+    }
 
 
 }
