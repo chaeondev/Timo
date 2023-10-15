@@ -14,11 +14,11 @@ protocol TimerDelegate: AnyObject {
 
 class TimerViewController: BaseViewController {
     
-    private lazy var timeLabel = UILabel.labelBuilder(text: "00:00:00", font: .boldSystemFont(ofSize: 44), textColor: Design.BaseColor.border!, numberOfLines: 1, textAlignment: .center)
-    private lazy var stopButton = TimerButton.timerButtonBuilder(imageSystemName: "pause.circle.fill", pointSize: 50)
+    private lazy var ovalView = CustomOvalView(frame: .zero)
+    private lazy var taskTitle = UILabel.labelBuilder(text: "Task title", font: .boldSystemFont(ofSize: 28), numberOfLines: 0, textAlignment: .center)
+    private lazy var timeLabel = UILabel.labelBuilder(text: "00:00:00", font: .boldSystemFont(ofSize: 44), textColor: Design.BaseColor.mainBackground!, numberOfLines: 1, textAlignment: .center)
+    private lazy var stopButton = TimerButton.timerButtonBuilder(imageSystemName: "pause.circle.fill", pointSize: 60)
     
-    //샘플버튼
-    private lazy var startButton = TimerButton.timerButtonBuilder(imageSystemName: "play.circle.fill", pointSize: 50)
     
     var timer: Timer?
     var elapsedTime: TimeInterval = 0 // TODO: 나중에 누적시간으로 변경 필요
@@ -46,7 +46,6 @@ class TimerViewController: BaseViewController {
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         self.navigationController?.navigationBar.isHidden = true
         
-        startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
         stopButton.addTarget(self, action: #selector(stopButtonClicked), for: .touchUpInside)
         
         //UserDefaults 저장값
@@ -71,30 +70,40 @@ class TimerViewController: BaseViewController {
     
     override func configure() {
         super.configure()
+        view.addSubview(taskTitle)
+        view.addSubview(ovalView)
         view.addSubview(timeLabel)
         view.addSubview(stopButton)
-        view.addSubview(startButton)
     }
     
     override func setConstraints() {
         super.setConstraints()
         
-        timeLabel.snp.makeConstraints { make in
+        taskTitle.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(60)
+            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.height.equalTo(65)
+        }
+        
+        ovalView.backgroundColor = Design.BaseColor.mainPoint
+        ovalView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(taskTitle.snp.bottom).offset(20)
+            make.width.equalTo(350)
+            make.height.equalTo(300)
+        }
+        
+        timeLabel.snp.makeConstraints { make in
+            make.center.equalTo(ovalView)
         }
         
         stopButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(timeLabel.snp.bottom).offset(30)
-            make.size.equalTo(55)
+            make.top.equalTo(ovalView.snp.bottom).offset(20)
+            make.size.equalTo(80)
         }
         
-        startButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(stopButton.snp.bottom).offset(30)
-            make.size.equalTo(55)
-        }
+        
     }
     
     func startTimer() {
