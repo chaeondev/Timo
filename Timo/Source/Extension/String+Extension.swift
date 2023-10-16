@@ -26,6 +26,10 @@ extension String {
         attributedString.removeAttribute(NSAttributedString.Key.strikethroughColor, range: NSMakeRange(0, attributedString.length))
         attributedString.removeAttribute(NSAttributedString.Key.foregroundColor, range: NSMakeRange(0, attributedString.length))
         
+        attributedString.addAttributes([
+            NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.isEmpty,
+            NSAttributedString.Key.foregroundColor: UIColor.darkGray
+        ], range: NSMakeRange(0, attributedString.length))
         
         return attributedString
     }
