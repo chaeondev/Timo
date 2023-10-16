@@ -35,12 +35,7 @@ class ProjectDetailViewController: BaseViewController {
     }()
     
     var projectData: ProjectTable?
-    var taskList: Results<TaskTable>? {
-        didSet {
-            setTotalTaskActivity()
-            setTotalWorkingHour()
-        }
-    }
+    var taskList: Results<TaskTable>?
     
     private let projectRepository = ProjectTableRepository()
     private let taskRepository = TaskTableRepository()
@@ -61,6 +56,9 @@ class ProjectDetailViewController: BaseViewController {
         setProjectData()
         doneButton.addTarget(self, action: #selector(doneButtonClicked), for: .touchUpInside)
         taskList = projectData?.tasks.sorted(byKeyPath: "savedDate")
+        
+        setTotalTaskActivity()
+        setTotalWorkingHour()
         
         setupMenu()
     }
@@ -227,6 +225,8 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
             data.completed.toggle()
         }
         
+        setTotalTaskActivity()
+        
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -255,6 +255,7 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
                 self.showAlertMessage(title: "Task 삭제", message: "해당 Task에 기록된 시간도 함께 삭제됩니다. 삭제하시겠습니까?") {
                     self.taskRepository.deleteItem(taskList[index])
                     self.tableView.reloadData()
+                    self.setTotalTaskActivity()
                 }
             }
             return UIMenu(title: "Options", image: nil, identifier: nil, options: .displayInline, children: [edit,delete])
@@ -266,8 +267,11 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
 
 extension ProjectDetailViewController {
     func setTotalTaskActivity() {
-        let doneTaskCount = taskList?.where { $0.completed == true }.count
-        let totalTaskCount = taskList?.count
+
+        let List = projectData?.tasks.sorted(byKeyPath: "savedDate")
+        let doneTaskCount = List?.where { $0.completed == true }.count
+        let totalTaskCount = List?.count
+        
         if totalTaskCount == 0 {
             totalTaskCountLabel.text = "0 task"
         } else {
@@ -277,7 +281,8 @@ extension ProjectDetailViewController {
     }
     func setTotalWorkingHour() {
         var totalHour = 0
-        taskList?.forEach {
+        let List = projectData?.tasks.sorted(byKeyPath: "savedDate")
+        List?.forEach {
             totalHour += ($0.realTime ?? 0)
         }
         
@@ -292,11 +297,12 @@ extension ProjectDetailViewController {
 extension ProjectDetailViewController: AddTaskDelegate, TaskTableCellDelegate, TimerDelegate {
     func updateTableView() {
         tableView.reloadData()
+        setTotalTaskActivity()
     }
     
-    func updateTimerTableView() {
+    func updateTimerToDetailView() {
         tableView.reloadData()
-        taskList = projectData?.tasks.sorted(byKeyPath: "savedDate")
+        
         setTotalWorkingHour()
         
     }
@@ -309,6 +315,10 @@ extension ProjectDetailViewController: AddTaskDelegate, TaskTableCellDelegate, T
         vc.delegate = self
         vc.taskData = data
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func updateDoneToDetailView() {
+        setTotalTaskActivity()
     }
     
 }

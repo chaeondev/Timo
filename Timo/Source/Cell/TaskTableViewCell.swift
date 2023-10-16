@@ -9,6 +9,7 @@ import UIKit
 
 protocol TaskTableCellDelegate: AnyObject {
     func passTaskData(data: TaskTable)
+    func updateDoneToDetailView()
 }
 
 class TaskTableViewCell: BaseTableViewCell {
@@ -109,7 +110,7 @@ class TaskTableViewCell: BaseTableViewCell {
 
         taskRealTimeLabel.snp.makeConstraints { make in
 
-            make.width.equalTo(contentView).multipliedBy(0.18)
+            make.width.equalTo(contentView).multipliedBy(0.20)
         }
 
         taskTimerButton.snp.makeConstraints { make in
@@ -119,22 +120,23 @@ class TaskTableViewCell: BaseTableViewCell {
 
         timerStackView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().inset(22)
-            make.width.equalToSuperview().multipliedBy(0.18)
+            make.trailing.equalToSuperview().inset(16)
+            make.width.equalToSuperview().multipliedBy(0.20)
             make.height.equalToSuperview().multipliedBy(0.7)
         }
         
-        
-        
-        
     }
+    
     
     func configureCell() {
         guard let taskdata else { return }
         titleLabel.text = taskdata.title
+        
         projectOfTaskLabel.text = " ⚬ \(projectTitle)"
         doneButton.isSelected = taskdata.completed
+
         titleLabel.attributedText = doneButton.isSelected ? titleLabel.text?.strikethrough() : titleLabel.text?.removeStrikethrough()
+        
         if let date = taskdata.date {
             let dateformatter = DateFormatter()
             dateformatter.dateFormat = "MM/dd"
@@ -181,6 +183,8 @@ class TaskTableViewCell: BaseTableViewCell {
         taskRepository.updateItem {
             taskdata.completed.toggle()
         }
+        
+        delegate?.updateDoneToDetailView()
         
     }
     
