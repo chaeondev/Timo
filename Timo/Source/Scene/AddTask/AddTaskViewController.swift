@@ -49,7 +49,6 @@ class AddTaskViewController: BaseViewController {
         
         setNavigationBar()
         setupDatePicker()
-        setupTimeTextField()
         setupSheet()
         
         setEditView()
@@ -129,11 +128,6 @@ class AddTaskViewController: BaseViewController {
         
     }
     
-    //timeTextField -> 숫자만 입력하게
-    func setupTimeTextField() {
-        expectedTimeTextField.keyboardType = .numberPad
-    }
-    
     //textField안에 datepicker 설정
     func setupDatePicker() {
         
@@ -194,8 +188,8 @@ extension AddTaskViewController {
         guard let title = titleTextField.text else { return }
         
         if viewModel.isValid.value {
-            
-            let expectedTime = expectedTimePicker.isSelected ? expectedTimePicker.date : nil
+            let expectedTime = (expectedTimePicker.countDownDuration == 60) ? nil : Int(expectedTimePicker.countDownDuration)
+            //let expectedTime = expectedTimePicker.date // 어떻게 select 안되었을때 nil로 만들지?
             let taskItem = TaskTable(title: title, savedDate: Date(), date: deadlineDatePicker.date, expectedTime: expectedTime, realTime: 0, timerStart: nil, timerStop: nil)
             
             switch menuType {
@@ -207,7 +201,7 @@ extension AddTaskViewController {
                 taskRepository.updateItem {
                     taskData.title = title
                     taskData.date = deadlineDatePicker.date
-                    taskData.expectedTime = expectedTimePicker.date //nil의 경우 삽입 필요
+                    taskData.expectedTime = Int(expectedTimePicker.countDownDuration) //nil의 경우 삽입 필요
                 }
             }
             
@@ -244,9 +238,8 @@ extension AddTaskViewController {
             
             let timeFormatter = DateFormatter()
             timeFormatter.dateFormat = "H시간mm분"
-            expectedTimePicker.date = taskData.expectedTime ?? Date()
+            expectedTimePicker.countDownDuration = TimeInterval(taskData.expectedTime ?? 0)
             expectedTimeTextField.text = timeFormatter.string(from: expectedTimePicker.date)
-            
             viewModel.title.value = titleTextField.text!
             viewModel.checkValidation()
         }

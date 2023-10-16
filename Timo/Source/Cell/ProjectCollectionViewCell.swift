@@ -25,11 +25,11 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
         view.progress = 0.3
         return view
     }()
-    private lazy var progressLabel = UILabel.labelBuilder(text: "33%", font: .systemFont(ofSize: 10, weight: .medium), textColor: .darkGray)
+    private lazy var progressLabel = UILabel.labelBuilder(text: "33%", font: .systemFont(ofSize: 11, weight: .medium), textColor: .darkGray)
     private lazy var taskImageView = UIImageView.imageViewBuilder(image: UIImage(systemName: "link")!)
-    private lazy var taskCountLabel = UILabel.labelBuilder(text: "23", font: .systemFont(ofSize: 10, weight: .medium), textColor: .darkGray)
+    private lazy var taskCountLabel = UILabel.labelBuilder(text: "23", font: .systemFont(ofSize: 11, weight: .medium), textColor: .darkGray)
     private lazy var timeImageView = UIImageView.imageViewBuilder(image: UIImage(systemName: "clock")!)
-    private lazy var realTimeLabel = UILabel.labelBuilder(text: "9H", font: .systemFont(ofSize: 10, weight: .medium), textColor: .darkGray)
+    private lazy var realTimeLabel = UILabel.labelBuilder(text: "9H", font: .systemFont(ofSize: 11, weight: .medium), textColor: .darkGray)
     
     var data: ProjectTable?
     
@@ -114,7 +114,7 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
         
         timeImageView.snp.makeConstraints { make in
             make.centerY.equalTo(taskImageView.snp.centerY)
-            make.leading.equalTo(taskCountLabel.snp.trailing).offset(8)
+            make.leading.equalTo(taskCountLabel.snp.trailing).offset(14)
             make.size.equalTo(14)
         }
         
@@ -138,7 +138,7 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
         progressbar.progress = calculateProgress()
         progressLabel.text = setProgressLabel()
         taskCountLabel.text = "\(data.tasks.count)"
-
+        setTotalTime()
     }
     
     @objc func doneButtonClicked() {
@@ -203,5 +203,28 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
         } else {
             return ""
         }
+    }
+    
+    func setTotalTime() {
+        let timeFormatter = DateComponentsFormatter()
+        var calendar = Calendar.current
+        calendar.locale = Locale(identifier: "en")
+        timeFormatter.calendar = calendar
+        timeFormatter.allowedUnits = [.hour]
+        timeFormatter.unitsStyle = .abbreviated
+        
+        var totalExpectedTime: Int = 0
+        var totalRealTime: Int = 0
+        data?.tasks.forEach {
+            totalExpectedTime += $0.expectedTime ?? 0
+            totalRealTime += $0.realTime ?? 0
+        }
+        let expectedHour = timeFormatter.string(from: TimeInterval(totalExpectedTime))
+        let realHour = timeFormatter.string(from: TimeInterval(totalRealTime))
+        
+        if let expectedHour, let realHour {
+            realTimeLabel.text = "예상: \(expectedHour) 소요: \(realHour)"
+        }
+        
     }
 }

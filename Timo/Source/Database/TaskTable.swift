@@ -17,7 +17,7 @@ class TaskTable: Object {
     @Persisted var title: String
     @Persisted var savedDate: Date
     @Persisted var date: Date?
-    @Persisted var expectedTime: Date?
+    @Persisted var expectedTime: Int?
     @Persisted var completed: Bool
     
     @Persisted var realTime: Int?
@@ -27,7 +27,7 @@ class TaskTable: Object {
     
     @Persisted var subTasks: List<SubTaskTable>
     
-    convenience init(title: String, savedDate: Date, date: Date?, expectedTime: Date?, realTime: Int?, completed: Bool = false, timerStart: Date?, timerStop: Date?, timerCounting: Bool = false) {
+    convenience init(title: String, savedDate: Date, date: Date?, expectedTime: Int?, realTime: Int?, completed: Bool = false, timerStart: Date?, timerStop: Date?, timerCounting: Bool = false) {
         self.init()
         
         self.title = title
