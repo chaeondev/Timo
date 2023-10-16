@@ -146,6 +146,7 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
         if let projectList {
             let data = projectList[indexPath.item]
             cell.data = data
+            cell.delegate = self
             cell.configureCell()
 
         }
@@ -210,10 +211,14 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
     
 }
 
-extension ProjectListViewController: AddProjectDelegate {
+extension ProjectListViewController: AddProjectDelegate, ProjectCellDelegate {
     
     //AddView의 delegate 메서드
     func updateCollectionView() {
+        collectionView.reloadData()
+    }
+    
+    func updateDoneToCollectionView() {
         collectionView.reloadData()
     }
 }

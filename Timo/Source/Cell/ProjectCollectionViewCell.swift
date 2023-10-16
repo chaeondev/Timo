@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ProjectCellDelegate: AnyObject {
+    func updateDoneToCollectionView()
+}
+
 class ProjectCollectionViewCell: BaseCollectionViewCell {
     
     private lazy var colorbar = UIView.barViewBuilder(color: Design.BaseColor.subPoint!)
@@ -28,6 +32,8 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
     private lazy var realTimeLabel = UILabel.labelBuilder(text: "9H", font: .systemFont(ofSize: 10, weight: .medium), textColor: .darkGray)
     
     var data: ProjectTable?
+    
+    var delegate: ProjectCellDelegate?
     
     private let repository = ProjectTableRepository()
     
@@ -141,6 +147,7 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
         repository.updateItem {
             data.done.toggle()
         }
+        delegate?.updateDoneToCollectionView()
     }
     
     func calculateProgress() -> Float {
