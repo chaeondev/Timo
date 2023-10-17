@@ -16,17 +16,21 @@ class AddTaskViewController: BaseViewController {
     
     // 프로젝트 이름
     private lazy var titleLabel = UILabel.labelBuilder(text: "Task 이름", font: .boldSystemFont(ofSize: 16))
+    private lazy var titleImageView = UIImageView.imageViewBuilder(image: UIImage(systemName: "highlighter")!)
     private lazy var titleTextField = UITextField.textFieldBuilder(placeholder: "Task 이름을 입력해주세요")
     private lazy var titleBorderline = UIView.barViewBuilder(color: .lightGray)
     
     // 마감 날짜
+    private lazy var deadlineLabel = UILabel.labelBuilder(text: "Task 일정", font: .boldSystemFont(ofSize: 16))
     private lazy var deadlineImageView = UIImageView.imageViewBuilder(image: UIImage(systemName: "calendar")!)
-    private lazy var deadlineTextField = UITextField.underlineTextFieldBuilder(placeholder: "일정")
+    private lazy var deadlineTextField = UITextField.textFieldBuilder(placeholder: "일정을 입력해주세요")
     private lazy var deadlineDatePicker = UIDatePicker.datePickerBuilder(datePickerStyle: .inline)
+    private lazy var deadlineBorderline = UIView.barViewBuilder(color: .lightGray)
     
     // 예상 시간
+    private lazy var expectedTimeLabel = UILabel.labelBuilder(text: "Task 예상소요시간", font: .boldSystemFont(ofSize: 16))
     private lazy var expectedTimeImageView = UIImageView.imageViewBuilder(image: UIImage(systemName: "clock")!)
-    private lazy var expectedTimeTextField = UITextField.underlineTextFieldBuilder(placeholder: "예상시간")
+    private lazy var expectedTimeTextField = UITextField.textFieldBuilder(placeholder: "예상시간을 입력해주세요")
     private lazy var expectedTimePicker = UIDatePicker.datePickerBuilder(datePickerMode: .countDownTimer, datePickerStyle: .wheels)
     
     
@@ -58,7 +62,7 @@ class AddTaskViewController: BaseViewController {
     override func configure() {
         super.configure()
         
-        [titleLabel, titleTextField, titleBorderline, deadlineImageView, deadlineTextField, expectedTimeImageView, expectedTimeTextField].forEach {
+        [titleLabel, titleImageView, titleTextField, titleBorderline, deadlineLabel ,deadlineImageView, deadlineTextField, deadlineBorderline, expectedTimeLabel, expectedTimeImageView, expectedTimeTextField].forEach {
             view.addSubview($0)
         }
         
@@ -73,9 +77,16 @@ class AddTaskViewController: BaseViewController {
             make.top.leading.equalTo(view.safeAreaLayoutGuide).offset(30)
         }
         
+        titleImageView.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(12)
+            make.leading.equalToSuperview().inset(30)
+            make.size.equalTo(28)
+        }
+        
         titleTextField.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom)
-            make.horizontalEdges.equalToSuperview().inset(30)
+            make.centerY.equalTo(titleImageView)
+            make.leading.equalTo(deadlineImageView.snp.trailing).offset(12)
+            make.trailing.equalToSuperview().inset(30)
             make.height.equalTo(50)
         }
         
@@ -85,28 +96,46 @@ class AddTaskViewController: BaseViewController {
             make.height.equalTo(1)
         }
         
+        deadlineLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleBorderline.snp.bottom).offset(16)
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(30)
+        }
+        
         deadlineImageView.snp.makeConstraints { make in
-            make.top.equalTo(titleBorderline.snp.bottom).offset(20)
+            make.top.equalTo(deadlineLabel.snp.bottom).offset(12)
             make.leading.equalToSuperview().inset(30)
-            make.size.equalTo(40)
+            make.size.equalTo(28)
         }
         
         deadlineTextField.snp.makeConstraints { make in
             make.centerY.equalTo(deadlineImageView)
             make.leading.equalTo(deadlineImageView.snp.trailing).offset(12)
-            make.width.equalTo(100)
+            make.trailing.equalToSuperview().inset(30)
+            make.height.equalTo(50)
+        }
+        
+        deadlineBorderline.snp.makeConstraints { make in
+            make.top.equalTo(deadlineTextField.snp.bottom)
+            make.horizontalEdges.equalToSuperview().inset(24)
+            make.height.equalTo(1)
+        }
+        
+        expectedTimeLabel.snp.makeConstraints { make in
+            make.top.equalTo(deadlineBorderline.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(30)
         }
         
         expectedTimeImageView.snp.makeConstraints { make in
-            make.top.equalTo(deadlineImageView.snp.bottom).offset(16)
+            make.top.equalTo(expectedTimeLabel.snp.bottom).offset(12)
             make.leading.equalToSuperview().inset(30)
-            make.size.equalTo(40)
+            make.size.equalTo(28)
         }
 
         expectedTimeTextField.snp.makeConstraints { make in
             make.centerY.equalTo(expectedTimeImageView)
             make.leading.equalTo(expectedTimeImageView.snp.trailing).offset(12)
-            make.width.equalTo(100)
+            make.trailing.equalToSuperview().inset(30)
+            make.height.equalTo(50)
         }
     }
     
@@ -131,8 +160,13 @@ class AddTaskViewController: BaseViewController {
     //textField안에 datepicker 설정
     func setupDatePicker() {
         
+        deadlineDatePicker.backgroundColor = Design.BaseColor.mainBackground
+        deadlineDatePicker.tintColor = Design.BaseColor.mainPoint?.withAlphaComponent(0.8)
+        
         deadlineTextField.inputView = deadlineDatePicker
         deadlineDatePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
+        
+        expectedTimePicker.backgroundColor = Design.BaseColor.mainBackground
         
         expectedTimeTextField.inputView = expectedTimePicker
         expectedTimePicker.addTarget(self, action: #selector(timePickerValueChanged), for: .valueChanged)
@@ -189,8 +223,9 @@ extension AddTaskViewController {
         
         if viewModel.isValid.value {
             let expectedTime = (expectedTimePicker.countDownDuration == 60) ? nil : Int(expectedTimePicker.countDownDuration)
-            //let expectedTime = expectedTimePicker.date // 어떻게 select 안되었을때 nil로 만들지?
-            let taskItem = TaskTable(title: title, savedDate: Date(), date: deadlineDatePicker.date, expectedTime: expectedTime, realTime: 0, timerStart: nil, timerStop: nil)
+            let deadline = (deadlineTextField.text!.isEmpty) ? nil : deadlineDatePicker.date
+            
+            let taskItem = TaskTable(title: title, savedDate: Date(), date: deadline, expectedTime: expectedTime, realTime: 0, timerStart: nil, timerStop: nil)
             
             switch menuType {
             case .add:
