@@ -28,6 +28,9 @@ class ProjectListViewController: BaseViewController {
         return view
     }()
     
+    private lazy var noProjectImageView = UIImageView.imageViewBuilder(image: UIImage(named: "ProjectIconLight")!)
+    private lazy var noProjectLabel = UILabel.labelBuilder(text: "생성된 프로젝트가 없어요!", font: .boldSystemFont(ofSize: 16), textColor: Design.BaseColor.border!, numberOfLines: 1, textAlignment: .center)
+    
     var projectList: Results<ProjectTable>?
     
     private let projectRepository = ProjectTableRepository()
@@ -39,9 +42,8 @@ class ProjectListViewController: BaseViewController {
         super.viewDidLoad()
         
         collectionView.reloadData()
-        let timerCounting = taskRepository.fetch().where {
-            $0.timerCounting == true
-        }.count >= 1
+        setNoDataImage()
+        
 
         let projectDetailVC = ProjectDetailViewController()
         let timerVC = TimerViewController()
@@ -79,6 +81,8 @@ class ProjectListViewController: BaseViewController {
         super.configure()
         view.addSubview(segmentedControl)
         view.addSubview(collectionView)
+        view.addSubview(noProjectImageView)
+        view.addSubview(noProjectLabel)
     }
     
     override func setConstraints() {
@@ -91,6 +95,17 @@ class ProjectListViewController: BaseViewController {
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(segmentedControl.snp.bottom).offset(16)
             make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        noProjectImageView.snp.makeConstraints { make in
+            make.centerX.equalTo(view.safeAreaLayoutGuide)
+            make.centerY.equalTo(view.safeAreaLayoutGuide).offset(-100)
+            make.size.equalTo(120)
+        }
+        
+        noProjectLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(noProjectImageView.snp.bottom).offset(12)
         }
     }
     
@@ -187,6 +202,7 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
                 self.showAlertMessage(title: "프로젝트 삭제", message: "해당 프로젝트 삭제 시, 하위 Task들과 기록한 시간이 삭제됩니다. 삭제하시겠습니까?") {
                     self.projectRepository.deleteItem(projectList[index])
                     self.collectionView.reloadData()
+                    self.setNoDataImage()
                 }
                 
             }
@@ -216,6 +232,7 @@ extension ProjectListViewController: AddProjectDelegate, ProjectCellDelegate {
     //AddView의 delegate 메서드
     func updateCollectionView() {
         collectionView.reloadData()
+        setNoDataImage()
     }
     
     func updateDoneToCollectionView() {
@@ -224,6 +241,17 @@ extension ProjectListViewController: AddProjectDelegate, ProjectCellDelegate {
 }
 
 extension ProjectListViewController {
+    
+    func setNoDataImage() {
+        let list = projectRepository.fetch()
+        if list.count == 0 {
+            noProjectImageView.isHidden = false
+            noProjectLabel.isHidden = false
+        } else {
+            noProjectImageView.isHidden = true
+            noProjectLabel.isHidden = true
+        }
+    }
     
     //AddProject 화면 전환 (추가, 편집)
     func transitionView(menuType: ProjectMenuType, projectData: ProjectTable?) {
