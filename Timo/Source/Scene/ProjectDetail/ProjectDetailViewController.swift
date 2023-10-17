@@ -239,6 +239,19 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
         transitionAddTaskView()
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "삭제") { action, view, completionHandler in
+            guard let taskList = self.taskList else { return }
+            self.showAlertMessage(title: "Task 삭제", message: "해당 Task에 기록된 시간도 함께 삭제됩니다. 삭제하시겠습니까?") {
+                self.taskRepository.deleteItem(taskList[indexPath.row])
+                self.tableView.reloadData()
+                self.setTotalTaskActivity()
+            }
+        }
+        delete.image = UIImage(systemName: "trash")
+        return UISwipeActionsConfiguration(actions: [delete])
+    }
+    
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         configureContextMenu(index: indexPath.row)
     }
