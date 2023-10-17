@@ -44,6 +44,7 @@ class ProjectListViewController: BaseViewController {
         collectionView.reloadData()
         setNoDataImage()
         
+        let timerCounting = userDefaults.bool(forKey: UserKey.TimeData.countingKey)
 
         let projectDetailVC = ProjectDetailViewController()
         let timerVC = TimerViewController()

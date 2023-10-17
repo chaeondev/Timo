@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 
 protocol TimerDelegate: AnyObject {
-    func updateTimerTableView()
+    func updateTimerToDetailView()
 }
 
 class TimerViewController: BaseViewController {
@@ -53,7 +53,7 @@ class TimerViewController: BaseViewController {
         
         startTime = taskData.timerStart
         stopTime = taskData.timerStop
-        timerCounting = taskData.timerCounting
+        timerCounting = userDefaults.bool(forKey: UserKey.TimeData.countingKey)
         
         if timerCounting {
             createTimer()
@@ -150,7 +150,7 @@ class TimerViewController: BaseViewController {
             //Timer invalidate
             cancelTimer()
         }
-        delegate?.updateTimerTableView()
+        delegate?.updateTimerToDetailView()
         navigationController?.popViewController(animated: true)
     }
 }
@@ -197,12 +197,13 @@ extension TimerViewController {
 extension TimerViewController {
     func createTimer() { //startTimer
         if timer == nil {
+            updateTimer()
             let newTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
             newTimer.tolerance = 0.1
             RunLoop.current.add(newTimer, forMode: .common) // TODO: 유무에 따른 차이점..? UI와 상호작용하는 동안에도 타이머가 실행됨
             self.timer = newTimer
             
-            setRealmTimerCounting(true) // Timer on 상태 저장
+            setTimerCounting(true) // Timer on 상태 저장
         }
     }
     
@@ -221,7 +222,7 @@ extension TimerViewController {
         timer?.invalidate()
         timer = nil
         
-        setRealmTimerCounting(false)
+        setTimerCounting(false)
     }
 
 }
@@ -244,17 +245,11 @@ extension TimerViewController {
             taskData.timerStop = stopTime
         }
     }
-    func setRealmTimerCounting(_ val: Bool) {
+
+    func setTimerCounting(_ val: Bool) {
         timerCounting = val
-        taskRepository.updateItem {
-            taskData?.timerCounting = timerCounting
-        }
+        userDefaults.set(timerCounting, forKey: UserKey.TimeData.countingKey)
     }
-    
-//    func setUserDefaultsTimerCounting(_ val: Bool) {
-//        timerCounting = val
-//        userDefaults.set(timerCounting, forKey: UserKey.TimeData.countingKey)
-//    }
     
     func setProjectID(id: ObjectId?) {
         userDefaults.set(id, forKey: UserKey.TimeData.projectKey)
