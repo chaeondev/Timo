@@ -260,7 +260,7 @@ extension ProjectListViewController {
         let vc = AddProjectViewController()
         vc.menuType = menuType
         vc.projectData = projectData
-        vc.delegate = self
+        vc.addDelegate = self
         
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .pageSheet

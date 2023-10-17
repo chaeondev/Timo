@@ -11,6 +11,10 @@ protocol AddProjectDelegate: AnyObject {
     func updateCollectionView()
 }
 
+protocol EditProjectDelegate: AnyObject {
+    func updateProjectDetail()
+}
+
 class AddProjectViewController: BaseViewController {
     
     // 프로젝트 이름
@@ -38,7 +42,8 @@ class AddProjectViewController: BaseViewController {
     private var isSaved: Bool = false
     
     // delegate - collectionView reload
-    var delegate: AddProjectDelegate?
+    var addDelegate: AddProjectDelegate?
+    var editDelegate: EditProjectDelegate?
     
     let projectRepository = ProjectTableRepository()
     
@@ -69,6 +74,7 @@ class AddProjectViewController: BaseViewController {
         
         titleTextField.addTarget(self, action: #selector(titleTextFieldChanged), for: .editingChanged)
         startDatePicker.addTarget(self, action: #selector(startDatePickerValueChanged), for: .valueChanged)
+        endDatePicker.addTarget(self, action: #selector(endDatePickerValueChanged), for: .valueChanged)
         
     }
     
@@ -139,6 +145,10 @@ class AddProjectViewController: BaseViewController {
     @objc func startDatePickerValueChanged() {
         endDatePicker.minimumDate = startDatePicker.date
     }
+    
+    @objc func endDatePickerValueChanged() {
+        startDatePicker.maximumDate = endDatePicker.date
+    }
 
 
 }
@@ -199,10 +209,11 @@ extension AddProjectViewController {
                     projectData.endDate = endDatePicker.date
                     projectData.color = color
                 }
+                editDelegate?.updateProjectDetail()
             }
 
             //call delegate -> collectionview reload 위해서
-            delegate?.updateCollectionView()
+            addDelegate?.updateCollectionView()
             
             dismiss(animated: true)
         } else {

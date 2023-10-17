@@ -269,6 +269,7 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
                     self.taskRepository.deleteItem(taskList[index])
                     self.tableView.reloadData()
                     self.setTotalTaskActivity()
+                    self.setTotalWorkingHour()
                 }
             }
             return UIMenu(title: "Options", image: nil, identifier: nil, options: .displayInline, children: [edit,delete])
@@ -307,7 +308,7 @@ extension ProjectDetailViewController {
     }
 }
 
-extension ProjectDetailViewController: AddTaskDelegate, TaskTableCellDelegate, TimerDelegate {
+extension ProjectDetailViewController: AddTaskDelegate, TaskTableCellDelegate, TimerDelegate, EditProjectDelegate {
     func updateTableView() {
         tableView.reloadData()
         setTotalTaskActivity()
@@ -334,6 +335,10 @@ extension ProjectDetailViewController: AddTaskDelegate, TaskTableCellDelegate, T
         setTotalTaskActivity()
     }
     
+    func updateProjectDetail() {
+        setProjectData()
+    }
+    
 }
 
 extension ProjectDetailViewController {
@@ -344,6 +349,7 @@ extension ProjectDetailViewController {
         let vc = AddProjectViewController()
         vc.menuType = menuType
         vc.projectData = projectData
+        vc.editDelegate = self
         
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .pageSheet
