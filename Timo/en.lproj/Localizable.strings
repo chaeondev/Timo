@@ -6,7 +6,9 @@
   
 */
 
+
 //1. ProjectListViewController
+
 
 //navigationbar
 "navigation_list_title" = "Projects";
@@ -24,7 +26,9 @@
 "edit_contextmenu" = "Edit";
 "delete_contextmenu" = "Delete";
 
+
 //2. AddProjectViewController
+
 
 // 프로젝트 추가
 
@@ -43,3 +47,47 @@
 
 //project color
 "project_color" = "Select project color";
+
+
+//3. ProjectDetailViewController
+
+
+//project total 값
+"project_total_hour_title" = "Total working hour";
+"project_total_task_status" = "Total task activity";
+
+//navigation menu
+"project_edit_title" = "Edit Project";
+"project_delete_title" = "Delete Project";
+"task_create_title" = " Add New Task";
+
+//alert message(프로젝트 삭제)
+"project_delete_alert_message" = "Deleting a project also deletes tasks and recorded time within that project. Are you sure you want to delete it?";
+
+//alert message(작업 삭제)
+"task_delete_alert_title" = "Delete Task";
+"task_delete_alert_message" = "The time recorded for that Task will also be deleted. Are you sure you want to delete it?";
+
+//task menu
+"task_delete_title" = "Delete";
+"task_edit_title" = "Edit";
+
+
+//4. AddTaskViewController
+"task_title" = "Task Title";
+"task_title_placeholder" = "Enter a name for your task";
+
+"task_deadline" = "Task Schedule";
+"task_deadline_placeholder" = "Enter your schedule";
+
+"task_expectedTime" = "Estimated time of the task";
+"task_expectedTime_placeholder" = "Enter an estimated time of the task";
+
+"navigation_task_create_title" = "New Task";
+"navigation_task_edit_title" = "Edit Task";
+
+//5. TimerViewController
+
+//6. TableViewCell
+
+"expected_time_label" = "Estimated :";

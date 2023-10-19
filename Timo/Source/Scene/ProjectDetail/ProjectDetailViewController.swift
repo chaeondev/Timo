@@ -14,11 +14,11 @@ class ProjectDetailViewController: BaseViewController {
     private lazy var doneButton = StatusButton()
     
     private lazy var totalHourView = ProjectDashboardView()
-    private lazy var totalHourTitleLabel = UILabel.labelBuilder(text: "Total working hour", font: .boldSystemFont(ofSize: 14), numberOfLines: 1, textAlignment: .center)
+    private lazy var totalHourTitleLabel = UILabel.labelBuilder(text: "project_total_hour_title".localized, font: .boldSystemFont(ofSize: 14), numberOfLines: 1, textAlignment: .center)
     private lazy var totalHourValueLabel = UILabel.labelBuilder(text: "25:34:12", font: .boldSystemFont(ofSize: 13), textColor: Design.BaseColor.border!, numberOfLines: 1, textAlignment: .center)
     
     private lazy var totalTaskView = ProjectDashboardView()
-    private lazy var totalTaskTitleLabel = UILabel.labelBuilder(text: "Total task activity", font: .boldSystemFont(ofSize: 14), numberOfLines: 1, textAlignment: .center)
+    private lazy var totalTaskTitleLabel = UILabel.labelBuilder(text: "project_total_task_status".localized, font: .boldSystemFont(ofSize: 14), numberOfLines: 1, textAlignment: .center)
     private lazy var totalTaskCountLabel = UILabel.labelBuilder(text: "24/87 task", font: .boldSystemFont(ofSize: 13), textColor: Design.BaseColor.border!, numberOfLines: 1, textAlignment: .center)
     
     private lazy var tableView = {
@@ -155,18 +155,18 @@ class ProjectDetailViewController: BaseViewController {
     
     //navigationbarbutton menu 추가
     func setupMenu() {
-        let projectEdit = UIAction(title: "프로젝트 편집", image: UIImage(systemName: "square.and.pencil")) { [weak self] action in
+        let projectEdit = UIAction(title: "project_edit_title".localized, image: UIImage(systemName: "square.and.pencil")) { [weak self] action in
             guard let data = self?.projectData else { return }
             self?.transitionProjectMenuView(menuType: .edit, projectData: data)
         }
-        let projectDelete = UIAction(title: "프로젝트 삭제", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] action in
+        let projectDelete = UIAction(title: "project_delete_title".localized, image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] action in
             guard let data = self?.projectData else { return }
-            self?.showAlertMessage(title: "프로젝트 삭제", message: "해당 프로젝트 삭제 시, 하위 Task들과 기록한 시간이 삭제됩니다. 삭제하시겠습니까?", handler: {
+            self?.showAlertMessage(title: "project_delete_title".localized, message: "project_delete_alert_message".localized, handler: {
                 self?.projectRepository.deleteItem(data)
                 self?.navigationController?.popViewController(animated: true)
             })
         }
-        let taskAdd = UIAction(title: "Task 추가", image: UIImage(systemName: "link.badge.plus")) { [weak self] action in
+        let taskAdd = UIAction(title: "task_create_title".localized, image: UIImage(systemName: "link.badge.plus")) { [weak self] action in
             self?.transitionAddTaskView()
         }
         
@@ -240,9 +240,9 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .destructive, title: "삭제") { action, view, completionHandler in
+        let delete = UIContextualAction(style: .destructive, title: "task_delete_title".localized) { action, view, completionHandler in
             guard let taskList = self.taskList else { return }
-            self.showAlertMessage(title: "Task 삭제", message: "해당 Task에 기록된 시간도 함께 삭제됩니다. 삭제하시겠습니까?") {
+            self.showAlertMessage(title: "task_delete_alert_title".localized, message: "task_delete_alert_message".localized) {
                 self.taskRepository.deleteItem(taskList[indexPath.row])
                 self.tableView.reloadData()
                 self.setTotalTaskActivity()
@@ -259,13 +259,13 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
     func configureContextMenu(index: Int) -> UIContextMenuConfiguration{
         let context = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { (action) -> UIMenu? in
             
-            let edit = UIAction(title: "편집하기", image: UIImage(systemName: "square.and.pencil"), state: .off) { (_) in
+            let edit = UIAction(title: "task_edit_title".localized, image: UIImage(systemName: "square.and.pencil"), state: .off) { (_) in
                 guard let taskList = self.taskList else { return }
                 self.transitionTaskMenuView(menuType: .edit, taskData: taskList[index])
             }
-            let delete = UIAction(title: "삭제하기", image: UIImage(systemName: "trash"), attributes: .destructive, state: .off) { (_) in
+            let delete = UIAction(title: "task_delete_title".localized, image: UIImage(systemName: "trash"), attributes: .destructive, state: .off) { (_) in
                 guard let taskList = self.taskList else { return }
-                self.showAlertMessage(title: "Task 삭제", message: "해당 Task에 기록된 시간도 함께 삭제됩니다. 삭제하시겠습니까?") {
+                self.showAlertMessage(title: "task_delete_alert_title".localized, message: "task_delete_alert_message".localized) {
                     self.taskRepository.deleteItem(taskList[index])
                     self.tableView.reloadData()
                     self.setTotalTaskActivity()

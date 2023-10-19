@@ -6,7 +6,9 @@
   
 */
 
+
 //1. ProjectListViewController
+
 
 //navigationbar
 "navigation_list_title" = "프로젝트";
@@ -24,7 +26,9 @@
 "edit_contextmenu" = "편집하기";
 "delete_contextmenu" = "삭제하기";
 
+
 //2. AddProjectViewController
+
 
 // 프로젝트 추가
 
@@ -43,3 +47,48 @@
 
 //project color
 "project_color" = "프로젝트 색상 선택";
+
+
+//3. ProjectDetailViewController
+
+
+//project total 값
+"project_total_hour_title" = "전체 작업 시간";
+"project_total_task_status" = "전체 작업 상태";
+
+//navigation menu
+"project_edit_title" = "프로젝트 편집";
+"project_delete_title" = "프로젝트 삭제";
+"task_create_title" = " 새 작업 추가";
+
+//alert message(프로젝트 삭제)
+"project_delete_alert_message" = "해당 프로젝트 삭제 시, 프로젝트 내 Task들과 기록한 시간이 삭제됩니다. 삭제하시겠습니까?";
+
+//alert message(작업 삭제)
+"task_delete_alert_title" = "작업 삭제";
+"task_delete_alert_message" = "해당 Task에 기록된 시간도 함께 삭제됩니다. 삭제하시겠습니까?";
+
+//task menu
+"task_delete_title" = "삭제하기";
+"task_edit_title" = "편집하기";
+
+
+//4. AddTaskViewController
+"task_title" = "작업 이름";
+"task_title_placeholder" = "작업 이름을 입력해주세요";
+
+"task_deadline" = "작업 일정";
+"task_deadline_placeholder" = "일정을 입력해주세요";
+
+"task_expectedTime" = "작업 예상소요시간";
+"task_expectedTime_placeholder" = "예상시간을 입력해주세요";
+
+"navigation_task_create_title" = "새 작업";
+"navigation_task_edit_title" = "작업 편집";
+
+
+//5. TimerViewController
+
+//6. TableViewCell
+
+"expected_time_label" = "예상시간 :";

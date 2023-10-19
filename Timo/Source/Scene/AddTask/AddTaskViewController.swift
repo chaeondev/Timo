@@ -15,22 +15,22 @@ protocol AddTaskDelegate: AnyObject {
 class AddTaskViewController: BaseViewController {
     
     // 프로젝트 이름
-    private lazy var titleLabel = UILabel.labelBuilder(text: "Task 이름", font: .boldSystemFont(ofSize: 16))
+    private lazy var titleLabel = UILabel.labelBuilder(text: "task_title".localized, font: .boldSystemFont(ofSize: 16))
     private lazy var titleImageView = UIImageView.imageViewBuilder(image: UIImage(systemName: "highlighter")!)
-    private lazy var titleTextField = UITextField.textFieldBuilder(placeholder: "Task 이름을 입력해주세요")
+    private lazy var titleTextField = UITextField.textFieldBuilder(placeholder: "task_title_placeholder".localized)
     private lazy var titleBorderline = UIView.barViewBuilder(color: .lightGray)
     
     // 마감 날짜
-    private lazy var deadlineLabel = UILabel.labelBuilder(text: "Task 일정", font: .boldSystemFont(ofSize: 16))
+    private lazy var deadlineLabel = UILabel.labelBuilder(text: "task_deadline".localized, font: .boldSystemFont(ofSize: 16))
     private lazy var deadlineImageView = UIImageView.imageViewBuilder(image: UIImage(systemName: "calendar")!)
-    private lazy var deadlineTextField = UITextField.textFieldBuilder(placeholder: "일정을 입력해주세요")
+    private lazy var deadlineTextField = UITextField.textFieldBuilder(placeholder: "task_deadline_placeholder".localized)
     private lazy var deadlineDatePicker = UIDatePicker.datePickerBuilder(datePickerStyle: .inline)
     private lazy var deadlineBorderline = UIView.barViewBuilder(color: .lightGray)
     
     // 예상 시간
-    private lazy var expectedTimeLabel = UILabel.labelBuilder(text: "Task 예상소요시간", font: .boldSystemFont(ofSize: 16))
+    private lazy var expectedTimeLabel = UILabel.labelBuilder(text: "task_expectedTime".localized, font: .boldSystemFont(ofSize: 16))
     private lazy var expectedTimeImageView = UIImageView.imageViewBuilder(image: UIImage(systemName: "clock")!)
-    private lazy var expectedTimeTextField = UITextField.textFieldBuilder(placeholder: "예상시간을 입력해주세요")
+    private lazy var expectedTimeTextField = UITextField.textFieldBuilder(placeholder: "task_expectedTime_placeholder".localized)
     private lazy var expectedTimePicker = UIDatePicker.datePickerBuilder(datePickerMode: .countDownTimer, datePickerStyle: .wheels)
     
     
@@ -207,9 +207,9 @@ extension AddTaskViewController {
     private func setTitle() {
         switch menuType {
         case .add:
-            title = "Task 생성"
+            title = "navigation_task_create_title".localized
         case .edit:
-            title = "Task 편집"
+            title = "navigation_task_edit_title".localized
         }
     }
     

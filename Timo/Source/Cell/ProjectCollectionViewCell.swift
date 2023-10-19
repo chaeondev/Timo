@@ -114,7 +114,7 @@ class ProjectCollectionViewCell: BaseCollectionViewCell {
         
         timeImageView.snp.makeConstraints { make in
             make.centerY.equalTo(taskImageView.snp.centerY)
-            make.leading.equalTo(taskCountLabel.snp.trailing).offset(14)
+            make.leading.equalTo(taskCountLabel.snp.trailing).offset(10)
             make.size.equalTo(14)
         }
         

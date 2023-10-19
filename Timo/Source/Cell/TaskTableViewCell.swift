@@ -22,7 +22,7 @@ class TaskTableViewCell: BaseTableViewCell {
     private lazy var dateLabel = UILabel.labelBuilder(text: "8/23", font: .systemFont(ofSize: 12), textColor: .darkGray)
     private lazy var subTaskCountImageView = UIImageView.imageViewBuilder(tintColor: .darkGray, image: UIImage(systemName: "point.topleft.down.curvedto.point.bottomright.up")!)
     private lazy var subTaskCountLabel = UILabel.labelBuilder(text: "3/8", font: .systemFont(ofSize: 12, weight: .medium), textColor: .darkGray)
-    private lazy var expectedTimeLabel = UILabel.labelBuilder(text: "Expected :", font: .systemFont(ofSize: 12), textColor: .systemGray)
+    private lazy var expectedTimeLabel = UILabel.labelBuilder(text: "expected_time_label".localized, font: .systemFont(ofSize: 12), textColor: .systemGray)
     private lazy var expectedTimeValueLabel = UILabel.labelBuilder(text: "5H", font: .systemFont(ofSize: 12), textColor: .systemBlue)
     private lazy var taskRealTimeLabel = UILabel.labelBuilder(text: "2:34:12", font: .boldSystemFont(ofSize: 13), textAlignment: .center)
     lazy var taskTimerButton = TimerButton()
@@ -142,7 +142,7 @@ class TaskTableViewCell: BaseTableViewCell {
             dateformatter.dateFormat = "MM/dd"
             dateLabel.text = dateformatter.string(from: date)
         } else {
-            dateLabel.text = "날짜없음" // TODO: 날짜없음 옵션 추가 필요 -> 현재는 datepicker.date가 무조건 들어감 -> 일정을 설정안하면 오늘로 추가됨
+            dateLabel.text = "날짜없음"
         }
         
         if let expectedTime = taskdata.expectedTime {

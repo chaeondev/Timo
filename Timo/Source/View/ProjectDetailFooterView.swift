@@ -10,7 +10,7 @@ import SnapKit
 
 final class ProjectDetailFooterView: UITableViewHeaderFooterView {
     
-    lazy var addTaskButton = UIButton.buttonBuilder(image: UIImage(systemName: "plus"), title: " Add New Task", font: .boldSystemFont(ofSize: 17))
+    lazy var addTaskButton = UIButton.buttonBuilder(image: UIImage(systemName: "plus"), title:  "task_create_title".localized, font: .boldSystemFont(ofSize: 17))
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
