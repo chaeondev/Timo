@@ -200,7 +200,7 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
                 
                 guard let projectList = self.projectList else { return }
                 
-                self.showAlertMessage(title: "프로젝트 삭제", message: "해당 프로젝트 삭제 시, 하위 Task들과 기록한 시간이 삭제됩니다. 삭제하시겠습니까?") {
+                self.showAlertMessage(title: "project_delete_title".localized, message: "project_delete_alert_message".localized) {
                     self.projectRepository.deleteItem(projectList[index])
                     self.collectionView.reloadData()
                     self.setNoDataImage()
