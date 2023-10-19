@@ -43,6 +43,9 @@
 		DE184A902AD3CD19004EEC0B /* MenuType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A8F2AD3CD19004EEC0B /* MenuType.swift */; };
 		DE184A922AD5129B004EEC0B /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A912AD5129B004EEC0B /* UserDefaults.swift */; };
 		DE68C5FD2ADAE40C00043BD5 /* CustomOvalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE68C5FC2ADAE40C00043BD5 /* CustomOvalView.swift */; };
+		DE68C5FF2ADE551E00043BD5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE68C5FE2ADE551E00043BD5 /* GoogleService-Info.plist */; };
+		DE68C60A2AE10ED500043BD5 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = DE68C6092AE10ED500043BD5 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		DE68C60C2AE10ED500043BD5 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = DE68C60B2AE10ED500043BD5 /* FirebaseCrashlytics */; };
 		DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62952AC19E7B003010DC /* AppDelegate.swift */; };
 		DEBD62982AC19E7B003010DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62972AC19E7B003010DC /* SceneDelegate.swift */; };
 		DEBD629F2AC19E7C003010DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEBD629E2AC19E7C003010DC /* Assets.xcassets */; };
@@ -97,6 +100,7 @@
 		DE184A8F2AD3CD19004EEC0B /* MenuType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuType.swift; sourceTree = "<group>"; };
 		DE184A912AD5129B004EEC0B /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		DE68C5FC2ADAE40C00043BD5 /* CustomOvalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOvalView.swift; sourceTree = "<group>"; };
+		DE68C5FE2ADE551E00043BD5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DEBD62922AC19E7B003010DC /* Timo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEBD62952AC19E7B003010DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEBD62972AC19E7B003010DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -117,7 +121,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEBD62BC2AC1A4AC003010DC /* RealmSwift in Frameworks */,
+				DE68C60A2AE10ED500043BD5 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				DE184A7C2ACED648004EEC0B /* IQKeyboardManagerSwift in Frameworks */,
+				DE68C60C2AE10ED500043BD5 /* FirebaseCrashlytics in Frameworks */,
 				DEBD62BA2AC1A4AC003010DC /* Realm in Frameworks */,
 				DEBD62B42AC1A405003010DC /* SnapKit in Frameworks */,
 			);
@@ -241,6 +247,7 @@
 				DE184A112ACBE7F4004EEC0B /* Resource */,
 				DE184A122ACBE80A004EEC0B /* Source */,
 				DEBD62A32AC19E7C003010DC /* Info.plist */,
+				DE68C5FE2ADE551E00043BD5 /* GoogleService-Info.plist */,
 				DE184A0E2ACBE54C004EEC0B /* Localizable.strings */,
 			);
 			path = Timo;
@@ -349,6 +356,7 @@
 				DEBD628E2AC19E7B003010DC /* Sources */,
 				DEBD628F2AC19E7B003010DC /* Frameworks */,
 				DEBD62902AC19E7B003010DC /* Resources */,
+				DE68C6052ADE566200043BD5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -360,6 +368,8 @@
 				DEBD62B92AC1A4AC003010DC /* Realm */,
 				DEBD62BB2AC1A4AC003010DC /* RealmSwift */,
 				DE184A7B2ACED648004EEC0B /* IQKeyboardManagerSwift */,
+				DE68C6092AE10ED500043BD5 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				DE68C60B2AE10ED500043BD5 /* FirebaseCrashlytics */,
 			);
 			productName = Timo;
 			productReference = DEBD62922AC19E7B003010DC /* Timo.app */;
@@ -394,6 +404,7 @@
 				DEBD62B22AC1A405003010DC /* XCRemoteSwiftPackageReference "SnapKit" */,
 				DEBD62B82AC1A4AC003010DC /* XCRemoteSwiftPackageReference "realm-swift" */,
 				DE184A7A2ACED648004EEC0B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				DE68C6082AE10ED500043BD5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = DEBD62932AC19E7B003010DC /* Products */;
 			projectDirPath = "";
@@ -410,12 +421,38 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEBD62A22AC19E7C003010DC /* LaunchScreen.storyboard in Resources */,
+				DE68C5FF2ADE551E00043BD5 /* GoogleService-Info.plist in Resources */,
 				DE184A0C2ACBE54C004EEC0B /* Localizable.strings in Resources */,
 				DEBD629F2AC19E7C003010DC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DE68C6052ADE566200043BD5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DEBD628E2AC19E7B003010DC /* Sources */ = {
@@ -615,9 +652,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 94879TT8BU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Timo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Timo;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -627,7 +666,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sesac.Timo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chaewon.Timo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -648,6 +687,7 @@
 				DEVELOPMENT_TEAM = 94879TT8BU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Timo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Timo;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -657,7 +697,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sesac.Timo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chaewon.Timo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -700,6 +740,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		DE68C6082AE10ED500043BD5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
 		DEBD62B22AC1A405003010DC /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -723,6 +771,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DE184A7A2ACED648004EEC0B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		DE68C6092AE10ED500043BD5 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DE68C6082AE10ED500043BD5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		DE68C60B2AE10ED500043BD5 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DE68C6082AE10ED500043BD5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
 		};
 		DEBD62B32AC1A405003010DC /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
