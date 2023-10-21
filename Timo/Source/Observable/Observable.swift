@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Observable<T> {
+class CustomObservable<T> {
     
     private var listener: ((T) -> Void)?
     

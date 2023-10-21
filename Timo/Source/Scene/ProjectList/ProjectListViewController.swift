@@ -38,6 +38,8 @@ class ProjectListViewController: BaseViewController {
     
     let userDefaults = UserDefaults.standard
     
+    let viewModel = ProjectListViewModel()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
         
@@ -74,9 +76,22 @@ class ProjectListViewController: BaseViewController {
         
         setNavigationbar()
         
-        projectList = projectRepository.fetch()
+        bindData()
+        setupData()
         
     }
+    
+    
+    func bindData() {
+        viewModel.projectList.bind { [weak self] _ in
+            self?.collectionView.reloadData()
+        }
+    }
+    
+    func setupData() {
+        viewModel.fetchData()
+    }
+
     
     override func configure() {
         super.configure()
@@ -111,23 +126,7 @@ class ProjectListViewController: BaseViewController {
     }
     
     @objc private func segmentedControlValueChanged() {
-        projectList = {
-            switch segmentedControl.selectedSegmentIndex {
-            case 0:
-                return projectRepository.fetch()
-            case 1:
-                return projectRepository.fetch().where {
-                    $0.done == false
-                }
-            case 2:
-                return projectRepository.fetch().where {
-                    $0.done == true
-                }
-            default:
-                return projectRepository.fetch()
-            }
-        }()
-        collectionView.reloadData()
+        viewModel.projectList.value = viewModel.fetchDataByIndex(index: segmentedControl.selectedSegmentIndex)
     }
     
     func setNavigationbar() {
@@ -141,9 +140,6 @@ class ProjectListViewController: BaseViewController {
     }
     
     @objc func addBarButtonClicked() {
-        
-        // TODO: collectionview select 되는거 막기 -> select되면 다음화면으로 넘어감
-        
         transitionView(menuType: .add, projectData: nil)
     }
 
@@ -152,28 +148,25 @@ class ProjectListViewController: BaseViewController {
 extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let projectList = projectList else { return 0 }
-        return projectList.count
+        
+        return viewModel.projectList.value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ProjectCollectionViewCell else { return UICollectionViewCell() }
         
-        if let projectList {
-            let data = projectList[indexPath.item]
-            cell.data = data
-            cell.delegate = self
-            cell.configureCell()
-
-        }
+        let data = viewModel.projectList.value[indexPath.item]
+        cell.data = data
+        cell.delegate = self
+        cell.configureCell()
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = ProjectDetailViewController()
-        guard let projectList else { return }
-        let projectData = projectList[indexPath.item]
+        
+        let projectData = viewModel.projectList.value[indexPath.item]
         
         userDefaults.set(projectData._id.stringValue, forKey: UserKey.TimeData.projectKey)
         
@@ -181,7 +174,7 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    // MARK: iOS17 확인
+    
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         configureContextMenu(index: indexPath.item)
     }
@@ -192,16 +185,13 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
             
             let edit = UIAction(title: "edit_contextmenu".localized, image: UIImage(systemName: "square.and.pencil"), identifier: nil, discoverabilityTitle: nil, state: .off) { (_) in
                 
-                guard let projectList = self.projectList else { return }
-                self.transitionView(menuType: .edit, projectData: projectList[index])
+                self.transitionView(menuType: .edit, projectData: self.viewModel.projectList.value[index])
                 
             }
             let delete = UIAction(title: "delete_contextmenu".localized, image: UIImage(systemName: "trash"), identifier: nil, discoverabilityTitle: nil,attributes: .destructive, state: .off) { (_) in
                 
-                guard let projectList = self.projectList else { return }
-                
                 self.showAlertMessage(title: "project_delete_title".localized, message: "project_delete_alert_message".localized) {
-                    self.projectRepository.deleteItem(projectList[index])
+                    self.projectRepository.deleteItem(self.viewModel.projectList.value[index])
                     self.collectionView.reloadData()
                     self.setNoDataImage()
                 }
