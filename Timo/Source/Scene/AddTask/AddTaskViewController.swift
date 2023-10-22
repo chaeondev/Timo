@@ -179,9 +179,11 @@ class AddTaskViewController: BaseViewController {
      }
     
     @objc func timePickerValueChanged(_ sender: UIDatePicker) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "H시간 mm분"
-        expectedTimeTextField.text = dateFormatter.string(from: sender.date)
+        let timeFormatter = DateComponentsFormatter()
+        timeFormatter.allowedUnits = [.hour, .minute]
+        timeFormatter.unitsStyle = .abbreviated
+
+        expectedTimeTextField.text = timeFormatter.string(from: sender.countDownDuration)
     }
     
     @objc func toolBarDoneButtonClicked(){
@@ -236,11 +238,11 @@ extension AddTaskViewController {
                 taskRepository.updateItem {
                     taskData.title = title
                     taskData.date = deadlineDatePicker.date
-                    taskData.expectedTime = Int(expectedTimePicker.countDownDuration) //nil의 경우 삽입 필요
+                    taskData.expectedTime = Int(expectedTimePicker.countDownDuration)
                 }
             }
             
-            //call delegate -> collectionview reload 위해서
+            //call delegate -> tableview reload 위해서
             delegate?.updateTableView()
             
             dismiss(animated: true)
@@ -271,10 +273,12 @@ extension AddTaskViewController {
             deadlineDatePicker.date = taskData.date ?? Date()
             deadlineTextField.text = dateFormatter.string(from: deadlineDatePicker.date)
             
-            let timeFormatter = DateFormatter()
-            timeFormatter.dateFormat = "H시간mm분"
+            let timeFormatter = DateComponentsFormatter()
+            timeFormatter.allowedUnits = [.hour, .minute]
+            timeFormatter.unitsStyle = .abbreviated
+
             expectedTimePicker.countDownDuration = TimeInterval(taskData.expectedTime ?? 0)
-            expectedTimeTextField.text = timeFormatter.string(from: expectedTimePicker.date)
+            expectedTimeTextField.text = timeFormatter.string(from: expectedTimePicker.countDownDuration)
             viewModel.title.value = titleTextField.text!
             viewModel.checkValidation()
         }
