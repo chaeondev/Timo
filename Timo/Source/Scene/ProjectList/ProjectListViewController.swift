@@ -36,35 +36,21 @@ class ProjectListViewController: BaseViewController {
     private let projectRepository = ProjectTableRepository()
     private let taskRepository = TaskTableRepository()
     
-    let userDefaults = UserDefaults.standard
-    
     let viewModel = ProjectListViewModel()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
         
-        collectionView.reloadData()
-        setNoDataImage()
-        
-        let timerCounting = userDefaults.bool(forKey: UserKey.TimeData.countingKey)
-
-        let projectDetailVC = ProjectDetailViewController()
-        let timerVC = TimerViewController()
-        
-        if timerCounting {
-            let projectID = userDefaults.string(forKey: UserKey.TimeData.projectKey)
-            let taskID = userDefaults.string(forKey: UserKey.TimeData.taskKey)
-
-            if let projectID, let taskID {
-                let projectData = projectRepository.fetchByID(try! ObjectId(string: projectID))
-
-                projectDetailVC.projectData = projectData
-                projectDetailVC.taskList = projectData?.tasks.sorted(byKeyPath: "savedDate")
-                navigationController?.pushViewController(projectDetailVC, animated: true)
-                let taskData = taskRepository.fetchByID(try! ObjectId(string: taskID))
-                timerVC.taskData = taskData
-                navigationController?.pushViewController(timerVC, animated: true)
-            }
+        viewModel.checkTimerCounting { [weak self] projectData, taskData in
+            let projectDetailVC = ProjectDetailViewController()
+            let timerVC = TimerViewController()
+            
+            projectDetailVC.projectData = projectData
+            projectDetailVC.taskList = projectData?.tasks.sorted(byKeyPath: "savedDate")
+            self?.navigationController?.pushViewController(projectDetailVC, animated: false)
+            
+            timerVC.taskData = taskData
+            self?.navigationController?.pushViewController(timerVC, animated: false)
         }
         
         
@@ -77,20 +63,18 @@ class ProjectListViewController: BaseViewController {
         setNavigationbar()
         
         bindData()
-        setupData()
+        viewModel.fetchData()
         
     }
     
     
     func bindData() {
-        viewModel.projectList.bind { [weak self] _ in
+        viewModel.projectList.bind { [weak self] list in
             self?.collectionView.reloadData()
+            self?.setNoDataImage(isEmpty: list.isEmpty)
         }
     }
-    
-    func setupData() {
-        viewModel.fetchData()
-    }
+
 
     
     override func configure() {
@@ -126,7 +110,7 @@ class ProjectListViewController: BaseViewController {
     }
     
     @objc private func segmentedControlValueChanged() {
-        viewModel.projectList.value = viewModel.fetchDataByIndex(index: segmentedControl.selectedSegmentIndex)
+        viewModel.updateDataByIndex(index: segmentedControl.selectedSegmentIndex)
     }
     
     func setNavigationbar() {
@@ -155,7 +139,7 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ProjectCollectionViewCell else { return UICollectionViewCell() }
         
-        let data = viewModel.projectList.value[indexPath.item]
+        let data = viewModel.projectDataForIndex(index: indexPath.item)
         cell.data = data
         cell.delegate = self
         cell.configureCell()
@@ -166,9 +150,8 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = ProjectDetailViewController()
         
-        let projectData = viewModel.projectList.value[indexPath.item]
-        
-        userDefaults.set(projectData._id.stringValue, forKey: UserKey.TimeData.projectKey)
+        let projectData = viewModel.projectDataForIndex(index: indexPath.item)
+        viewModel.setUserDefaultsWithProjectData(projectData: projectData)
         
         vc.projectData = projectData
         navigationController?.pushViewController(vc, animated: true)
@@ -191,9 +174,7 @@ extension ProjectListViewController: UICollectionViewDelegate, UICollectionViewD
             let delete = UIAction(title: "delete_contextmenu".localized, image: UIImage(systemName: "trash"), identifier: nil, discoverabilityTitle: nil,attributes: .destructive, state: .off) { (_) in
                 
                 self.showAlertMessage(title: "project_delete_title".localized, message: "project_delete_alert_message".localized) {
-                    self.projectRepository.deleteItem(self.viewModel.projectList.value[index])
-                    self.collectionView.reloadData()
-                    self.setNoDataImage()
+                    self.viewModel.deleteProjectAtIndex(index: index)
                 }
                 
             }
@@ -222,8 +203,6 @@ extension ProjectListViewController: AddProjectDelegate, ProjectCellDelegate {
     
     //AddView의 delegate 메서드
     func updateCollectionView() {
-        collectionView.reloadData()
-        setNoDataImage()
     }
     
     func updateDoneToCollectionView() {
@@ -233,15 +212,9 @@ extension ProjectListViewController: AddProjectDelegate, ProjectCellDelegate {
 
 extension ProjectListViewController {
     
-    func setNoDataImage() {
-        let list = projectRepository.fetch()
-        if list.count == 0 {
-            noProjectImageView.isHidden = false
-            noProjectLabel.isHidden = false
-        } else {
-            noProjectImageView.isHidden = true
-            noProjectLabel.isHidden = true
-        }
+    func setNoDataImage(isEmpty: Bool) {
+        noProjectImageView.isHidden = !isEmpty
+        noProjectLabel.isHidden = !isEmpty
     }
     
     //AddProject 화면 전환 (추가, 편집)
