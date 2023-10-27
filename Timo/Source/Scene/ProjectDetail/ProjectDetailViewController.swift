@@ -35,12 +35,7 @@ class ProjectDetailViewController: BaseViewController {
     }()
     
     var projectData: ProjectTable?
-    var taskList: Results<TaskTable>?
-    
-    private let projectRepository = ProjectTableRepository()
-    private let taskRepository = TaskTableRepository()
-    
-    let userDefaults = UserDefaults.standard
+    let viewModel = ProjectDetailViewModel()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -53,14 +48,19 @@ class ProjectDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setProjectData()
-        doneButton.addTarget(self, action: #selector(doneButtonClicked), for: .touchUpInside)
-        taskList = projectData?.tasks.sorted(byKeyPath: "savedDate")
+        //viewModel Observable 연결
+        bindData()
         
-        setTotalTaskActivity()
-        setTotalWorkingHour()
+        // 전달받은 projectData를 viewModel value로 전환 -> bind 다음 연결 부분
+        setProjectData()
+        
+        //projectData.value(ViewModel)에서 가져온 tasks(array형태)
+        setTaskData()
         
         setupMenu()
+        
+        doneButton.addTarget(self, action: #selector(doneButtonClicked), for: .touchUpInside)
+        
     }
     
     override func configure() {
@@ -74,6 +74,7 @@ class ProjectDetailViewController: BaseViewController {
         [totalTaskTitleLabel, totalTaskCountLabel].forEach {
             totalTaskView.addSubview($0)
         }
+        tableView.separatorStyle = .none
     }
     
     override func setConstraints() {
@@ -131,43 +132,54 @@ class ProjectDetailViewController: BaseViewController {
         }
     }
     
-    @objc func doneButtonClicked() {
-        doneButton.isSelected.toggle()
-        guard let projectData else { return }
-        projectRepository.updateItem {
-            projectData.done.toggle()
+    func bindData() {
+        viewModel.projectData.bind { [weak self] projectData in
+            self?.updateProjectData()
         }
+        viewModel.tasks.bind { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+            self?.setTotalTaskActivity()
+            self?.setTotalWorkingHour()
+        }
+    }
+    
+    //projectData bind할때마다 불러오는 메서드. 이 메서드가 맞는지 모르겠음
+    func updateProjectData() {
+        self.title = viewModel.projectData.value.title
+        dateLabel.text = viewModel.getProjectDateRange()
+        doneButton.isSelected = viewModel.isProjectDone()
     }
     
     func setProjectData() {
         guard let projectData else { return }
-        title = projectData.title
-        
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "yy.MM.dd"
-        
-        guard let startdate = projectData.startDate else { return }
-        guard let enddate = projectData.endDate else { return }
-        dateLabel.text = "\(dateformatter.string(from: startdate)) - \(dateformatter.string(from: enddate))"
-        
-        doneButton.isSelected = projectData.done
+        viewModel.fetchProjectData(projectData: projectData)
+    }
+    
+    func setTaskData() {
+        viewModel.fetchTaskData()
+    }
+    
+    @objc func doneButtonClicked() {
+        doneButton.isSelected.toggle()
+        viewModel.toggleProjectIsDone()
     }
     
     //navigationbarbutton menu 추가
     func setupMenu() {
         let projectEdit = UIAction(title: "project_edit_title".localized, image: UIImage(systemName: "square.and.pencil")) { [weak self] action in
-            guard let data = self?.projectData else { return }
+            let data = self?.viewModel.projectData.value
             self?.transitionProjectMenuView(menuType: .edit, projectData: data)
         }
         let projectDelete = UIAction(title: "project_delete_title".localized, image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] action in
-            guard let data = self?.projectData else { return }
             self?.showAlertMessage(title: "project_delete_title".localized, message: "project_delete_alert_message".localized, handler: {
-                self?.projectRepository.deleteItem(data)
+                self?.viewModel.deleteProjectData()
                 self?.navigationController?.popViewController(animated: true)
             })
         }
         let taskAdd = UIAction(title: "task_create_title".localized, image: UIImage(systemName: "link.badge.plus")) { [weak self] action in
-            self?.transitionAddTaskView()
+            self?.transitionTaskMenuView(menuType: .add, taskData: nil)
         }
         
         let projectMenu = UIMenu(options: .displayInline, children: [projectEdit, projectDelete])
@@ -187,22 +199,19 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let taskList = taskList else { return 0 }
-        return taskList.count
+        return viewModel.tasks.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell") as? TaskTableViewCell else { return UITableViewCell()}
         
-        if let taskList, let projectData {
-            let data = taskList[indexPath.row]
-            cell.taskdata = data
-            cell.projectTitle = projectData.title
-            cell.projectOfTaskLabel.isHidden = true
-            cell.configureCell()
-            cell.delegate = self
-        }
+        let data = viewModel.tasks.value[indexPath.row]
+        cell.taskdata = data
+        cell.projectTitle = viewModel.projectData.value.title
+        cell.projectOfTaskLabel.isHidden = true
+        cell.configureCell()
+        cell.delegate = self
         
         return cell
     }
@@ -210,9 +219,6 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         guard let selectedCell = tableView.cellForRow(at: indexPath) as? TaskTableViewCell else { return }
-        guard let taskList else { return }
-        
-        let data = taskList[indexPath.row]
         
         selectedCell.doneButton.isSelected.toggle()
         if selectedCell.doneButton.isSelected {
@@ -221,9 +227,7 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
             selectedCell.titleLabel.attributedText = selectedCell.titleLabel.text?.removeStrikethrough()
         }
      
-        taskRepository.updateItem {
-            data.completed.toggle()
-        }
+        viewModel.updateTaskDataIsDoneByIndex(index: indexPath.row)
         
         setTotalTaskActivity()
         
@@ -236,16 +240,13 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     @objc func addTaskButtonClicked() {
-        transitionAddTaskView()
+        transitionTaskMenuView(menuType: .add, taskData: nil)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "task_delete_title".localized) { action, view, completionHandler in
-            guard let taskList = self.taskList else { return }
             self.showAlertMessage(title: "task_delete_alert_title".localized, message: "task_delete_alert_message".localized) {
-                self.taskRepository.deleteItem(taskList[indexPath.row])
-                self.tableView.reloadData()
-                self.setTotalTaskActivity()
+                self.viewModel.deleteTaskDataAtIndex(index: indexPath.row)
             }
         }
         delete.image = UIImage(systemName: "trash")
@@ -260,16 +261,11 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
         let context = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { (action) -> UIMenu? in
             
             let edit = UIAction(title: "task_edit_title".localized, image: UIImage(systemName: "square.and.pencil"), state: .off) { (_) in
-                guard let taskList = self.taskList else { return }
-                self.transitionTaskMenuView(menuType: .edit, taskData: taskList[index])
+                self.transitionTaskMenuView(menuType: .edit, taskData: self.viewModel.tasks.value[index])
             }
             let delete = UIAction(title: "task_delete_title".localized, image: UIImage(systemName: "trash"), attributes: .destructive, state: .off) { (_) in
-                guard let taskList = self.taskList else { return }
                 self.showAlertMessage(title: "task_delete_alert_title".localized, message: "task_delete_alert_message".localized) {
-                    self.taskRepository.deleteItem(taskList[index])
-                    self.tableView.reloadData()
-                    self.setTotalTaskActivity()
-                    self.setTotalWorkingHour()
+                    self.viewModel.deleteTaskDataAtIndex(index: index)
                 }
             }
             return UIMenu(title: "Options", image: nil, identifier: nil, options: .displayInline, children: [edit,delete])
@@ -282,61 +278,50 @@ extension ProjectDetailViewController: UITableViewDelegate, UITableViewDataSourc
 extension ProjectDetailViewController {
     func setTotalTaskActivity() {
 
-        let List = projectData?.tasks.sorted(byKeyPath: "savedDate")
-        let doneTaskCount = List?.where { $0.completed == true }.count
-        let totalTaskCount = List?.count
-        
+        let (doneTaskCount, totalTaskCount) = viewModel.countTotalTaskActivity()
         if totalTaskCount == 0 {
             totalTaskCountLabel.text = "0 task"
         } else {
-            totalTaskCountLabel.text = "\(doneTaskCount ?? 0)/\(totalTaskCount ?? 0) task"
+            totalTaskCountLabel.text = "\(doneTaskCount)/\(totalTaskCount) task"
         }
         
     }
     func setTotalWorkingHour() {
-        var totalHour = 0
-        let List = projectData?.tasks.sorted(byKeyPath: "savedDate")
-        List?.forEach {
-            totalHour += ($0.realTime ?? 0)
-        }
-        
-        let hours = totalHour / 3600
-        let minutes = totalHour / 60 % 60
-        let seconds = totalHour % 60
-        
+        let (hours, minutes, seconds) = viewModel.setTotalWorkingHour()
         totalHourValueLabel.text = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 }
 
+
 extension ProjectDetailViewController: AddTaskDelegate, TaskTableCellDelegate, TimerDelegate, EditProjectDelegate {
+    
+    //AddTaskView
     func updateTableView() {
-        tableView.reloadData()
-        setTotalTaskActivity()
+        viewModel.fetchTaskData()
     }
     
-    func updateTimerToDetailView() {
-        tableView.reloadData()
-        
-        setTotalWorkingHour()
-        
-    }
-    
+    //CellDelegate
     func passTaskData(data: TaskTable) {
         
-        userDefaults.set(data._id.stringValue, forKey: UserKey.TimeData.taskKey)
+        viewModel.setUserDefaultsWithTaskData(data)
         
         let vc = TimerViewController()
         vc.delegate = self
         vc.taskData = data
         navigationController?.pushViewController(vc, animated: true)
     }
-    
     func updateDoneToDetailView() {
-        setTotalTaskActivity()
+        viewModel.fetchTaskData()
     }
     
+    //TimerView
+    func updateTimerToDetailView() {
+        viewModel.fetchTaskData()
+    }
+    
+    //AddProjectView (ProjectEdit할때)
     func updateProjectDetail() {
-        setProjectData()
+        setProjectData() // 이거 맞는지 확인하기
     }
     
 }
@@ -357,20 +342,8 @@ extension ProjectDetailViewController {
         present(nav, animated: true)
         
     }
-    
-    //Task 추가 화면 전환
-    func transitionAddTaskView() {
-        let vc = AddTaskViewController()
-        vc.project = projectData
-        vc.delegate = self
-        
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .pageSheet
 
-        present(nav, animated: true)
-    }
-    
-    //Task 편집하기 화면 전환
+    //Task 추가하기, 편집하기 화면 전환
     func transitionTaskMenuView(menuType: TaskMenuType, taskData: TaskTable?) {
         let vc = AddTaskViewController()
         vc.menuType = menuType
