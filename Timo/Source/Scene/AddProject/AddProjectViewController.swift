@@ -196,10 +196,10 @@ extension AddProjectViewController {
     
     @objc func saveBarButtonClicked() {
         viewModel.updateColor(colorWell.selectedColor?.toHexString() ?? Design.BaseColor.mainPoint!.toHexString())
+        
         viewModel.saveProject(menuType: menuType) {
-            self.editDelegate?.updateProjectDetail()
-        } saveCompletion: {
             self.addDelegate?.updateCollectionView()
+            self.editDelegate?.updateProjectDetail()
             self.dismiss(animated: true)
         }
     }

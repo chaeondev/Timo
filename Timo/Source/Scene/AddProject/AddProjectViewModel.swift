@@ -63,24 +63,31 @@ extension AddProjectViewModel {
     }
     
     //navigation save button clicked
-    func saveProject(menuType: ProjectMenuType, editCompletion: @escaping () -> Void, saveCompletion: @escaping () -> Void) {
+    func saveProject(menuType: ProjectMenuType, saveCompletion: @escaping () -> Void) {
         
         switch menuType {
         case .add:
-            let projectItem = ProjectTable(title: title.value, savedDate: Date(), startDate: startDate ?? Date(), endDate: endDate ?? Date(), color: color, done: false)
-            projectRepository.createItem(projectItem)
-            saveCompletion()
+            createProjectItem()
         case .edit:
-            guard let projectData = projectData.value else { return }
-            projectRepository.updateItem {
-                projectData.title = title.value
-                projectData.startDate = startDate
-                projectData.endDate = endDate
-                projectData .color = color
-            }
-            editCompletion()
+            updateProjectItem()
         }
+        saveCompletion()
 
+    }
+    
+    func createProjectItem() {
+        let projectItem = ProjectTable(title: title.value, savedDate: Date(), startDate: startDate ?? Date(), endDate: endDate ?? Date(), color: color, done: false)
+        projectRepository.createItem(projectItem)
+    }
+    
+    func updateProjectItem() {
+        guard let projectData = projectData.value else { return }
+        projectRepository.updateItem {
+            projectData.title = title.value
+            projectData.startDate = startDate
+            projectData.endDate = endDate
+            projectData.color = color
+        }
     }
         
 }
