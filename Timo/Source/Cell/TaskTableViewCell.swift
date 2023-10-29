@@ -127,7 +127,11 @@ class TaskTableViewCell: BaseTableViewCell {
         
     }
     
-    
+    override func prepareForReuse() {
+        expectedTimeValueLabel.text = nil
+        expectedTimeValueLabel.textColor = .systemBlue
+    }
+ 
     func configureCell() {
         guard let taskdata else { return }
         titleLabel.text = taskdata.title
@@ -153,8 +157,8 @@ class TaskTableViewCell: BaseTableViewCell {
             let formattedString = timeformatter.string(from: TimeInterval(expectedTime))
             expectedTimeValueLabel.text = formattedString
         } else {
-            expectedTimeLabel.isHidden = true
-            expectedTimeValueLabel.isHidden = true
+            expectedTimeValueLabel.text = "없음"
+            expectedTimeValueLabel.textColor = .systemGray
         }
         
         setRealTime(taskdata: taskdata)
