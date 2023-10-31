@@ -17,16 +17,17 @@ class ProjectListViewModel {
     //userDefaults
     private let userDefaults = UserDefaults.standard
     
+    var segmentIndex: CustomObservable<Int> = CustomObservable(0)
     
     var projectList: CustomObservable<[ProjectTable]> = CustomObservable([])
  
     
     
     //projectList fetch 메서드
-    func fetchData() {
-        let projects = Array(projectRepository.fetch())
-        self.projectList.value = projects
-    }
+//    func fetchData() {
+//        let projects = Array(projectRepository.fetch())
+//        self.projectList.value = projects
+//    }
     
     // segmentedControl index에 따라 projectList data 반환
     func fetchDataByIndex(index: Int) -> [ProjectTable] {
@@ -42,8 +43,9 @@ class ProjectListViewModel {
         }
     }
     // segmentedControl - projectList.value에 반영
-    func updateDataByIndex(index: Int) {
-        projectList.value = fetchDataByIndex(index: index)
+    // 이친구가 최종적 fetch 메서드
+    func updateDataByIndex() {
+        projectList.value = fetchDataByIndex(index: segmentIndex.value)
     }
     
 }
@@ -84,6 +86,6 @@ extension ProjectListViewModel {
     func deleteProjectAtIndex(index: Int) {
         let projectData = projectList.value[index]
         projectRepository.deleteItem(projectData)
-        projectList.value = Array(projectRepository.fetch())
+        updateDataByIndex()
     }
 }

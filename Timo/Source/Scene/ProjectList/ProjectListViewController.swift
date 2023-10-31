@@ -31,31 +31,24 @@ class ProjectListViewController: BaseViewController {
     private lazy var noProjectImageView = UIImageView.imageViewBuilder(image: UIImage(named: "ProjectIconLight")!)
     private lazy var noProjectLabel = UILabel.labelBuilder(text: "생성된 프로젝트가 없어요!", font: .boldSystemFont(ofSize: 16), textColor: Design.BaseColor.border!, numberOfLines: 1, textAlignment: .center)
     
-    var projectList: Results<ProjectTable>?
-    
-    private let projectRepository = ProjectTableRepository()
-    private let taskRepository = TaskTableRepository()
-    
     let viewModel = ProjectListViewModel()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
+        
+        viewModel.updateDataByIndex()
         
         viewModel.checkTimerCounting { [weak self] projectData, taskData in
             let projectDetailVC = ProjectDetailViewController()
             let timerVC = TimerViewController()
             
             projectDetailVC.projectData = projectData
-            projectDetailVC.taskList = projectData?.tasks.sorted(byKeyPath: "savedDate")
             self?.navigationController?.pushViewController(projectDetailVC, animated: false)
             
             timerVC.taskData = taskData
             self?.navigationController?.pushViewController(timerVC, animated: false)
         }
-        
-        
     }
-  
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +56,7 @@ class ProjectListViewController: BaseViewController {
         setNavigationbar()
         
         bindData()
-        viewModel.fetchData()
+        viewModel.updateDataByIndex()
         
     }
     
@@ -72,6 +65,9 @@ class ProjectListViewController: BaseViewController {
         viewModel.projectList.bind { [weak self] list in
             self?.collectionView.reloadData()
             self?.setNoDataImage(isEmpty: list.isEmpty)
+        }
+        viewModel.segmentIndex.bind { [weak self] index in
+            self?.viewModel.updateDataByIndex()
         }
     }
 
@@ -110,7 +106,7 @@ class ProjectListViewController: BaseViewController {
     }
     
     @objc private func segmentedControlValueChanged() {
-        viewModel.updateDataByIndex(index: segmentedControl.selectedSegmentIndex)
+        viewModel.segmentIndex.value = segmentedControl.selectedSegmentIndex
     }
     
     func setNavigationbar() {
@@ -203,10 +199,11 @@ extension ProjectListViewController: AddProjectDelegate, ProjectCellDelegate {
     
     //AddView의 delegate 메서드
     func updateCollectionView() {
+        viewModel.updateDataByIndex()
     }
     
     func updateDoneToCollectionView() {
-        collectionView.reloadData()
+        viewModel.updateDataByIndex()
     }
 }
 
