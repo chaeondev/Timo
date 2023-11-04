@@ -145,8 +145,6 @@ class AddProjectViewController: BaseViewController {
 
     @objc func titleTextFieldChanged() {
         viewModel.updateTitle(titleTextField.text!)
-        viewModel.title.value = titleTextField.text!
-        viewModel.checkValidation()
     }
     
     @objc func startDatePickerValueChanged() {

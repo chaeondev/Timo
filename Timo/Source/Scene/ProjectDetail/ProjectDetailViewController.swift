@@ -347,6 +347,7 @@ extension ProjectDetailViewController {
     func transitionTaskMenuView(menuType: TaskMenuType, taskData: TaskTable?) {
         let vc = AddTaskViewController()
         vc.menuType = menuType
+        vc.project = projectData
         vc.taskData = taskData
         vc.delegate = self
         
