@@ -8,8 +8,8 @@
 import Foundation
 
 class AddTaskViewModel {
-    var title = Observable("")
-    var isValid = Observable(false)
+    var title = CustomObservable("")
+    var isValid = CustomObservable(false)
     
     func checkValidation() {
         if title.value.isEmpty {

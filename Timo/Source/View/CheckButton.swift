@@ -26,6 +26,14 @@ final class CheckButton: UIButton {
         
     }
     
+//    func configureButton(isSelected: Bool){
+//        if isSelected {
+//            self.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .selected)
+//        } else {
+//            self.setImage(UIImage(systemName: "circle"), for: .normal)
+//        }
+//    }
+    
     override var isSelected: Bool {
         didSet {
             if isSelected {

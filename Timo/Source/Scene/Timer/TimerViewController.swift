@@ -108,6 +108,10 @@ class TimerViewController: BaseViewController {
         
     }
     
+    deinit {
+        print("deinit")
+    }
+    
     func startTimer() {
         if !timerCounting
         {

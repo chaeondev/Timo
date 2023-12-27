@@ -42,10 +42,12 @@
 		DE184A8C2AD2BEB3004EEC0B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A8B2AD2BEB3004EEC0B /* String+Extension.swift */; };
 		DE184A902AD3CD19004EEC0B /* MenuType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A8F2AD3CD19004EEC0B /* MenuType.swift */; };
 		DE184A922AD5129B004EEC0B /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A912AD5129B004EEC0B /* UserDefaults.swift */; };
+		DE4720142AEA421C00C260A7 /* ProjectDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4720132AEA421C00C260A7 /* ProjectDetailViewModel.swift */; };
 		DE68C5FD2ADAE40C00043BD5 /* CustomOvalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE68C5FC2ADAE40C00043BD5 /* CustomOvalView.swift */; };
 		DE68C5FF2ADE551E00043BD5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE68C5FE2ADE551E00043BD5 /* GoogleService-Info.plist */; };
 		DE68C60A2AE10ED500043BD5 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = DE68C6092AE10ED500043BD5 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		DE68C60C2AE10ED500043BD5 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = DE68C60B2AE10ED500043BD5 /* FirebaseCrashlytics */; };
+		DE68C60F2AE26EC000043BD5 /* ProjectListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE68C60E2AE26EC000043BD5 /* ProjectListViewModel.swift */; };
 		DEBD62962AC19E7B003010DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62952AC19E7B003010DC /* AppDelegate.swift */; };
 		DEBD62982AC19E7B003010DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBD62972AC19E7B003010DC /* SceneDelegate.swift */; };
 		DEBD629F2AC19E7C003010DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEBD629E2AC19E7C003010DC /* Assets.xcassets */; };
@@ -99,8 +101,10 @@
 		DE184A8B2AD2BEB3004EEC0B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		DE184A8F2AD3CD19004EEC0B /* MenuType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuType.swift; sourceTree = "<group>"; };
 		DE184A912AD5129B004EEC0B /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		DE4720132AEA421C00C260A7 /* ProjectDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewModel.swift; sourceTree = "<group>"; };
 		DE68C5FC2ADAE40C00043BD5 /* CustomOvalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOvalView.swift; sourceTree = "<group>"; };
 		DE68C5FE2ADE551E00043BD5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DE68C60E2AE26EC000043BD5 /* ProjectListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewModel.swift; sourceTree = "<group>"; };
 		DEBD62922AC19E7B003010DC /* Timo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEBD62952AC19E7B003010DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEBD62972AC19E7B003010DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -334,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				DEBD62BF2AC1A62E003010DC /* ProjectListViewController.swift */,
+				DE68C60E2AE26EC000043BD5 /* ProjectListViewModel.swift */,
 			);
 			path = ProjectList;
 			sourceTree = "<group>";
@@ -342,6 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				DE184A632ACD6165004EEC0B /* ProjectDetailViewController.swift */,
+				DE4720132AEA421C00C260A7 /* ProjectDetailViewModel.swift */,
 			);
 			path = ProjectDetail;
 			sourceTree = "<group>";
@@ -468,9 +474,11 @@
 				DE184A7E2ACFF336004EEC0B /* UnderlineTextField.swift in Sources */,
 				DE184A642ACD6165004EEC0B /* ProjectDetailViewController.swift in Sources */,
 				DE184A6A2ACD6644004EEC0B /* BaseTableViewCell.swift in Sources */,
+				DE4720142AEA421C00C260A7 /* ProjectDetailViewModel.swift in Sources */,
 				DE184A142ACBE8B4004EEC0B /* Localized+Extension.swift in Sources */,
 				DE184A1F2ACBF5D5004EEC0B /* LabelBuilder.swift in Sources */,
 				DE184A252ACC0151004EEC0B /* DatePickerBuilder.swift in Sources */,
+				DE68C60F2AE26EC000043BD5 /* ProjectListViewModel.swift in Sources */,
 				DE184A882AD1F720004EEC0B /* TimerViewController.swift in Sources */,
 				DEBD62C02AC1A62E003010DC /* ProjectListViewController.swift in Sources */,
 				DE184A802AD02FCF004EEC0B /* TaskTableRepository.swift in Sources */,
