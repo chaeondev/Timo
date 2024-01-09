@@ -6,11 +6,17 @@
 
 # Timo - 프로젝트 관리 및 테스크 타이머 앱
 
-<img width="1000" alt="image" src="https://github.com/chaeondev/Timo/assets/80023607/2c3b70c7-8243-46bd-af7a-2e03e773b644">
+<img width="800" alt="image" src="https://github.com/chaeondev/Timo/assets/80023607/2c3b70c7-8243-46bd-af7a-2e03e773b644">
 
 
 ## 프로젝트 소개
 > 주요기능
+
+- Realm
+- Timer -> Run loop
+- FCM
+- TableView, CollectionView
+- Localization
 
 ---
 
@@ -19,7 +25,8 @@
 - **프레임워크** : UIKit
 - **디자인패턴** : MVVM, Singleton, Repository
 - **라이브러리** : RealmSwift, SnapKit, Firebase, IQKeyboardManager
-- **ETC** : CodabaseUI
+- **의존성관리** : Swift Package Manager
+- **ETC** : CodabaseUI, Localization
 
 ---
 
