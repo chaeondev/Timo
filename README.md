@@ -10,14 +10,23 @@
 
 
 ## 프로젝트 소개
+
+> 앱 소개
+
+- 프로젝트 단위로 공수산정을 진행할 수 있는 앱
+- 프로젝트 별로 작업들을 관리할 수 있음
+- 작업별로 수행시간을 타이머로 측정 가능
+- 총 수행률, 프로젝트 전체 작업시간 등을 제공
+
+---
+
 > 주요기능
 
-- Realm
-- Timer -> Run loop
-- FCM
-- TableView, CollectionView
-- Localization
-
+- Realm DB를 **Repository Pattern**을 활용해 **N:M 스키마** 대응
+- **RunLoop모드**를 통한 **Timer** 모니터링, Realm을 통한 Timer **Background** 시간 추적
+- TableView, CollectionView의 **Custom Cell**를 통해 화면 구성, pull down gesture를 통한 menu 구현
+- **enum**을 통한 화면 재사용, **ReusableView**를 통한 재사용성 향상
+- 한국어, 영어 **다국어 대응**을 통한 **Localization** 처리
 ---
 
 > 기술스택
