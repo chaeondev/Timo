@@ -12,7 +12,29 @@
 ## 프로젝트 소개
 > 주요기능
 
+---
+
 > 기술스택
 
+- **프레임워크** : UIKit
+- **디자인패턴** : MVVM, Singleton, Repository
+- **라이브러리** : RealmSwift, SnapKit, Firebase, IQKeyboardManager
+- **ETC** : CodabaseUI
+
+---
+
+> 개발환경
+
+- **iOS Deployment Target** : iOS 15.0
+- **Xcode** : v14.3.1
+- **Swift** : v5.8.1
+
+---
 
 > 서비스
+- **개발인원** : 1인 기획, 디자인, 개발
+- **개발기간** : 2023.9.25 - 2023.10.18 (업데이트 진행 중)
+- **협업툴** : Git, Figma
+
+---
+
