@@ -8,6 +8,7 @@
 
 <img width="800" alt="image" src="https://github.com/chaeondev/Timo/assets/80023607/2c3b70c7-8243-46bd-af7a-2e03e773b644">
 
+<br></br>
 
 ## 프로젝트 소개
 
@@ -20,24 +21,27 @@
 
 ---
 
+
 > 주요기능
 
 - Realm DB를 **Repository Pattern**을 활용해 **N:M 스키마** 대응
-- **RunLoop모드**를 통한 **Timer** 모니터링, Realm을 통한 Timer **Background** 시간 추적
-- TableView, CollectionView의 **Custom Cell**를 통해 화면 구성, pull down gesture를 통한 menu 구현
-- **enum**을 통한 화면 재사용, **ReusableView**를 통한 재사용성 향상
+- **RunLoop모드**를 통한 **Timer** 모니터링, Realm을 활용해 Timer **Background** 시간 추적
+- TableView, CollectionView의 **Custom Cell**를 사용해 화면 구성, pull down gesture를 통한 menu 구현
+- **enum**으로 화면 재사용, **ReusableView**를 통한 재사용성 향상
 - 한국어, 영어 **다국어 대응**을 통한 **Localization** 처리
 ---
+
 
 > 기술스택
 
 - **프레임워크** : UIKit
-- **디자인패턴** : MVVM, Singleton, Repository
+- **디자인패턴** : MVVM, Repository Pattern
 - **라이브러리** : RealmSwift, SnapKit, Firebase, IQKeyboardManager
 - **의존성관리** : Swift Package Manager
 - **ETC** : CodabaseUI, Localization
 
 ---
+
 
 > 개발환경
 
@@ -47,6 +51,7 @@
 
 ---
 
+
 > 서비스
 - **개발인원** : 1인 기획, 디자인, 개발
 - **개발기간** : 2023.9.25 - 2023.10.18 (업데이트 진행 중)
@@ -54,3 +59,6 @@
 
 ---
 
+<br> </br>
+
+## 트러블 슈팅
