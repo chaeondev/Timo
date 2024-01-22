@@ -6,11 +6,14 @@
 
 # Timo - 프로젝트 관리 및 테스크 타이머 앱
 
+#### 프로젝트 내 Task들의 예상시간과 실제 작업시간을 기록하며 관리하는 라이트한 프로젝트 관리 앱입니다. 
+
 <img width="800" alt="image" src="https://github.com/chaeondev/Timo/assets/80023607/2c3b70c7-8243-46bd-af7a-2e03e773b644">
 
 <br></br>
 
 ## 프로젝트 소개
+
 
 > 앱 소개
 
@@ -21,16 +24,13 @@
 
 ---
 
+> 서비스
+- **개발인원** : 1인 기획, 디자인, 개발
+- **개발기간** : 2023.9.25 - 2023.10.18 (업데이트 진행 중)
+- **협업툴** : Git, Figma
+- **iOS Deployment Target** : iOS 15.0
 
-> 주요기능
-
-- Realm DB를 **Repository Pattern**을 활용해 **N:M 스키마** 대응
-- **RunLoop모드**를 통한 **Timer** 모니터링, Realm을 활용해 Timer **Background** 시간 추적
-- TableView, CollectionView의 **Custom Cell**를 사용해 화면 구성, pull down gesture를 통한 menu 구현
-- **enum**으로 화면 재사용, **ReusableView**를 기반한 재사용성 향상
-- 한국어, 영어 **다국어 대응**을 통한 **Localization** 처리
 ---
-
 
 > 기술스택
 
@@ -42,21 +42,13 @@
 
 ---
 
+> 주요기능
 
-> 개발환경
-
-- **iOS Deployment Target** : iOS 15.0
-- **Xcode** : v14.3.1
-- **Swift** : v5.8.1
-
----
-
-
-> 서비스
-- **개발인원** : 1인 기획, 디자인, 개발
-- **개발기간** : 2023.9.25 - 2023.10.18 (업데이트 진행 중)
-- **협업툴** : Git, Figma
-
+- Realm DB를 **Repository Pattern**을 활용해 **N:M 스키마** 대응
+- **RunLoop모드**를 통한 **Timer** 모니터링, Realm을 활용해 Timer **Background** 시간 추적
+- TableView, CollectionView의 **Custom Cell**를 사용해 화면 구성, pull down gesture를 통한 menu 구현
+- **enum**으로 화면 재사용, **ReusableView**를 기반한 재사용성 향상
+- 한국어, 영어 **다국어 대응**을 통한 **Localization** 처리
 ---
 
 <br> </br>
@@ -129,7 +121,7 @@ func createTimer() {
 ### 2. 타이머 측정 도중 앱 강제종료 시, 재시작할 때 타이머 측정 화면 전환 이슈
 
 #### Issue
-기획 상 한 task의 타이머가 작동하는 동안, 다른 task의 타이머는 작동이 불가능해야 했습니다. 
+기획 상 하나의 task의 타이머가 작동하는 동안, 다른 task의 타이머는 작동이 불가능해야 했습니다. 
 타이머 측정 도중 앱 강제종료 시, 재시작 화면이 프로젝트 리스트 화면이면 사용자가 다른 task의 타이머를 실행시킬 수 있어 타이머가 중복되는 이슈가 발생했습니다.
 그렇기에 타이머 측정 도중이었다면 재시작화면이 타이머화면이 되어야 했으며, 그 후 타이머를 종료하면 프로젝트 디테일 화면이 나올 수 있도록 구현해야 했습니다.
 
