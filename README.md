@@ -36,7 +36,7 @@
 
 - **프레임워크** : UIKit
 - **디자인패턴** : MVVM, Repository Pattern
-- **라이브러리** : RealmSwift, SnapKit, Firebase, IQKeyboardManager
+- **라이브러리** : RealmSwift, SnapKit, Firebase(Analytics, Crashlytics), IQKeyboardManager
 - **의존성관리** : Swift Package Manager
 - **ETC** : CodabaseUI, Localization
 
@@ -49,6 +49,7 @@
 - TableView, CollectionView의 **Custom Cell**를 사용해 화면 구성, pull down gesture를 통한 menu 구현
 - **enum**으로 화면 재사용, **ReusableView**를 기반한 재사용성 향상
 - 한국어, 영어 **다국어 대응**을 통한 **Localization** 처리
+- Firebase의 **Analytics, Crashlytics**에 기반한 **유저 데이터 관리** 및 앱 기능 개선
 ---
 
 <br> </br>
@@ -166,4 +167,14 @@ func checkTimerCounting(completion: (ProjectTable?, TaskTable?) -> Void) {
     }
 }
 ```
+
+<br> </br>
+
+## 회고
+
+### ▹ 배운점
+
+
+
+### ▹ 아쉬운점
 
