@@ -156,3 +156,22 @@ override func viewWillAppear(_ animated: Bool) {
 }
 ```
 
+```swift
+//viewModel
+
+func checkTimerCounting(completion: (ProjectTable?, TaskTable?) -> Void) {
+    let timerCounting = userDefaults.bool(forKey: UserKey.TimeData.countingKey)
+    
+    if timerCounting {
+        let projectID = userDefaults.string(forKey: UserKey.TimeData.projectKey)
+        let taskID = userDefaults.string(forKey: UserKey.TimeData.taskKey)
+
+        if let projectID, let taskID {
+            let projectData = projectRepository.fetchByID(try! ObjectId(string: projectID))
+            let taskData = taskRepository.fetchByID(try! ObjectId(string: taskID))
+            completion(projectData, taskData)
+        }
+    }
+}
+```
+
