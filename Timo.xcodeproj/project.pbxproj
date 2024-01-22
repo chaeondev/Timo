@@ -44,7 +44,6 @@
 		DE184A922AD5129B004EEC0B /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE184A912AD5129B004EEC0B /* UserDefaults.swift */; };
 		DE4720142AEA421C00C260A7 /* ProjectDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4720132AEA421C00C260A7 /* ProjectDetailViewModel.swift */; };
 		DE68C5FD2ADAE40C00043BD5 /* CustomOvalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE68C5FC2ADAE40C00043BD5 /* CustomOvalView.swift */; };
-		DE68C5FF2ADE551E00043BD5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE68C5FE2ADE551E00043BD5 /* GoogleService-Info.plist */; };
 		DE68C60A2AE10ED500043BD5 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = DE68C6092AE10ED500043BD5 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		DE68C60C2AE10ED500043BD5 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = DE68C60B2AE10ED500043BD5 /* FirebaseCrashlytics */; };
 		DE68C60F2AE26EC000043BD5 /* ProjectListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE68C60E2AE26EC000043BD5 /* ProjectListViewModel.swift */; };
@@ -61,6 +60,8 @@
 		DEF16C522AC2D349006354F8 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF16C512AC2D349006354F8 /* Color.swift */; };
 		DEF16C542AC2DAD7006354F8 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF16C532AC2DAD7006354F8 /* BaseCollectionViewCell.swift */; };
 		DEF16C562AC2DB90006354F8 /* ProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF16C552AC2DB90006354F8 /* ProjectCollectionViewCell.swift */; };
+		DEF48A012B5E47AC00FDC7CC /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = DEF48A002B5E47AC00FDC7CC /* .gitignore */; };
+		DEF48A052B5E482600FDC7CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEF48A042B5E482600FDC7CC /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,7 +104,6 @@
 		DE184A912AD5129B004EEC0B /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		DE4720132AEA421C00C260A7 /* ProjectDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailViewModel.swift; sourceTree = "<group>"; };
 		DE68C5FC2ADAE40C00043BD5 /* CustomOvalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOvalView.swift; sourceTree = "<group>"; };
-		DE68C5FE2ADE551E00043BD5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DE68C60E2AE26EC000043BD5 /* ProjectListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewModel.swift; sourceTree = "<group>"; };
 		DEBD62922AC19E7B003010DC /* Timo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEBD62952AC19E7B003010DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +117,8 @@
 		DEF16C512AC2D349006354F8 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		DEF16C532AC2DAD7006354F8 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		DEF16C552AC2DB90006354F8 /* ProjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCollectionViewCell.swift; sourceTree = "<group>"; };
+		DEF48A002B5E47AC00FDC7CC /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		DEF48A042B5E482600FDC7CC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,8 +253,9 @@
 				DE184A112ACBE7F4004EEC0B /* Resource */,
 				DE184A122ACBE80A004EEC0B /* Source */,
 				DEBD62A32AC19E7C003010DC /* Info.plist */,
-				DE68C5FE2ADE551E00043BD5 /* GoogleService-Info.plist */,
 				DE184A0E2ACBE54C004EEC0B /* Localizable.strings */,
+				DEF48A002B5E47AC00FDC7CC /* .gitignore */,
+				DEF48A042B5E482600FDC7CC /* GoogleService-Info.plist */,
 			);
 			path = Timo;
 			sourceTree = "<group>";
@@ -426,8 +429,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEF48A012B5E47AC00FDC7CC /* .gitignore in Resources */,
 				DEBD62A22AC19E7C003010DC /* LaunchScreen.storyboard in Resources */,
-				DE68C5FF2ADE551E00043BD5 /* GoogleService-Info.plist in Resources */,
+				DEF48A052B5E482600FDC7CC /* GoogleService-Info.plist in Resources */,
 				DE184A0C2ACBE54C004EEC0B /* Localizable.strings in Resources */,
 				DEBD629F2AC19E7C003010DC /* Assets.xcassets in Resources */,
 			);
