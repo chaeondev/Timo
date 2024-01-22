@@ -27,7 +27,7 @@
 - Realm DB를 **Repository Pattern**을 활용해 **N:M 스키마** 대응
 - **RunLoop모드**를 통한 **Timer** 모니터링, Realm을 활용해 Timer **Background** 시간 추적
 - TableView, CollectionView의 **Custom Cell**를 사용해 화면 구성, pull down gesture를 통한 menu 구현
-- **enum**으로 화면 재사용, **ReusableView**를 통한 재사용성 향상
+- **enum**으로 화면 재사용, **ReusableView**를 기반한 재사용성 향상
 - 한국어, 영어 **다국어 대응**을 통한 **Localization** 처리
 ---
 
@@ -124,8 +124,35 @@ func createTimer() {
     }
 }
 ```
-
-
+<br> </br>
 
 ### 2. 타이머 측정 도중 앱 강제종료 시, 재시작할 때 타이머 측정 화면 전환 이슈
+
+#### Issue
+기획 상 한 task의 타이머가 작동하는 동안, 다른 task의 타이머는 작동이 불가능해야 했습니다. 
+타이머 측정 도중 앱 강제종료 시, 재시작 화면이 프로젝트 리스트 화면이면 사용자가 다른 task의 타이머를 실행시킬 수 있어 타이머가 중복되는 이슈가 발생했습니다.
+그렇기에 타이머 측정 도중이었다면 재시작화면이 타이머화면이 되어야 했으며, 그 후 타이머를 종료하면 프로젝트 디테일 화면이 나올 수 있도록 구현해야 했습니다.
+
+#### Solution
+타이머의 실행 여부를 UserDefaults에 저장해서 앱이 강제종료 되어도 시작시 판단할 수 있도록 하였습니다.
+원래는 SceneDelegate에서 처리해야하는 문제인가 고민했었는데, 더 간단하게 해결할 수 있었습니다.
+화면 layer를 어떻게 쌓을 지가 고민이었습니다. 그래서 Project와 Task의 데이터를 전달하기 위해 각각의 ID를 UserDefaults로 저장한 후 Realm DB fetch를 통해 데이터를 각 화면에 전달했습니다.
+첫 화면 VC에서 viewWillAppear 시점에 타이머 실행 여부를 확인 후 실행 중이면 타이머 화면까지 차례대로 화면을 push시켜서 연결했습니다. 사용자에게 보이지 않아야 함으로 animation 효과를 false로 두었습니다.
+
+```swift
+override func viewWillAppear(_ animated: Bool) {
+  super.viewDidLoad()
+
+  viewModel.checkTimerCounting { [weak self] projectData, taskData in
+      let projectDetailVC = ProjectDetailViewController()
+      let timerVC = TimerViewController()
+      
+      projectDetailVC.projectData = projectData
+      self?.navigationController?.pushViewController(projectDetailVC, animated: false)
+      
+      timerVC.taskData = taskData
+      self?.navigationController?.pushViewController(timerVC, animated: false)
+  }
+}
+```
 
