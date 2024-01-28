@@ -6,7 +6,9 @@
 
 # Timo - 프로젝트 관리 및 테스크 타이머 앱
 
-#### 프로젝트 내 Task들의 예상시간과 실제 작업시간을 기록하며 관리하는 라이트한 프로젝트 관리 앱입니다. 
+#### 프로젝트 내 Task들의 예상시간과 실제 작업시간을 기록하며 관리하는 라이트한 프로젝트 관리 앱입니다.
+
+## Preview
 
 <img width="800" alt="image" src="https://github.com/chaeondev/Timo/assets/80023607/2c3b70c7-8243-46bd-af7a-2e03e773b644">
 
