@@ -49,6 +49,7 @@
 - Realm DB를 **Repository Pattern**을 활용해 **N:M 스키마** 대응
 - **RunLoop모드**를 통한 **Timer** 모니터링, Realm을 활용해 Timer **Background** 시간 추적
 - TableView, CollectionView의 **Custom Cell**를 사용해 화면 구성, pull down gesture를 통한 menu 구현
+- Custom **Observable** 클래스를 이용한 **MVVM** 패턴 적용
 - **enum**으로 화면 재사용, **ReusableView**를 기반한 재사용성 향상
 - 한국어, 영어 **다국어 대응**을 통한 **Localization** 처리
 - Firebase의 **Analytics, Crashlytics**에 기반한 **유저 데이터 관리** 및 앱 기능 개선
