@@ -172,9 +172,3 @@ func checkTimerCounting(completion: (ProjectTable?, TaskTable?) -> Void) {
 ```
 
 <br> </br>
-
-## 회고
-
-### ▹ 배운점
-
-### ▹ 아쉬운점
